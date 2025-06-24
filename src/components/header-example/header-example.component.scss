@@ -1,0 +1,67 @@
+@use '../../styles/mixins.scss' as *;
+
+.header {
+  background-color: lightblue;
+  padding: 10px 0;
+  font-weight: bold;
+  
+  @include mobile {
+    background-color: red;
+    font-size: 14px;
+  }
+  
+  @include tablet {
+    background-color: green;
+    font-size: 16px;
+  }
+  
+  @include desktop {
+    background-color: blue;
+    font-size: 18px;
+  }
+
+  &__logo-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &__nav {
+    @include mobile {
+      display: none;
+    }
+
+    &-list {
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 10px;
+    
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__burger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    
+    @include mobile {
+      display: flex;
+    }
+
+    &-line {
+      width: 20px;
+      height: 2px;
+      background-color: black;
+    }
+  }
+
+  &__mobile-menu {
+    display: none;
+  }
+}

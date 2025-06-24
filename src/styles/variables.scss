@@ -1,0 +1,35 @@
+// ========================================
+// BREAKPOINTS
+// ========================================
+
+$mobile-max: 767px;
+$tablet-min: 768px;
+$tablet-max: 1279px;
+$desktop-min: 1280px;
+
+// ========================================
+// CONTAINER WIDTHS
+// ========================================
+
+$container-mobile: 100%;
+$container-tablet: 768px;
+$container-desktop: 1280px;
+
+// ========================================
+// SPACING
+// ========================================
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// ========================================
+// Z-INDEX
+// ========================================
+
+$z-index-dropdown: 100;
+$z-index-modal: 1000;
+$z-index-tooltip: 1100;
