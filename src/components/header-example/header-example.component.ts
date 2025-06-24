@@ -24,6 +24,9 @@ export class HeaderExampleComponent extends BaseComponent {
   removeEvents(): void {
     this.#button?.removeEventListener('click', this.#handleClick);
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onReady(): void {}
 }
 
 customElements.define('app-header-example', HeaderExampleComponent);

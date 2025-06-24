@@ -5,6 +5,14 @@ export interface IComponent {
   // Subscribe and unsubscribe events
   bindEvents(): void;
   removeEvents(): void;
+
+  // entry point
+  // for extra logic of our component
+  // - API calls
+  // - JS animation
+  // - Calculate something
+
+  onReady(): void;
 }
 
 export abstract class BaseComponent extends HTMLElement implements IComponent {
@@ -27,4 +35,5 @@ export abstract class BaseComponent extends HTMLElement implements IComponent {
   abstract initializeElements(): void;
   abstract bindEvents(): void;
   abstract removeEvents(): void;
+  abstract onReady(): void;
 }
