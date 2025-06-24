@@ -4,11 +4,11 @@ declare module '*.html?raw' {
 }
 
 declare module '*.scss' {
-  const content: string;
+  const content: any;
   export default content;
 }
 
 declare module '*.css' {
-  const content: string;
+  const content: any;
   export default content;
 }

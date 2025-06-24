@@ -1,5 +1,10 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  assetsInclude: ['**/*.html']
+  assetsInclude: [],
+  build: {
+    rollupOptions: {
+      external: []
+    }
+  }
 })

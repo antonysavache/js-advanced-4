@@ -19,10 +19,7 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-
-    /* Type definitions */
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/types/**/*"]
+  "include": ["src", "src/shared/types/modules.d.ts"]
 }
