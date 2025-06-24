@@ -7,10 +7,15 @@
     <title>YourEnergy</title>
   </head>
   <body>
-    <app-header-example><app-header-example/>
-
+    <app-header-example></app-header-example>
     <main>
-      <div id="app"></div>
+      <div id="app">
+        <quote-container></quote-container>
+        <button id="open-modal-btn">Відкрити модалку</button>
+        <empty-state></empty-state>
+        <exercise-container></exercise-container>
+        <category-container></category-container>
+      </div>
     </main>
 
     <script type="module" src="/src/main.ts"></script>
