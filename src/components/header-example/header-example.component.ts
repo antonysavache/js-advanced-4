@@ -3,7 +3,7 @@ import headerTemplate from './header-example.component.html?raw';
 import { BaseComponent } from '../../shared/models/component.abc.ts';
 
 export class HeaderExampleComponent extends BaseComponent {
-  #button: HTMLElement | null = null;
+  #button;
 
   constructor() {
     super(headerTemplate);
