@@ -9,6 +9,7 @@ import {
   type Exercise,
   type GetExercisesResponse,
   type Rating,
+  type GetFiltersResponse,
 } from './api.interface';
 
 export class YourEnergyAPI {
@@ -42,7 +43,11 @@ export class YourEnergyAPI {
   }
 
   // 1. Перелік фільтрів (вправ)
-  static async getFilters(exerciseFilter: ExerciseFilter, page = 1, limit = 12) {
+  static async getFilters(
+    exerciseFilter: ExerciseFilter,
+    page = 1,
+    limit = 12,
+  ): Promise<GetFiltersResponse> {
     const params: Record<string, string | number | undefined> = {
       page,
       limit,
@@ -53,7 +58,7 @@ export class YourEnergyAPI {
     }
 
     const response = await this.axiosInstance.get('/filters', { params });
-    return response.data;
+    return response.data as GetFiltersResponse;
   }
 
   // 2. Перелік вправ з фільтрацією по категорії та ключовому слову
@@ -66,7 +71,7 @@ export class YourEnergyAPI {
     limit?: number;
   }): Promise<GetExercisesResponse> {
     const response = await this.axiosInstance.get('/exercises', { params });
-    return response.data;
+    return response.data as GetExercisesResponse;
   }
 
   // 3. Детальна інформація про вправу
