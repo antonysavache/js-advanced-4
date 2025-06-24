@@ -1,7 +1,7 @@
 export interface IComponent {
   // Elements init
   initializeElements(): void;
-  
+
   // Subscribe and unsubscribe events
   bindEvents(): void;
   removeEvents(): void;
