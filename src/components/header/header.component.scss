@@ -1,0 +1,43 @@
+.header {
+  padding: 20px 20px 0 20px;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  
+}
+
+.header__logo {
+  fill: #242424;
+}
+
+.header__navigation {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.header__menu-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .header__menu-icon {
+    stroke: #242424;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.header__social-links {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
