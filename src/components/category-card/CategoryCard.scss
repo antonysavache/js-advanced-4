@@ -1,53 +1,108 @@
+@use '../../styles/mixins.scss' as *;
 @use '../../styles/variables.scss' as *;
 
 .category-card {
   position: relative;
+  cursor: pointer;
   border-radius: 12px;
   overflow: hidden;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-end;
-  padding: $spacing-md;
-  color: #fff;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-  background: #000;
-  min-height: 180px;
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  height: 206px;
 
-  .category-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
-  .category-name {
-    position: relative;
-    z-index: 1;
-    font-size: 18px;
-    font-weight: 600;
+  &:focus {
+    outline: 2px solid var(--page-bg);
+    outline-offset: 2px;
   }
 
-  @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
-    min-height: 160px;
-  }
-
-  @media screen and (min-width: $desktop-min) {
-    min-height: 150px;
+  &:active {
+    transform: translateY(-2px);
   }
 }
 
-.category-list {
-  display: grid;
-  gap: $spacing-md;
-  grid-template-columns: 1fr;
+.category-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
-    grid-template-columns: repeat(3, 1fr);
+.category-overlay {
+  position: absolute;
+  padding: 14px;
+  color: var(--page-bg);
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 0.5) 0%,
+    rgba(17, 17, 17, 0.5) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.category-name {
+  font-family: var(--dm-sans-family), sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color: var(--page-bg);
+  margin: 0 0 2px 0;
+  text-transform: capitalize;
+}
+
+.category-filter {
+  font-family: var(--dm-sans-family), sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(244, 244, 244, 0.6);
+  margin: 0;
+  text-transform: capitalize;
+}
+
+@include mobile {
+  .category-card {
+    height: 180px;
   }
 
-  @media screen and (min-width: $desktop-min) {
-    grid-template-columns: repeat(4, 1fr);
+  .category-name {
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .category-filter {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .category-overlay {
+    padding: 12px;
+  }
+}
+
+@include tablet {
+  .category-card {
+    height: 192px;
+  }
+
+  .category-name {
+    font-size: 19px;
+    line-height: 1.21;
   }
 }

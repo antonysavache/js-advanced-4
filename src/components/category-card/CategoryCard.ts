@@ -1,4 +1,6 @@
 import './CategoryCard.scss';
+import { YourEnergyAPI } from '../../api';
+import { ExerciseCard } from '../exercise-card/ExerciseCard.ts';
 
 interface CategoryData {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -30,10 +32,70 @@ export class CategoryCard {
       </div>
     `;
 
+    card.addEventListener('click', () => {
+      this.handleCategoryClick().catch(error => {
+        console.error('Помилка під час обробки кліку по категорії:', error);
+      });
+    });
+
     return card;
   }
 
   public render(container: HTMLElement): void {
     container.appendChild(this.element);
+  }
+
+  private async handleCategoryClick(): Promise<void> {
+    try {
+      const response = await YourEnergyAPI.getExercises({
+        keyword: this.data.name,
+        page: 1,
+        limit: 12,
+      });
+
+      const exercises = response.results;
+      const container = document.getElementById('exercise-container');
+
+      if (!container) {
+        console.error('Контейнер для вправ не знайдено');
+
+        return;
+      }
+
+      container.innerHTML = '';
+
+      if (exercises && exercises.length) {
+        exercises.forEach(exerciseData => {
+          const card = new ExerciseCard({
+            name: exerciseData.name,
+            calories: exerciseData.burnedCalories,
+            bodyPart: exerciseData.bodyPart,
+            target: exerciseData.target,
+            rating: exerciseData.rating,
+          });
+
+          card.render(container);
+        });
+      } else {
+        this.renderEmptyState(container);
+      }
+    } catch (error: unknown) {
+      const container = document.getElementById('exercise-container');
+      if (!container) {
+        return;
+      }
+
+      container.innerHTML = '';
+      this.renderEmptyState(container);
+
+      console.warn('Вправи не знайдено або сталася помилка:', error);
+    }
+  }
+
+  private renderEmptyState(container: HTMLElement): void {
+    const emptyState = document.createElement('div');
+    emptyState.classList.add('empty-state');
+    emptyState.textContent = 'На жаль, вправи за цією категорією не знайдено.';
+    container.appendChild(emptyState);
   }
 }
