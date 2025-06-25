@@ -1,5 +1,8 @@
-/* HEADER COMPONENT SCSS – refactored with true centered pill */
-/* DM Sans font loaded globally */
+/* ========================================================
+   header.component.scss  (refactored, brace‑safe)
+   ======================================================== */
+/* Google Font (load once in index.html):
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap" rel="stylesheet"> */
 
 /* ─────────── DESKTOP BASE (≥1440 px) ─────────── */
 .header {
@@ -17,10 +20,17 @@
     align-items: center;
   }
 
-  &__logo .logo__icon { width: 132px; height: 24px; }
+  /* logo */
+  &__logo {
+    .logo__icon {
+      width: 132px;
+      height: 24px;
+      display: block;
+    }
+  }
 
+  /* nav pill */
   &__nav {
-    /* will flex‑center on tablet; desktop uses fixed pill */
     .nav__wrapper {
       width: 265px;
       height: 52px;
@@ -32,51 +42,122 @@
       justify-content: center;
     }
 
-    .nav__list { display:flex; gap:8px; margin:0; padding:0; list-style:none; }
+    .nav__list {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
     .nav__button {
-      font-family:'DM Sans',sans-serif; font-size:16px; line-height:24px; font-weight:400;
-      padding:8px 24px; border-radius:60px; background:transparent; color:#fff; text-decoration:none;
-      transition:background-color .25s;
-      &:hover:not(.nav__button--active){ background:#3a3a3a; }
-      &--active{ background:#f4f4f4; color:#242424; font-weight:600; }
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+      padding: 8px 24px;
+      border-radius: 60px;
+      background: transparent;
+      color: #fff;
+      text-decoration: none;
+      transition: background-color 0.25s ease;
+
+      &:hover:not(.nav__button--active) {
+        background: #3a3a3a;
+      }
+
+      &--active {
+        background: #f4f4f4;
+        color: #242424;
+        font-weight: 600;
+      }
     }
   }
 
+  /* socials */
   &__social {
-    display:flex; align-items:center; gap:12px; flex-shrink:0;
-    .social__link{ width:44px; height:44px; padding:8px; border:1px solid #242424; border-radius:10px;
-      display:flex; justify-content:center; align-items:center; transition:background .25s,opacity .25s;
-      &:hover{ background:#f5f5f5; opacity:1; }
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .social__link {
+      width: 44px;
+      height: 44px;
+      padding: 8px;
+      border: 1px solid #242424;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.25s, opacity 0.25s;
+
+      &:hover {
+        background: #f5f5f5;
+        opacity: 1;
+      }
     }
-    .social__icon{ width:28px; height:28px; fill:#242424; opacity:.8; }
+
+    .social__icon {
+      width: 28px;
+      height: 28px;
+      fill: #242424;
+      opacity: 0.8;
+    }
   }
 }
 
-/* ──────── TABLET (768 – 1439.98 px) – centered pill ─────── */
-@media (min-width:768px) and (max-width:1439.98px){
-  .header{ background:#f4f4f4; padding:20px 0; }
-  .header__container{ max-width:100%; padding:0 24px; }
+/* ─────────── TABLET (768 – 1439.98 px) ─────────── */
+@media (min-width: 768px) and (max-width: 1439.98px) {
+  .header {
+    background: #f4f4f4;
+    padding: 20px 0;
 
-  /* Center pill within remaining space using flex */
-  .header__nav{
-    flex:1;                /* take remaining width between logo & socials */
-    display:flex;
-    justify-content:center;
+    &__container {
+      max-width: 100%;
+      padding: 0 32px;   /* 32‑px side gutters on tablet */
+    }
 
-    .nav__wrapper{ width:233px; height:52px; } /* exact Figma size */
-  }
+    &__nav {
+      flex: 1;                     /* take remaining row space */
+      display: flex;
+      justify-content: center;     /* center pill */
 
-  /* Social icons slightly smaller */
-  .header__social{
-    gap:8px;
-    .social__link{ width:40px; height:40px; border-radius:8px; }
-    .social__icon{ width:24px; height:24px; }
+      .nav__wrapper {
+        width: 233px;              /* Figma exact */
+        height: 52px;
+      }
+    }
+
+    &__social {
+      gap: 8px;
+
+      .social__link {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+      }
+
+      .social__icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 }
 
-/* ──────── MOBILE (≤767.98 px) – stacked layout ─────── */
-@media (max-width:767.98px){
-  .header__container{ flex-direction:column; gap:16px; padding:0 16px; }
-  .header__nav{ flex:none; .nav__wrapper{ width:90vw; } }
+/* ─────────── MOBILE (≤767.98 px) ─────────── */
+@media (max-width: 767.98px) {
+  .header__container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .header__nav {
+    flex: none;
+
+    .nav__wrapper {
+      width: 90vw;
+    }
+  }
 }
