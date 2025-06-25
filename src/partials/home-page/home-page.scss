@@ -1,0 +1,502 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.exercises-section {
+  padding: $spacing-xl 0;
+
+  @include mobile {
+    padding: $spacing-md 0;
+  }
+}
+
+.exercises-header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xxl;
+
+  @include tablet {
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  @include desktop {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  @include mobile {
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.exercises-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: light-dark(var(--black), var(--white));
+  margin: 0;
+
+  @include mobile {
+    font-size: 24px;
+  }
+
+  @include tablet {
+    font-size: 32px;
+  }
+
+  @include desktop {
+    font-size: 36px;
+  }
+}
+
+// ========================================
+// FILTER PANEL
+// ========================================
+
+.filters-panel {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  @include mobile {
+    gap: 16px;
+  }
+}
+
+.filter-btn {
+  all: unset;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  position: relative;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+
+  @include mobile {
+    font-size: 13px;
+  }
+
+  &:hover:not(&--active) {
+    color: #666;
+  }
+
+  &--active {
+    color: #000;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #000;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ========================================
+// CONTENT LAYOUT
+// ========================================
+
+.exercises-content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  @include desktop {
+    flex-direction: row;
+    gap: $spacing-xxl;
+  }
+}
+
+.exercises-right {
+  order: 1;
+
+  @include desktop {
+    order: 2;
+    flex: 1;
+  }
+}
+
+.exercises-left {
+  order: 2;
+
+  @include desktop {
+    order: 1;
+    width: 444px;
+    flex-shrink: 0;
+  }
+}
+
+// ========================================
+// DEVICE VISIBILITY
+// ========================================
+
+.mobile-only {
+  display: block;
+
+  @include tablet {
+    display: none;
+  }
+
+  @include desktop {
+    display: none;
+  }
+}
+
+.tablet-only {
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
+
+  @include desktop {
+    display: none;
+  }
+}
+
+.desktop-only {
+  display: none;
+
+  @include desktop {
+    display: block;
+  }
+}
+
+// ========================================
+// MOBILE LAYOUT
+// ========================================
+
+.mobile-only {
+  .exercises-left {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  // Картинка отдельно
+  .mobile-image-section {
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    max-width: 335px;
+    
+    img {
+      width: 100%;
+      height: 242px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+  }
+
+  // Текстовый блок 110 min
+  .mobile-text-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: $spacing-lg;
+
+    .sport-info-content {
+      display: flex;
+      gap: $spacing-md;
+      align-items: flex-start;
+    }
+
+    .sport-info-icon {
+      background: var(--black);
+      
+      svg {
+        color: var(--white);
+      }
+    }
+
+    .sport-info-time {
+      color: var(--black);
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 4px 0;
+    }
+
+    .sport-info-subtitle {
+      color: var(--black);
+      font-size: 12px;
+      font-weight: 400;
+      margin: 0 0 16px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sport-info-description {
+      color: rgba(41, 41, 41, 0.6);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.29;
+      margin: 0;
+    }
+  }
+}
+
+// ========================================
+// TABLET LAYOUT
+// ========================================
+
+.tablet-only {
+  .exercises-left {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .quote-image-row {
+    display: flex;
+    gap: $spacing-lg;
+    margin-bottom: 30px;
+
+    > * {
+      flex: 1;
+    }
+  }
+
+  .tablet-image-section {
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 288px;
+
+    img {
+      width: 100%;
+      height: 249px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+  }
+
+  // Текстовый блок 110 min (ограниченная ширина)
+  .tablet-text-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: $spacing-lg;
+    max-width: 400px; // Ограничение ширины
+
+    .sport-info-content {
+      display: flex;
+      gap: $spacing-md;
+      align-items: flex-start;
+    }
+
+    .sport-info-icon {
+      background: var(--black);
+      
+      svg {
+        color: var(--white);
+      }
+    }
+
+    .sport-info-time {
+      color: var(--black);
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 4px 0;
+    }
+
+    .sport-info-subtitle {
+      color: var(--black);
+      font-size: 12px;
+      font-weight: 400;
+      margin: 0 0 16px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sport-info-description {
+      color: rgba(41, 41, 41, 0.6);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.29;
+      margin: 0;
+    }
+  }
+}
+
+// ========================================
+// DESKTOP LAYOUT
+// ========================================
+
+.desktop-only {
+  .exercises-left {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    width: 444px;
+  }
+
+  .quote-section,
+  .desktop-image-section,
+  .desktop-text-section {
+    width: 100%;
+  }
+
+  .desktop-image-section {
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 444px;
+    margin-bottom: 20px;
+    
+    img {
+      width: 100%;
+      height: 249px; // Новая высота
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+  }
+
+  .desktop-text-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: $spacing-lg;
+
+    .sport-info-content {
+      display: flex;
+      gap: $spacing-md;
+      align-items: flex-start;
+    }
+
+    .sport-info-icon {
+      background: var(--black);
+      
+      svg {
+        color: var(--white);
+      }
+    }
+
+    .sport-info-time {
+      color: var(--black);
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 4px 0;
+    }
+
+    .sport-info-subtitle {
+      color: var(--gray14-opacity);
+      font-size: 12px;
+      font-weight: 400;
+      margin: 0 0 16px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sport-info-description {
+      color: var(--gray14);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.29;
+      margin: 0;
+    }
+  }
+}
+
+// ========================================
+// SHARED COMPONENTS (удалено дублирование)
+// ========================================
+
+// Общие стили теперь встроены в каждый layout выше
+
+// ========================================
+// CATEGORY GRID
+// ========================================
+
+.category-grid {
+  min-height: 400px;
+  width: 100%;
+  max-width: 335px;
+  margin: 0 auto;
+
+  @include tablet {
+    max-width: 705px;
+  }
+
+  @include desktop {
+    max-width: 900px;
+    margin: 0;
+  }
+}
+
+.placeholder-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 16px;
+  color: light-dark(#666, #ccc);
+  font-style: italic;
+}
+
+// ========================================
+// LOADING & ERROR STATES
+// ========================================
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 16px;
+  color: light-dark(#666, #ccc);
+}
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-xxl;
+  text-align: center;
+
+  .error-message {
+    color: var(--error);
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .retry-button {
+    background: var(--accet-green);
+    color: var(--white);
+    border: none;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background: var(--hover);
+    }
+  }
+}
+
+.no-categories {
+  text-align: center;
+  color: light-dark(#666, #ccc);
+  font-size: 16px;
+  padding: $spacing-xxl;
+  margin: 0;
+}
