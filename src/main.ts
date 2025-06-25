@@ -1,4 +1,5 @@
 import 'modern-normalize/modern-normalize.css';
+import './css/index.css';
 import './styles/main.scss';
 import './components';
 import { YourEnergyAPI } from './api/your-energy-api.ts';
