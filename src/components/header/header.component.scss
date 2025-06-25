@@ -144,9 +144,15 @@
   gap: 24px;
   text-align: center;
 
+  /* typography – DM Sans 14/18 */
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+
+  /* ensure anchors inherit colour & remove underline */
   a {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 18px;
     color: #fff;
     text-decoration: none;
   }
