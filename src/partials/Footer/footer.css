@@ -1,0 +1,167 @@
+.footer {
+  margin-top: 200px;
+  background-color: #242424;
+}
+.container {
+}
+.footer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* #region Social */
+.social {
+  margin-top: 45px;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  margin-bottom: 20px;
+}
+.footer-logo-link {
+}
+
+.footer-logo-text {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #f4f4f4;
+}
+
+.social-links-footer {
+  display: flex;
+  gap: 12px;
+}
+
+.social-links-item {
+  list-style: none; /* Забрати маркери, якщо це ul/li */
+}
+
+.social-links-link {
+  border: 1px solid rgba(244, 244, 244, 0.1);
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.social-links-icon {
+  width: 24px;
+  height: 24px;
+  fill: #f4f4f4;
+  transition: fill 0.3s;
+}
+
+.social-links-link:hover,
+.social-links-link:focus {
+  background-color: #f4f4f4;
+  color: #242424;
+}
+
+.social-links-link:hover .social-links-icon,
+.social-links-link:focus .social-links-icon {
+  fill: #242424; /* Змінити колір іконки при ховері */
+}
+/* #endregion */
+
+/* #region slogan */
+.slogan {
+  margin-bottom: 20px;
+  width: 335px;
+}
+.slogan-massage {
+  font-family: "DM Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  color: #f4f4f4;
+}
+/* #endregion */
+
+/* #region  registration*/
+.registration {
+  margin-bottom: 120px;
+}
+.form-titel {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #f4f4f4;
+  margin-bottom: 20px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form-label {
+}
+.registration-input {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 14px;
+  gap: 10px;
+  width: 335px;
+  height: 42px;
+  border: 1px solid #f4f4f4;
+  border-radius: 30px;
+}
+.submit-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 335px;
+  height: 42px;
+  background: #f4f4f4;
+  border-radius: 30px;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background-color: var(--hover-grey);
+  transition: background-color 0.3s
+}
+/* #endregion */
+
+/* #region end */
+.footer-end {
+  position: relative;
+  margin-bottom: 10px;
+}
+.small-footer-text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  color: #c6cdd1;
+  opacity: 0.9;
+}
+
+.small-footer-text.year{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.small-footer-text.policy::after{
+  content: '/';
+  padding-left: 8px;
+}
+
+.footer-rules {
+}
+/* #endregion */

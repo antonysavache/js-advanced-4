@@ -24,6 +24,7 @@
     "vite-plugin-html-inject": "^1.1.2"
   },
   "dependencies": {
+    "@fontsource/dm-sans": "^5.2.6",
     "axios": "^1.7.0",
     "modern-normalize": "^3.0.1"
   }
