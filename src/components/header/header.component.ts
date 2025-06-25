@@ -3,7 +3,8 @@ import headerTemplate from './header.component.html?raw';
 import { BaseComponent } from '../../shared/models/component.abc.ts';
 
 export class HeaderComponent extends BaseComponent {
-  #navButtons: NodeListOf<HTMLAnchorElement> | null = null;
+  // accepts <a> *or* <button>
+  #navButtons: NodeListOf<HTMLElement> | null = null;
 
   constructor() {
     super(headerTemplate);
@@ -14,24 +15,26 @@ export class HeaderComponent extends BaseComponent {
   }
 
   bindEvents(): void {
-    this.#navButtons?.forEach(button => {
-      button.addEventListener('click', this.#handleNavClick);
-    });
+    this.#navButtons?.forEach(btn =>
+      btn.addEventListener('click', this.#handleNavClick)
+    );
   }
 
   removeEvents(): void {
-    this.#navButtons?.forEach(button => {
-      button.removeEventListener('click', this.#handleNavClick);
-    });
+    this.#navButtons?.forEach(btn =>
+      btn.removeEventListener('click', this.#handleNavClick)
+    );
   }
 
   #handleNavClick = (event: Event): void => {
-    const clicked = event.currentTarget as HTMLAnchorElement;
+    const clicked = event.currentTarget as HTMLElement;
 
-    this.#navButtons?.forEach(btn => {
-      btn.classList.remove('nav__button--active');
-    });
+    // clear all
+    this.#navButtons?.forEach(btn =>
+      btn.classList.remove('nav__button--active')
+    );
 
+    // activate clicked
     clicked.classList.add('nav__button--active');
   };
 
