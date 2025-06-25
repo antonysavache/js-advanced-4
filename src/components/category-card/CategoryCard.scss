@@ -1,100 +1,53 @@
+@use '../../styles/variables.scss' as *;
+
 .category-card {
   position: relative;
-  cursor: pointer;
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  height: 206px;
-  
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
-
-  &:focus {
-    outline: 2px solid #f4f4f4;
-    outline-offset: 2px;
-  }
-
-  &:active {
-    transform: translateY(-2px);
-  }
-}
-
-.category-image {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
+  cursor: pointer;
   display: flex;
   align-items: flex-end;
-}
+  padding: $spacing-md;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  background: #000;
+  min-height: 180px;
 
-.category-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(17, 17, 17, 0) 18.75%,
-    rgba(17, 17, 17, 0.5) 72.92%
-  );
-  padding: 14px;
-  color: #f4f4f4;
-}
-
-.category-name {
-  font-family: 'Neue Montreal', sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  color: #f4f4f4;
-  margin: 0 0 2px 0;
-  text-transform: capitalize;
-}
-
-.category-filter {
-  font-family: 'Neue Montreal', sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  color: rgba(244, 244, 244, 0.6);
-  margin: 0;
-  text-transform: capitalize;
-}
-
-@media (max-width: 767px) {
-  .category-card {
-    height: 180px;
+  .category-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
   }
-  
+
   .category-name {
+    position: relative;
+    z-index: 1;
     font-size: 18px;
-    line-height: 22px;
+    font-weight: 600;
   }
-  
-  .category-filter {
-    font-size: 11px;
-    line-height: 16px;
+
+  @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+    min-height: 160px;
   }
-  
-  .category-overlay {
-    padding: 12px;
+
+  @media screen and (min-width: $desktop-min) {
+    min-height: 150px;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
-  .category-card {
-    height: 192px;
+.category-list {
+  display: grid;
+  gap: $spacing-md;
+  grid-template-columns: 1fr;
+
+  @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .category-name {
-    font-size: 19px;
-    line-height: 23px;
+
+  @media screen and (min-width: $desktop-min) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

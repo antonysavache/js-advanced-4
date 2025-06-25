@@ -1,6 +1,7 @@
 import './CategoryCard.scss';
 
 interface CategoryData {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   _id: string;
   name: string;
   imgURL: string;

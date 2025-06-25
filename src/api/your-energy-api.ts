@@ -103,7 +103,7 @@ export class YourEnergyAPI {
   }
 }
 
-/* 
+/*
 Usage in components:
 
 async function getFilters() {
