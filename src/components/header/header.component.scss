@@ -1,0 +1,89 @@
+.header {
+  width: 100%;
+  padding: 24px 0;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    max-width: 100%;
+  }
+
+  &__logo {
+    .logo__icon {
+      width: 132px;
+      height: 24px;
+      display: block;
+    }
+
+    .logo__text {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #111;
+      text-decoration: none;
+      display: block;
+    }
+  }
+
+  &__nav {
+    .nav__wrapper {
+      background-color: #242424;
+      border-radius: 60px;
+      padding: 4px;
+      width: 265px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav__list {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav__button {
+      display: inline-block;
+      padding: 8px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 60px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #3a3a3a;
+      }
+
+      &--active {
+        background-color: #fff;
+        color: #242424;
+      }
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 16px;
+
+    .social__icon {
+      width: 24px;
+      height: 24px;
+      fill: #111;
+      transition: fill 0.3s ease;
+
+      &:hover {
+        fill: #3ebf91;
+      }
+    }
+  }
+}
