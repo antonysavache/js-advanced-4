@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portfolio</title>
+  <title>Your Energy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -23,6 +23,25 @@
 <main>
   <div id="app"></div>
 </main>
+
+<!-- Mobile slide-in panel (only one in the whole document) -->
+<aside class="mobile-menu">
+  <button class="mobile-menu__close" aria-label="Close menu">
+    <img src="src/images/close.png" alt="close icon" />
+  </button>
+
+  <nav class="mobile-menu__links">
+    <a href="#home">Home</a>
+    <a href="#favorites">Favorites</a>
+  </nav>
+
+  <div class="mobile-menu__social">
+    <a href="#"><svg><use href="/src/images/sprite.svg#icon-facebook"></use></svg></a>
+    <a href="#"><svg><use href="/src/images/sprite.svg#icon-instagram"></use></svg></a>
+    <a href="#"><svg><use href="/src/images/sprite.svg#icon-youtube"></use></svg></a>
+  </div>
+</aside>
+
 
 <script type="module" src="src/main.ts"></script>
 <script type="module" src="src/js/main.js"></script>

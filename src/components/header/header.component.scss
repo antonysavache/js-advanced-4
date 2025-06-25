@@ -1,10 +1,10 @@
-/* ========================================================
-   header.component.scss  (refactored, brace‑safe)
-   ======================================================== */
-/* Google Font (load once in index.html):
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap" rel="stylesheet"> */
+/* ==========================================================
+   header.component.scss  —  Desktop, Tablet, Mobile
+   Burger shown by default, hidden on ≥768px
+   Slide-in panel appears on ≤767px when .mobile-menu--open
+   ========================================================== */
 
-/* ─────────── DESKTOP BASE (≥1440 px) ─────────── */
+/* --------------  DESKTOP BASE (≥1440px) -------------- */
 .header {
   width: 100%;
   padding: 24px 0;
@@ -21,143 +21,166 @@
   }
 
   /* logo */
-  &__logo {
-    .logo__icon {
-      width: 132px;
-      height: 24px;
-      display: block;
-    }
-  }
+  &__logo .logo__icon { width: 132px; height: 24px; }
 
-  /* nav pill */
+  /* pill */
   &__nav {
     .nav__wrapper {
-      width: 265px;
-      height: 52px;
-      background: #242424;
-      border-radius: 60px;
+      width: 265px; height: 52px;
+      background: #242424; border-radius: 60px;
       padding: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .nav__list {
-      display: flex;
-      gap: 8px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+    .nav__list { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; }
 
     .nav__button {
       font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 400;
-      padding: 8px 24px;
-      border-radius: 60px;
-      background: transparent;
-      color: #fff;
+      font-size: 16px; line-height: 24px; font-weight: 400;
+      padding: 8px 24px; border-radius: 60px;
+      background: transparent; color: #fff;
       text-decoration: none;
-      transition: background-color 0.25s ease;
+      transition: background-color .25s;
 
-      &:hover:not(.nav__button--active) {
-        background: #3a3a3a;
-      }
-
-      &--active {
-        background: #f4f4f4;
-        color: #242424;
-        font-weight: 600;
-      }
+      &:hover:not(.nav__button--active) { background: #3a3a3a; }
+      &--active { background: #f4f4f4; color: #242424; font-weight: 600; }
     }
   }
 
   /* socials */
   &__social {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; gap: 12px; align-items: center;
 
     .social__link {
-      width: 44px;
-      height: 44px;
-      padding: 8px;
-      border: 1px solid #242424;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background 0.25s, opacity 0.25s;
+      width: 44px; height: 44px; padding: 8px;
+      border: 1px solid #242424; border-radius: 10px;
+      display: flex; justify-content: center; align-items: center;
+      transition: background .25s, opacity .25s;
 
-      &:hover {
-        background: #f5f5f5;
-        opacity: 1;
-      }
+      &:hover { background: #f5f5f5; opacity: 1; }
     }
 
-    .social__icon {
-      width: 28px;
-      height: 28px;
-      fill: #242424;
-      opacity: 0.8;
-    }
+    .social__icon { width: 28px; height: 28px; fill: #242424; opacity: .8; }
   }
 }
 
-/* ─────────── TABLET (768 – 1439.98 px) ─────────── */
-@media (min-width: 768px) and (max-width: 1439.98px) {
-  .header {
-    background: #f4f4f4;
-    padding: 20px 0;
+/* --------------  BURGER (visible by default) -------------- */
+.burger {
+  background: none;
+  border: 0;
+  line-height: 0;
+  cursor: pointer;
+  display: block;               /* visible by default (mobile first) */
+  margin-left: auto;            /* pushes to right in flex row */
 
-    &__container {
-      max-width: 100%;
-      padding: 0 32px;   /* 32‑px side gutters on tablet */
-    }
-
-    &__nav {
-      flex: 1;                     /* take remaining row space */
-      display: flex;
-      justify-content: center;     /* center pill */
-
-      .nav__wrapper {
-        width: 233px;              /* Figma exact */
-        height: 52px;
-      }
-    }
-
-    &__social {
-      gap: 8px;
-
-      .social__link {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-      }
-
-      .social__icon {
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
+  img { width: 28px; height: 28px; }
 }
 
-/* ─────────── MOBILE (≤767.98 px) ─────────── */
-@media (max-width: 767.98px) {
-  .header__container {
-    flex-direction: column;
-    gap: 16px;
-    padding: 0 16px;
-  }
+/* Hide burger on tablet & desktop  */
+@media (min-width: 768px) {
+  .burger { display: none; }
+}
+
+/* --------------  TABLET (768–1439px) -------------- */
+@media (min-width:768px) and (max-width:1439.98px){
+  .header { background: #f4f4f4; padding: 20px 0; }
+
+  .header__container { max-width: 100%; padding: 0 32px; }
 
   .header__nav {
-    flex: none;
+    flex: 1; display: flex; justify-content: center;
 
-    .nav__wrapper {
-      width: 90vw;
-    }
+    .nav__wrapper { width: 233px; height: 52px; }  /* Figma exact */
   }
+
+  .header__social {
+    gap: 8px;
+
+    .social__link { width: 40px; height: 40px; border-radius: 8px; }
+    .social__icon { width: 24px; height: 24px; }
+  }
+}
+
+/* --------------  DESKTOP & TABLET: hide slide-panel -------------- */
+@media (min-width: 768px) {
+  .mobile-menu { display: none; }
+}
+
+/* --------------  MOBILE (≤767px) -------------- */
+@media (max-width: 767.98px){
+  /* 20-px gutters as per Figma */
+  .header__container { padding: 0 20px; }
+
+  /* hide pill & desktop socials */
+  .header__nav, .header__social { display: none !important; }
+
+  /* -------- slide-in panel -------- */
+  .mobile-menu {
+    position: fixed; top: 0; right: 0;
+    width: 210px; height: 100vh;
+    background: #242424; color: #fff;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 96px 24px 32px; gap: 48px;
+    transform: translateX(100%);               /* hidden off-screen */
+    transition: transform .35s ease;
+    z-index: 1000;
+  }
+  .mobile-menu--open { transform: translateX(0); }
+
+  .mobile-menu__close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; border: 0; cursor: pointer; line-height: 0;
+
+    img { width: 24px; height: 24px; }
+  }
+
+  /* link stack — now perfectly centered */
+.mobile-menu__links {
+  flex: 1;                               /* take remaining height   */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;               /* vertical centre         */
+  align-items: center;                   /* horizontal centre       */
+  gap: 24px;
+  text-align: center;
+
+  a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+
+  .mobile-menu__social {
+  margin-top: auto;
+  display: flex;
+  gap: 16px;
+
+  a {
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    border: 1px solid #ffffff80;   /* faint white stroke */
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  svg {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    opacity: 0.8;
+  }
+}
+
+}
+
+/* --------------  Tiny-phone pill (if re-enabled) -------------- */
+@media (max-width: 480px) {
+  .header__nav .nav__wrapper { width: 90vw; }
 }
