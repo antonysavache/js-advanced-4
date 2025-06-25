@@ -39,7 +39,7 @@ export class HeaderComponent extends BaseComponent {
     this.mobileMenu.classList.remove('mobile-menu--open');
   };
 
-  private toggleMenu = (): void =>
+  private toggleMenu = (): boolean =>
     this.mobileMenu.classList.toggle('mobile-menu--open');
 
   onReady(): void {}
