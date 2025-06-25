@@ -1,6 +1,8 @@
+import { ExerciseFilter } from '../../api/api.interface';
+
 class HomePageController {
   constructor() {
-    this.activeFilter = 'muscles';
+    this.activeFilter = 'Muscles';
     this.loading = false;
     this.categoryCards = [];
     this.emptyState = null;
@@ -55,13 +57,7 @@ class HomePageController {
     try {
       this.loading = true;
 
-      const filterMap = {
-        muscles: 'Muscles',
-        bodyparts: 'Body_parts',
-        equipment: 'Equipment',
-      };
-
-      const apiFilter = filterMap[filter];
+      const apiFilter = ExerciseFilter[filter];
       const response = await window.YourEnergyAPI.getFilters(apiFilter, 1, 12);
 
       if (response && response.results && response.results.length) {

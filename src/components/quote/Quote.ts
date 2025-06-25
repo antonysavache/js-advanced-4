@@ -1,4 +1,6 @@
 import './Quote.scss';
+import { YourEnergyAPI } from '../../api';
+import { type Quote as QuoteModel } from '../../api/api.interface';
 
 interface QuoteData {
   quote: string;
@@ -8,7 +10,6 @@ interface QuoteData {
 
 export class Quote {
   private readonly container: HTMLElement | null;
-  private apiUrl: string = 'https://your-energy.b.goit.study/quote';
   private storageKey: string = 'daily-quote';
 
   constructor(containerSelector: string) {
@@ -30,7 +31,7 @@ export class Quote {
     if (cached && cached.date === today) {
       this.render(cached.quote, cached.author);
     } else {
-      this.fetchQuote();
+      this.getQuote();
     }
   }
 
@@ -51,24 +52,17 @@ export class Quote {
     return new Date().toISOString().split('T')[0];
   }
 
-  private fetchQuote(): void {
-    fetch(this.apiUrl)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`Ошибка: ${res.status}`);
-        }
-
-        return res.json();
-      })
-      .then((data: { quote: string; author: string }) => {
+  private getQuote(): void {
+    YourEnergyAPI.getQuote()
+      .then((quote: QuoteModel) => {
         const today = this.getTodayDate();
         const quoteData: QuoteData = {
-          quote: data.quote,
-          author: data.author,
+          quote: quote.quote,
+          author: quote.author,
           date: today,
         };
 
-        this.render(data.quote, data.author);
+        this.render(quote.quote, quote.author);
         localStorage.setItem(this.storageKey, JSON.stringify(quoteData));
       })
       .catch(err => {
