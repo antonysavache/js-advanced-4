@@ -1,14 +1,18 @@
 @import url("modern-normalize/modern-normalize.css");
 
 :root {
-  --poppins-family: "Poppins", sans-serif;
-  --impact-family: "Impact", sans-serif;
-  --montserrat-family: "Montserrat", sans-serif;
 
-  --black: #292929;
+  --dm-sans-family: 'DM Sans', sans-serif;
+  --impact-family: 'Impact', sans-serif;
+
+  --black: #000;
+  --gray14: #242424;
+  --gray14-opacity: rgba(36, 36, 36, 0.6);
+  --black-rgb: 0, 0, 0;
   --accet-green: #00b068;
-  --white: #f0f0f0;
+  --white: #fff;
   --light-grey: #e4e5e6;
+  --page-bg: #f4f4f4;
   --hover-grey: #bbb;
   --light-accent: #bcdfd1;
   --hover: #009156;
@@ -80,12 +84,12 @@ select {
 }
 
 body {
-  font-family: var(--poppins-family), sans-serif;
-  font-weight: 300;
+  font-family: var(--dm-sans-family), sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.03em;
-  background-color: light-dark(var(--white), var(--black-dt));
+  background-color: var(--page-bg);
 }
 
 

@@ -1,0 +1,28 @@
+.category-card {
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+  max-width: 200px;
+  margin: 8px;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+.category-image {
+  width: 100%;
+  height: 120px;
+  background-size: cover;
+  background-position: center;
+}
+
+.category-name {
+  padding: 12px;
+  font-size: 16px;
+  color: #333;
+}
