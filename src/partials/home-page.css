@@ -1,0 +1,424 @@
+.exercises-section {
+  padding: 48px 0;
+}
+
+.exercises-header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media screen and (min-width: 768px) {
+  .exercises-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.exercises-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: light-dark(var(--black), var(--white));
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .exercises-title {
+    font-size: 32px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .exercises-title {
+    font-size: 36px;
+  }
+}
+
+.filters-panel {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 12px 24px;
+  border: 1px solid var(--light-grey);
+  border-radius: 30px;
+  background: transparent;
+  color: light-dark(var(--black), var(--white));
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+.filter-btn:hover {
+  border-color: var(--accet-green);
+  color: var(--accet-green);
+}
+
+.filter-btn--active {
+  background: var(--accet-green);
+  border-color: var(--accet-green);
+  color: var(--white);
+}
+
+.filter-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Content Layout */
+.exercises-content {
+  display: grid;
+  gap: 32px;
+}
+
+/* MOBILE & TABLET: categories сверху, content снизу */
+@media screen and (max-width: 1279px) {
+  .exercises-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .exercises-right {
+    order: 1; /* Категории сверху */
+  }
+  
+  .exercises-left {
+    order: 2; /* Контент снизу */
+  }
+}
+
+/* DESKTOP: content слева, categories справа */
+@media screen and (min-width: 1280px) {
+  .exercises-content {
+    grid-template-columns: 444px 1fr; /* Фиксированная ширина 444px для левой колонки */
+    gap: 48px;
+  }
+  
+  .exercises-left {
+    order: 1; /* Контент слева */
+  }
+  
+  .exercises-right {
+    order: 2; /* Категории справа */
+  }
+}
+
+/* DEVICE VISIBILITY CLASSES */
+.mobile-only {
+  display: block;
+}
+
+.tablet-only {
+  display: none;
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .tablet-only {
+    display: block;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .tablet-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* MOBILE LAYOUT */
+.mobile-only .exercises-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobile-only .sport-info-card {
+  background: light-dark(var(--light-grey), var(--charcoal-dt));
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-only .sport-info-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.mobile-only .sport-info-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mobile-only .sport-info-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* TABLET LAYOUT */
+.tablet-only .exercises-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tablet-only .quote-image-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.tablet-only .sport-image-section .sport-info-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.tablet-only .sport-image-section .sport-info-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tablet-only .sport-info-card {
+  background: light-dark(var(--light-grey), var(--charcoal-dt));
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.tablet-only .sport-info-content {
+  display: flex;
+  gap: 16px;
+}
+
+/* DESKTOP LAYOUT */
+.desktop-only .exercises-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 444px; /* Точная ширина вместо max-width */
+}
+
+/* Блок 1: Цитата */
+.desktop-only .quote-section {
+  width: 100%; /* Используем всю ширину родителя (444px) */
+}
+
+/* Блок 2: Картинка отдельно */
+.desktop-only .desktop-image-section {
+  width: 100%; /* Используем всю ширину родителя (444px) */
+}
+
+.desktop-only .desktop-image-section .sport-info-image {
+  width: 100%;
+  height: 242px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.desktop-only .desktop-image-section .sport-info-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Блок 3: Текст 110 min отдельно */
+.desktop-only .desktop-text-section {
+  width: 100%; /* Используем всю ширину родителя (444px) */
+}
+
+.desktop-only .desktop-text-section .sport-info-card {
+  background: light-dark(var(--light-grey), var(--charcoal-dt));
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.desktop-only .desktop-text-section .sport-info-content {
+  display: flex;
+  gap: 16px;
+}
+
+
+/* SHARED STYLES */
+.sport-info-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--accet-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+
+.mobile-only .sport-info-icon {
+  margin-bottom: 16px;
+}
+
+.sport-info-text {
+  flex: 1;
+}
+
+.sport-info-time {
+  font-size: 24px;
+  font-weight: 700;
+  color: light-dark(var(--black), var(--white));
+  margin: 0 0 4px 0;
+}
+
+.sport-info-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: light-dark(var(--black), var(--white));
+  margin: 0 0 12px 0;
+}
+
+.sport-info-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: light-dark(#666, #ccc);
+  margin: 0;
+}
+
+.category-grid {
+  min-height: 400px;
+  width: 100%;
+  max-width: 335px; /* Mobile */
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .category-grid {
+    max-width: 705px; /* Tablet */
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .category-grid {
+    max-width: 900px; /* Desktop */
+    margin: 0;
+  }
+}
+
+.placeholder-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 16px;
+  color: light-dark(#666, #ccc);
+  font-style: italic;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 16px;
+  color: light-dark(#666, #ccc);
+}
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px;
+  text-align: center;
+}
+
+.error-message {
+  color: var(--error);
+  font-size: 16px;
+  margin: 0;
+}
+
+.retry-button {
+  background: var(--accet-green);
+  color: var(--white);
+  border: none;
+  padding: 8px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.retry-button:hover {
+  background: var(--hover);
+}
+
+.no-categories {
+  text-align: center;
+  color: light-dark(#666, #ccc);
+  font-size: 16px;
+  padding: 48px;
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .exercises-section {
+    padding: 24px 0;
+  }
+
+  .exercises-header {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .exercises-title {
+    font-size: 24px;
+  }
+
+  .exercises-content {
+    gap: 24px;
+  }
+
+  .filter-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .sport-info-content {
+    padding: 20px;
+  }
+
+  .sport-info-time {
+    font-size: 20px;
+  }
+}

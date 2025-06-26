@@ -50,7 +50,7 @@ class HomePageController {
   }
 
   setDefaultFilter() {
-    this.setActiveFilter('muscles');
+    this.setActiveFilter('Muscles');
   }
 
   async loadCategories(filter) {
@@ -97,7 +97,6 @@ class HomePageController {
     const paginatorContainer = document.getElementById('paginator-container');
     if (!paginatorContainer) return;
 
-    console.log(window.Paginator);
     const paginator = new window.Paginator(122, 12, 1);
     paginator.render(paginatorContainer);
   }
