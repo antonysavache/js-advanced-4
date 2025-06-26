@@ -1,4 +1,5 @@
 export * from './header-example';
+export * from './header/header.component.ts';
 export * from './common/social-links';
 export * from './modal/Modal.ts';
 export * from './quote/Quote.ts';
