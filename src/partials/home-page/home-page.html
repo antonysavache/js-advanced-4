@@ -1,0 +1,141 @@
+<section class="exercises-section">
+  <div class="container">
+    <div class="exercises-header">
+      <h2 class="exercises-title">Exercises</h2>
+      <div class="filters-panel" id="filters-panel">
+        <button class="filter-btn filter-btn--active" data-filter="Muscles">Muscles</button>
+        <button class="filter-btn" data-filter="Body_parts">Body parts</button>
+        <button class="filter-btn" data-filter="Equipment">Equipment</button>
+      </div>
+    </div>
+
+    <div class="exercises-content">
+      <div class="exercises-right">
+        <div class="category-grid" id="category-grid">
+          <!-- Categories will be rendered here by CategoryCard components -->
+        </div>
+        <div class="paginator-container" id="paginator-container"></div>
+      </div>
+
+      <!-- MOBILE VERSION -->
+      <div class="exercises-left mobile-only">
+        <div class="quote-section" id="quote-container">
+          <!-- Quote will be rendered here by Quote component -->
+        </div>
+
+        <div class="mobile-image-section">
+          <picture>
+            <img
+              src="/images/home-women-s-x1.png"
+              srcset="/images/home-women-s-x1.png 1x, /images/home-women-s-x2.png 2x"
+              alt="Women doing sport activities"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+
+        <div class="mobile-text-section">
+          <div class="sport-info-content">
+            <div class="sport-info-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M14,6 L10,10 L6,6" stroke="currentColor" stroke-width="2" fill="none" />
+              </svg>
+            </div>
+            <div class="sport-info-text">
+              <h3 class="sport-info-time">110 min</h3>
+              <p class="sport-info-subtitle">Daily norm of sports</p>
+              <p class="sport-info-description">
+                The World Health Organization recommends at least 150 minutes of moderate-intensity aerobic physical activity throughout the
+                week for adults aged 18-64. However, what happens if we adjust that number to 110 minutes every day? While it might seem
+                like a high number to hit, dedicating 110 minutes daily to sporting activities may offer unparalleled benefits to physical
+                health, mental well-being, and overall quality of life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLET VERSION -->
+      <div class="exercises-left tablet-only">
+        <div class="quote-image-row">
+          <div class="quote-section"></div>
+          <div class="tablet-image-section">
+            <picture>
+              <img
+                src="/images/home-women-m-x1.png"
+                srcset="/images/home-women-m-x1.png 1x, /images/home-women-m-x2.png 2x"
+                alt="Women doing sport activities"
+                loading="lazy"
+              />
+            </picture>
+          </div>
+        </div>
+
+        <!-- Второй ряд: текст с 110 min (ограниченная ширина) -->
+        <div class="tablet-text-section">
+          <div class="sport-info-content">
+            <div class="sport-info-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M14,6 L10,10 L6,6" stroke="currentColor" stroke-width="2" fill="none" />
+              </svg>
+            </div>
+            <div class="sport-info-text">
+              <h3 class="sport-info-time">110 min</h3>
+              <p class="sport-info-subtitle">Daily norm of sports</p>
+              <p class="sport-info-description">
+                The World Health Organization recommends at least 150 minutes of moderate-intensity aerobic physical activity throughout the
+                week for adults aged 18-64. However, what happens if we adjust that number to 110 minutes every day? While it might seem
+                like a high number to hit, dedicating 110 minutes daily to sporting activities may offer unparalleled benefits to physical
+                health, mental well-being, and overall quality of life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESKTOP VERSION -->
+      <div class="exercises-left desktop-only">
+        <!-- Блок 1: Цитата -->
+        <div class="quote-section">
+          <!-- Quote will be rendered here by Quote component -->
+        </div>
+
+        <!-- Блок 2: Картинка отдельно -->
+        <div class="desktop-image-section">
+          <picture>
+            <img
+              src="/images/home-women-xl-x1.png"
+              srcset="/images/home-women-xl-x1.png 1x, /images/home-women-xl-x2.png 2x"
+              alt="Women doing sport activities"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+
+        <!-- Блок 3: Текст 110 min отдельно -->
+        <div class="desktop-text-section">
+          <div class="sport-info-content">
+            <div class="sport-info-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M14,6 L10,10 L6,6" stroke="currentColor" stroke-width="2" fill="none" />
+              </svg>
+            </div>
+            <div class="sport-info-text">
+              <h3 class="sport-info-time">110 min</h3>
+              <p class="sport-info-subtitle">Daily norm of sports</p>
+              <p class="sport-info-description">
+                The World Health Organization recommends at least 150 minutes of moderate-intensity aerobic physical activity throughout the
+                week for adults aged 18-64. However, what happens if we adjust that number to 110 minutes every day? While it might seem
+                like a high number to hit, dedicating 110 minutes daily to sporting activities may offer unparalleled benefits to physical
+                health, mental well-being, and overall quality of life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

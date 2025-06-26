@@ -1,2 +1,5 @@
 // Import of globals styles
 @use './globals.scss';
+
+// Import partials
+@use '../partials/home-page/home-page.scss';
