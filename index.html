@@ -16,7 +16,7 @@
   >
   <link rel="stylesheet" href="src/css/index.css" />
 </head>
-<body>
+<body class="no-scroll">
 <load src="src/partials/header-example/01-header-example.html" />
 <app-header></app-header>
 
@@ -35,11 +35,23 @@
     <a href="#favorites">Favorites</a>
   </nav>
 
-  <div class="mobile-menu__social">
-    <a href="#"><svg><use href="/src/images/sprite.svg#icon-facebook"></use></svg></a>
-    <a href="#"><svg><use href="/src/images/sprite.svg#icon-instagram"></use></svg></a>
-    <a href="#"><svg><use href="/src/images/sprite.svg#icon-youtube"></use></svg></a>
-  </div>
+  <ul class="mobile-menu__social social-links">
+  <li class="social-links__item">
+    <a href="https://www.facebook.com/goITclub/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-facebook"></use></svg>
+    </a>
+  </li>
+  <li class="social-links__item">
+    <a href="https://www.instagram.com/goitclub/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-instagram"></use></svg>
+    </a>
+  </li>
+  <li class="social-links__item">
+    <a href="https://www.youtube.com/c/GoIT" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+      <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-youtube"></use></svg>
+    </a>
+  </li>
+</ul>
 </aside>
 
 

@@ -46,3 +46,8 @@ button {
 .container {
   @include container;
 }
+
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
