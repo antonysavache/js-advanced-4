@@ -50,7 +50,7 @@ class HomePageController {
   }
 
   setDefaultFilter() {
-    this.setActiveFilter('muscles');
+    this.setActiveFilter('Muscles');
   }
 
   async loadCategories(filter) {
@@ -89,6 +89,11 @@ class HomePageController {
       categoryCard.render(container);
       this.categoryCards.push(categoryCard);
     });
+  }
+
+  handleCategorySelect(selectedCategory) {
+    console.log('Category selected:', selectedCategory);
+    // Логика обработки в CategoryCard.ts
   }
 
   showEmptyState() {

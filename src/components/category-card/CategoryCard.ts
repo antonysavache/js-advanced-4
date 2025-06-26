@@ -47,11 +47,20 @@ export class CategoryCard {
 
   private async handleCategoryClick(): Promise<void> {
     try {
-      const response = await YourEnergyAPI.getExercises({
-        keyword: this.data.name,
+      const filterToParam = {
+        Muscles: 'muscles',
+        'Body parts': 'bodypart',
+        Equipment: 'equipment',
+      };
+
+      const paramName = filterToParam[this.data.filter];
+      const exerciseParams = {
         page: 1,
         limit: 12,
-      });
+        [paramName]: this.data.name,
+      };
+
+      const response = await YourEnergyAPI.getExercises(exerciseParams);
 
       const exercises = response.results;
       const container = document.getElementById('exercise-container');
