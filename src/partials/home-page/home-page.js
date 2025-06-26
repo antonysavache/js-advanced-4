@@ -65,7 +65,9 @@ class HomePageController {
       } else {
         this.showEmptyState();
       }
+      this.renderPaginator();
     } catch (error) {
+      console.log(error);
       this.showErrorState();
     } finally {
       this.loading = false;
@@ -89,6 +91,14 @@ class HomePageController {
       categoryCard.render(container);
       this.categoryCards.push(categoryCard);
     });
+  }
+
+  renderPaginator() {
+    const paginatorContainer = document.getElementById('paginator-container');
+    if (!paginatorContainer) return;
+
+    const paginator = new window.Paginator(122, 12, 1);
+    paginator.render(paginatorContainer);
   }
 
   handleCategorySelect(selectedCategory) {

@@ -5,3 +5,4 @@ export * from './quote/Quote.ts';
 export * from './empty-state/EmptyState.ts';
 export * from './exercise-card/ExerciseCard.ts';
 export * from './category-card/CategoryCard.ts';
+export * from './paginator/Paginator.ts';

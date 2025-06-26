@@ -1,0 +1,30 @@
+.paginator {
+  display: flex;
+  font-size: 28px;
+  gap: 8px;
+  color: black;
+}
+
+.paginator__previous-container,
+.paginator__next-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.paginator__next-container .paginator__arrow-button {
+  transform: rotate(180deg);
+}
+
+.paginator__arrow-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #242424;
+  border-radius: 50%;
+}
+
+.paginator__arrow-icon {
+  fill: #242424;
+}
