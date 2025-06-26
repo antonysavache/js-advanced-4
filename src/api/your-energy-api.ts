@@ -34,6 +34,7 @@ export class YourEnergyAPI {
             case 500:
               return Promise.reject(new Error('Server error (500). Please try again later.'));
             default:
+              console.error(`API response: ${JSON.stringify(error.response)}`);
               return Promise.reject(new Error(error.message || 'Unexpected error occurred.'));
           }
         }
