@@ -1,0 +1,34 @@
+@use '../../styles/variables.scss' as *;
+
+.exercise-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+
+  .exercise-name {
+    font-size: 18px;
+    margin-bottom: $spacing-sm;
+  }
+
+  .exercise-info {
+    margin: $spacing-xs 0;
+    color: #555;
+  }
+
+  .exercise-start-btn {
+    margin-top: $spacing-md;
+    padding: $spacing-sm $spacing-md;
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background: #45a049;
+    }
+  }
+}
