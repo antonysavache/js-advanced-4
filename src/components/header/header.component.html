@@ -1,7 +1,7 @@
 <header class="header">
   <div class="container header__container">
 
-    <!-- Логотип -->
+    <!-- LOGO -->
     <div class="header__logo">
       <a href="/" aria-label="Go to homepage">
         <svg class="logo__icon">
@@ -10,7 +10,12 @@
       </a>
     </div>
 
-    <!-- Меню навігації у фон-контейнері -->
+    <!-- BURGER  (visible ≤767 px, hidden above) -->
+    <button class="burger" aria-label="Open menu">
+      <img src="src/images/burger.png" alt="menu icon" />
+    </button>
+
+    <!-- NAV PILL (desktop / tablet) -->
     <nav class="header__nav">
       <div class="nav__wrapper">
         <ul class="nav__list">
@@ -20,22 +25,16 @@
       </div>
     </nav>
 
-    <!-- Соц. іконки -->
+    <!-- SOCIAL ICONS (desktop / tablet) -->
     <div class="header__social">
       <a href="#" class="social__link" aria-label="Facebook">
-        <svg class="social__icon">
-          <use href="/src/images/sprite.svg#icon-facebook"></use>
-        </svg>
+        <svg class="social__icon"><use href="/src/images/sprite.svg#icon-facebook"></use></svg>
       </a>
       <a href="#" class="social__link" aria-label="Instagram">
-        <svg class="social__icon">
-          <use href="/src/images/sprite.svg#icon-instagram"></use>
-        </svg>
+        <svg class="social__icon"><use href="/src/images/sprite.svg#icon-instagram"></use></svg>
       </a>
       <a href="#" class="social__link" aria-label="YouTube">
-        <svg class="social__icon">
-          <use href="/src/images/sprite.svg#icon-youtube"></use>
-        </svg>
+        <svg class="social__icon"><use href="/src/images/sprite.svg#icon-youtube"></use></svg>
       </a>
     </div>
 

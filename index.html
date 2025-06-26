@@ -1,24 +1,41 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YourEnergy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+            rel="stylesheet"
     />
     <link rel="stylesheet" href="src/css/index.css" />
-  </head>
-  <body>
-    <main>
-      <load src="src/partials/hero-page/hero-page.html" />
-      <load src="src/partials/home-page/home-page.html" />
-    </main>
-    <load src="src/partials/Footer/footer.html" />
-    <script type="module" src="src/main.ts"></script>
-    <script type="module" src="src/js/main.js"></script>
-  </body>
+</head>
+<body>
+<app-header></app-header>
+<main>
+    <load src="src/partials/hero-page/hero-page.html" />
+    <load src="src/partials/home-page/home-page.html" />
+</main>
+<aside class="mobile-menu">
+    <button class="mobile-menu__close" aria-label="Close menu">
+        <img src="src/images/close.png" alt="close icon" />
+    </button>
+
+    <nav class="mobile-menu__links">
+        <a href="#home">Home</a>
+        <a href="#favorites">Favorites</a>
+    </nav>
+
+    <div class="mobile-menu__social">
+        <a href="#"><svg><use href="/src/images/sprite.svg#icon-facebook"></use></svg></a>
+        <a href="#"><svg><use href="/src/images/sprite.svg#icon-instagram"></use></svg></a>
+        <a href="#"><svg><use href="/src/images/sprite.svg#icon-youtube"></use></svg></a>
+    </div>
+</aside>
+<load src="src/partials/Footer/footer.html" />
+<script type="module" src="src/main.ts"></script>
+<script type="module" src="src/js/main.js"></script>
+</body>
 </html>
