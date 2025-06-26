@@ -101,6 +101,11 @@ class HomePageController {
     paginator.render(paginatorContainer);
   }
 
+  handleCategorySelect(selectedCategory) {
+    console.log('Category selected:', selectedCategory);
+    // Логика обработки в CategoryCard.ts
+  }
+
   showEmptyState() {
     if (!this.emptyState) {
       return;
