@@ -1,3 +1,6 @@
+@use '../../styles/mixins.scss' as *;
+@use '../../styles/variables.scss' as *;
+
 .category-card {
   position: relative;
   cursor: pointer;
@@ -7,14 +10,14 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
   height: 206px;
-  
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
   &:focus {
-    outline: 2px solid #f4f4f4;
+    outline: 2px solid var(--page-bg);
     outline-offset: 2px;
   }
 
@@ -31,70 +34,75 @@
   background-repeat: no-repeat;
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
 }
 
 .category-overlay {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  padding: 14px;
+  color: var(--page-bg);
+  inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(17, 17, 17, 0) 18.75%,
-    rgba(17, 17, 17, 0.5) 72.92%
+    rgba(17, 17, 17, 0.5) 0%,
+    rgba(17, 17, 17, 0.5) 100%
   );
-  padding: 14px;
-  color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .category-name {
-  font-family: 'Neue Montreal', sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  color: #f4f4f4;
+  font-family: var(--dm-sans-family), sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color: var(--page-bg);
   margin: 0 0 2px 0;
   text-transform: capitalize;
 }
 
 .category-filter {
-  font-family: 'Neue Montreal', sans-serif;
+  font-family: var(--dm-sans-family), sans-serif;
   font-weight: 400;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 1.5;
   color: rgba(244, 244, 244, 0.6);
   margin: 0;
   text-transform: capitalize;
 }
 
-@media (max-width: 767px) {
+@include mobile {
   .category-card {
     height: 180px;
   }
-  
+
   .category-name {
     font-size: 18px;
-    line-height: 22px;
+    line-height: 1.22;
   }
-  
+
   .category-filter {
     font-size: 11px;
-    line-height: 16px;
+    line-height: 1.45;
   }
-  
+
   .category-overlay {
     padding: 12px;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+@include tablet {
   .category-card {
     height: 192px;
   }
-  
+
   .category-name {
     font-size: 19px;
-    line-height: 23px;
+    line-height: 1.21;
   }
 }

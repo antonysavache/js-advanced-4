@@ -1,3 +1,5 @@
+@use '../../styles/variables.scss' as *;
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -5,12 +7,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: $z-index-modal;
 }
 
 .modal-content {
   background: #fff;
-  padding: 24px;
+  padding: $spacing-lg;
   border-radius: 12px;
   max-width: 500px;
   width: 90%;
@@ -19,8 +21,8 @@
 
 .modal-close {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: $spacing-md;
+  right: $spacing-md;
   background: transparent;
   border: none;
   font-size: 24px;
