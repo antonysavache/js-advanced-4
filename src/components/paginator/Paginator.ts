@@ -3,21 +3,14 @@ import './Paginator.scss';
 export class Paginator {
   private totalPages: number;
   private currentPage: number;
-  private perPage: number;
-  private totalItems: number;
-  private onPageChangeCallback: (page: number, limit: number) => void;
+  // private perPage: number;
+  // private totalItems: number;
 
-  constructor(
-    totalItems: number,
-    perPage: number,
-    currentPage: number,
-    onPageChangeCallback: (page: number, limit: number) => void,
-  ) {
-    this.totalItems = totalItems;
-    this.perPage = perPage;
+  constructor(totalItems: number, perPage: number, currentPage: number) {
+    // this.totalItems = totalItems;
+    // this.perPage = perPage;
     this.currentPage = currentPage;
     this.totalPages = Math.ceil(totalItems / perPage);
-    this.onPageChangeCallback = onPageChangeCallback;
   }
 
   render(container: HTMLElement) {
@@ -71,14 +64,6 @@ export class Paginator {
 
     // Append the paginator to the container
     container.appendChild(paginatorElement);
-  }
-
-  private changePage(newPage: number) {
-    if (newPage < 1 || newPage > this.totalPages) {
-      return;
-    }
-
-    this.currentPage = newPage;
   }
 
   private isFirstPage(): boolean {
