@@ -14,16 +14,16 @@ export interface Exercise {
   time: number; // in minutes
 }
 
-export type Rating = {
+export interface Rating {
   rate: number;
   email: string;
   review: string;
-};
+}
 
-export type Quote = {
+export interface Quote {
   author: string;
   quote: string;
-};
+}
 
 export interface PaginatedResponse<T> {
   page: number | string;
@@ -35,14 +35,14 @@ export interface PaginatedResponse<T> {
 export type GetExercisesResponse = PaginatedResponse<Exercise>;
 export type GetFiltersResponse = PaginatedResponse<FilterValue>;
 
-export type SubscriptionResponse = {
+export interface SubscriptionResponse {
   message: string;
-};
+}
 
 //  literal union types
 export const ExerciseFilter = {
   All: 'All',
-  Body_parts: 'Body_parts',
+  Body_parts: 'Body parts',
   Muscles: 'Muscles',
   Equipment: 'Equipment',
 } as const;
