@@ -42,7 +42,7 @@ export type SubscriptionResponse = {
 //  literal union types
 export const ExerciseFilter = {
   All: 'All',
-  Body_parts: 'Body_parts',
+  Body_parts: 'Body parts',
   Muscles: 'Muscles',
   Equipment: 'Equipment',
 } as const;

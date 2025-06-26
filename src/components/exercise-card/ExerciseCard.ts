@@ -1,4 +1,5 @@
 import './ExerciseCard.scss';
+import { Modal } from '../modal/Modal.ts';
 
 interface ExerciseData {
   name: string;
@@ -29,6 +30,10 @@ export class ExerciseCard {
       <button class="exercise-start-btn">Start</button>
     `;
 
+    card.addEventListener('click', () => {
+      this.showExerciseModal();
+    });
+
     const startBtn = card.querySelector('.exercise-start-btn');
     if (startBtn) {
       startBtn.addEventListener('click', () => {
@@ -46,5 +51,19 @@ export class ExerciseCard {
   private startExercise(): void {
     console.warn(`Починаємо вправу: ${this.data.name}`);
     // todo: Тут можна вставити реальну логіку запуску вправи
+  }
+
+  private showExerciseModal(): void {
+    const modal = new Modal();
+    modal.open(`
+    <div class="exercise-modal-content">
+      <h2>${this.data.name}</h2>
+      <p>Калорії: ${this.data.calories} ккал за 3 хв</p>
+      <p>Частина тіла: ${this.data.bodyPart}</p>
+      <p>Мета: ${this.data.target}</p>
+      <p>Рейтинг: ${this.data.rating} ⭐</p>
+      <button class="exercise-start-btn">Start</button>
+    </div>
+  `);
   }
 }

@@ -81,7 +81,7 @@
   height: 32px;
   display: flex;
   align-items: center;
-  line-height: 1;
+  line-height: 1.0;
 
   @include mobile {
     font-size: 13px;
@@ -93,7 +93,7 @@
 
   &--active {
     color: #000;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -150,7 +150,10 @@
 // ========================================
 
 .mobile-only {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  align-items: center;
 
   @include tablet {
     display: none;
@@ -165,7 +168,11 @@
   display: none;
 
   @include tablet {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    justify-content: center;
+    align-items: center;
   }
 
   @include desktop {
@@ -186,19 +193,13 @@
 // ========================================
 
 .mobile-only {
-  .exercises-left {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-lg;
-  }
 
-  // Картинка отдельно
   .mobile-image-section {
     border-radius: 20px;
     overflow: hidden;
     margin-bottom: 30px;
     max-width: 335px;
-    
+
     img {
       width: 100%;
       height: 242px;
@@ -222,7 +223,7 @@
 
     .sport-info-icon {
       background: var(--black);
-      
+
       svg {
         color: var(--white);
       }
@@ -263,12 +264,15 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-lg;
+    justify-content: center;
+    align-items: center;
   }
 
   .quote-image-row {
     display: flex;
     gap: $spacing-lg;
     margin-bottom: 30px;
+    max-width: 705px;
 
     > * {
       flex: 1;
@@ -289,12 +293,11 @@
     }
   }
 
-  // Текстовый блок 110 min (ограниченная ширина)
   .tablet-text-section {
     background: var(--white);
     border-radius: 20px;
     padding: $spacing-lg;
-    max-width: 400px; // Ограничение ширины
+    max-width: 400px;
 
     .sport-info-content {
       display: flex;
@@ -304,7 +307,7 @@
 
     .sport-info-icon {
       background: var(--black);
-      
+
       svg {
         color: var(--white);
       }
@@ -359,10 +362,10 @@
     overflow: hidden;
     max-width: 444px;
     margin-bottom: 20px;
-    
+
     img {
       width: 100%;
-      height: 249px; // Новая высота
+      height: 249px;
       object-fit: cover;
       object-position: center;
       display: block;
@@ -382,7 +385,7 @@
 
     .sport-info-icon {
       background: var(--black);
-      
+
       svg {
         color: var(--white);
       }
@@ -415,28 +418,45 @@
 }
 
 // ========================================
-// SHARED COMPONENTS (удалено дублирование)
-// ========================================
-
-// Общие стили теперь встроены в каждый layout выше
-
-// ========================================
 // CATEGORY GRID
 // ========================================
 
-.category-grid {
+.category-grid,
+.categories-grid {
   min-height: 400px;
   width: 100%;
-  max-width: 335px;
   margin: 0 auto;
+
+  @include mobile {
+    max-width: 335px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
   @include tablet {
     max-width: 705px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    .category-card {
+      width: calc((100% - 30px) / 3); // (705px - 2*15px) / 3 = 225px
+      flex-shrink: 0;
+    }
   }
 
   @include desktop {
     max-width: 900px;
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    .category-card {
+      width: calc((100% - 30px) / 3); // (900px - 2*15px) / 3 = 290px
+      flex-shrink: 0;
+    }
   }
 }
 
@@ -453,45 +473,6 @@
 // ========================================
 // LOADING & ERROR STATES
 // ========================================
-
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  font-size: 16px;
-  color: light-dark(#666, #ccc);
-}
-
-.error-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: $spacing-md;
-  padding: $spacing-xxl;
-  text-align: center;
-
-  .error-message {
-    color: var(--error);
-    font-size: 16px;
-    margin: 0;
-  }
-
-  .retry-button {
-    background: var(--accet-green);
-    color: var(--white);
-    border: none;
-    padding: $spacing-sm $spacing-lg;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background: var(--hover);
-    }
-  }
-}
 
 .no-categories {
   text-align: center;
