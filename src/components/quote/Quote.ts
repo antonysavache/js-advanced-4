@@ -77,12 +77,25 @@ export class Quote {
     }
 
     this.container.innerHTML = `
-      <div class="quote-block p-4 rounded-2xl shadow">
-        <p class="text-xl font-semibold mb-2">"${quote}"</p>
-        <p class="text-sm text-gray-600 mb-4">— ${author}</p>
-        <div class="text-sm text-gray-800">
-          Щоденне заняття спортом: <strong>110 хвилин</strong>
+      <div class="quote-block">
+        <div class="quote-header">
+          <div class="quote-icon">
+            <img src="images/running-man/run-man.png" 
+                srcset="images/running-man/run-man.png 1x, 
+                        images/running-man/run-man@2x.png 2x, 
+                        images/running-man/run-man@3x.png 3x" 
+                alt="icon" 
+            />
+          </div>
+          <h2 class="quote-title">Quote of the day</h2>
+          <div class="quote-decor">
+            <svg class="icon">
+              <use xlink:href="sprite.svg#inverted-commas"></use>
+            </svg>
+          </div>
         </div>
+        <p class="quote-text">${quote}</p>
+        <p class="quote-author">${author}</p>
       </div>
     `;
   }
