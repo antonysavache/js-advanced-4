@@ -21,7 +21,7 @@ function capitalizeFirstLetter(string) {
   }
 }
 
-export function openExerciseModal(data) {
+function openExerciseModal(data) {
   document.getElementById('exercise-img').src = data.gifUrl;
   document.getElementById('exercise-name').textContent = capitalizeFirstLetter(data.name);
   document.getElementById('target').textContent = capitalizeFirstLetter(data.target);

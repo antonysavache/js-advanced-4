@@ -2,7 +2,6 @@
   border-radius: 20px;
   background: #242424;
   padding: 20px;
-  margin-top: 20px;
 }
 
 .quote-block {
@@ -10,6 +9,10 @@
 
   align-items: flex-start;
   gap: 18px;
+}
+
+.quote-text {
+  width: 243px;
 }
 
 .quote-header-box {
@@ -50,7 +53,6 @@
 }
 
 .daily-info {
-  margin-top: 20px;
   padding: 20px;
   border-radius: 20px;
   background: #fff;
@@ -69,6 +71,10 @@
   line-height: 20px;
 }
 
+.quote-flex {
+  margin-top: 20px;
+}
+
 .daily-info p {
   margin-top: 6px;
   color: rgba(36, 36, 36, 0.6);
@@ -83,6 +89,102 @@
   margin-top: 20px;
   border-radius: 20px;
   background: #fff;
-  width: 335px;
+  width: 100%;
   height: 119px;
+  background-image: url(/src/images/women_mobile.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (min-resolution: 192dpi) {
+  .quote-women {
+    background-image: url(/src/images/women_mobile@2x.jpg);
+  }
+}
+
+@media (min-width: 768px) {
+  .quote-women {
+    background-image: url(/src/images/women_tablet.jpg);
+    width: 344px;
+    height: 141px;
+    margin-top: 0;
+  }
+
+  .quote-box {
+    padding: 40px;
+  }
+
+  .quote-text {
+    width: 574px;
+  }
+
+  .quote-header {
+    font-size: 24px;
+
+    line-height: 32px;
+  }
+
+  .quote-header-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .quote-card-author {
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .quote-card {
+    margin-top: 6px;
+  }
+
+  .quote-flex {
+    display: flex;
+    margin-top: 16px;
+    gap: 16px;
+  }
+
+  .daily-info {
+    padding: 25px;
+    width: 344px;
+    height: 141px;
+  }
+
+  .daily-info h3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+@media (min-width: 768px) and (min-resolution: 192dpi) {
+  .quote-women {
+    background-image: url(/src/images/women_tablet@2x.jpg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .quote-women {
+    background-image: url(/src/images/women_desktop.jpg);
+    width: 239px;
+    height: 141px;
+  }
+  .quote-box {
+    width: 494px;
+  }
+
+  .quote-text {
+    width: 364px;
+  }
+
+  .daily-info {
+    width: 239px;
+  }
+}
+
+@media (min-width: 1440px) and (min-resolution: 192dpi) {
+  .quote-women {
+    background-image: url(/src/images/women_desktop@2x.jpg);
+  }
 }

@@ -20,8 +20,8 @@
 }
 .modal-close {
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: 14px;
+  top: 14px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -57,6 +57,7 @@
   justify-content: center;
   align-items: center;
   gap: 2px;
+  margin-top: 10px;
 }
 
 .stars-text {
@@ -73,6 +74,8 @@
 
 .exercise-line1 {
   margin-top: 20px;
+  stroke-width: 1px;
+  stroke: rgba(244, 244, 244, 0.2);
 }
 
 .exercise-info {
@@ -118,6 +121,8 @@
 
 .exercise-line2 {
   margin-top: 10px;
+  stroke-width: 1px;
+  stroke: rgba(244, 244, 244, 0.2);
 }
 
 .description {
@@ -127,7 +132,11 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
+}
+
+.favorite-buttons {
+  margin-top: 40px;
 }
 
 #favorite-btn {
@@ -140,8 +149,6 @@
   gap: 8px;
   border-radius: 30px;
   background: #f4f4f4;
-
-  margin-top: 52px;
 
   color: #242424;
   font-family: "DM Sans";
@@ -193,4 +200,91 @@
 
 .modal-close-icon {
   fill: rgba(244, 244, 244, 0.2);
+}
+
+@media screen and (min-width: 768px) {
+  .modal-close {
+    right: 16px;
+    top: 16px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .modal-content {
+    padding: 32px;
+    display: flex;
+    gap: 32px;
+  }
+
+  #exercise-name {
+    margin-top: 0;
+
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .exercise-gif {
+    width: 270px;
+    height: 259px;
+  }
+
+  .stars {
+    margin-top: 8px;
+  }
+
+  .exercise-line1 {
+    margin-top: 16px;
+    width: 338px;
+  }
+
+  .exercise-line2 {
+    margin-top: 8px;
+    width: 338px;
+  }
+
+  .exercise-info {
+    margin-top: 8px;
+    gap: 16px;
+  }
+
+  .description {
+    margin-top: 16px;
+  }
+
+  .favorite-buttons {
+    margin-top: 64px;
+  }
+
+  #favorite-btn {
+    min-width: 194px;
+    width: auto;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  #rating-btn {
+    width: 131px;
+    margin-top: 0;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .favorite-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .modal-content {
+    width: 708px;
+    margin: 0 auto;
+  }
+
+  .exercise-line1 {
+    width: 342px;
+  }
+
+  .exercise-line2 {
+    width: 342px;
+  }
 }
