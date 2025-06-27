@@ -22,13 +22,40 @@ export class ExerciseCard {
     const card = document.createElement('div');
     card.classList.add('exercise-card');
     card.innerHTML = `
-      <h3 class="exercise-name">${this.data.name}</h3>
-      <p class="exercise-info">Калорії: ${this.data.calories} ккал за 3 хв</p>
-      <p class="exercise-info">Частина тіла: ${this.data.bodyPart}</p>
-      <p class="exercise-info">Мета: ${this.data.target}</p>
-      <p class="exercise-info">Рейтинг: ${this.data.rating} ⭐</p>
-      <button class="exercise-start-btn">Start</button>
-    `;
+    <span class="exercise-label">WORKOUT</span>
+
+    <div class="exercise-rating">
+      ${this.data.rating} <span class="exercise-star">★</span>
+    </div>
+
+    <button class="exercise-start-btn">
+      Start
+      <svg class="arrow-icon" width="16" height="16">
+        <use xlink:href="#icon-arrow-right"></use>
+      </svg>
+    </button>
+
+    <div class="exercise-content">
+      <div class="runner-icon">
+        <svg width="14" height="16">
+          <use xlink:href="#icon-run-man"></use>
+        </svg>
+      </div>
+
+      <div class="exercise-text">
+        <h3 class="exercise-name">${this.data.name}</h3>
+
+        <div class="exercise-info-line">
+          <span class="info-label">Burned calories:</span>
+          <span class="info-value">${this.data.calories} / 3 min</span>
+          <span class="info-label">Body part:</span>
+          <span class="info-value">${this.data.bodyPart}</span>
+          <span class="info-label">Target:</span>
+          <span class="info-value">${this.data.target}</span>
+        </div>
+      </div>
+    </div>
+  `;
 
     card.addEventListener('click', () => {
       this.showExerciseModal();
@@ -36,7 +63,8 @@ export class ExerciseCard {
 
     const startBtn = card.querySelector('.exercise-start-btn');
     if (startBtn) {
-      startBtn.addEventListener('click', () => {
+      startBtn.addEventListener('click', e => {
+        e.stopPropagation();
         this.startExercise();
       });
     }

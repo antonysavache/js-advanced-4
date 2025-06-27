@@ -1,34 +1,123 @@
 @use '../../styles/variables.scss' as *;
 
 .exercise-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: $spacing-md;
-  margin-bottom: $spacing-md;
-  background: #fff;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  width: 442px;
+  height: 141px;
+  border-radius: 15px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif;
+  position: relative;
+}
 
-  .exercise-name {
-    font-size: 18px;
-    margin-bottom: $spacing-sm;
+.exercise-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+  border: 1px solid #242424;
+  border-radius: 15px;
+  font-size: 12px;
+  color: #242424;
+  opacity: 0.5;
+}
+
+.exercise-rating {
+  position: absolute;
+  top: 20px;
+  left: 108px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #242424;
+
+  .exercise-star {
+    margin-left: 2px;
+    color: #f5a623;
   }
+}
 
-  .exercise-info {
-    margin: $spacing-xs 0;
-    color: #555;
+.exercise-start-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #242424;
+  padding: 0;
+
+  .arrow-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: relative;
+    top: 1px;
   }
+}
 
-  .exercise-start-btn {
-    margin-top: $spacing-md;
-    padding: $spacing-sm $spacing-md;
-    background: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+.exercise-icon-and-title {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-top: 16px;
+}
 
-    &:hover {
-      background: #45a049;
-    }
+.runner-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #242424;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: absolute;
+  top: 67px;
+  left: 16px;
+
+  svg {
+    width: 12px;
+    height: 12px;
+    fill: #fff;
+    display: block;
+  }
+}
+
+.exercise-title-and-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.exercise-name {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #242424;
+  margin-bottom: 8px;
+}
+
+.exercise-info-line {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #242424;
+
+  .info-label {
+    opacity: 0.5;
   }
 }
