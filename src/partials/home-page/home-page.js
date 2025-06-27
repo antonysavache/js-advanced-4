@@ -32,6 +32,16 @@ class HomePageController {
 
   async handleFilterChange(filter) {
     this.setActiveFilter(filter);
+    const exerciseContainer = document.getElementById('exercise-container');
+    const categoryGrid = document.getElementById('category-grid');
+
+    if (exerciseContainer) {
+      exerciseContainer.style.display = 'none';
+    }
+    if (categoryGrid) {
+      categoryGrid.style.display = 'grid';
+    }
+
     await this.loadCategories(filter);
   }
 
@@ -84,10 +94,7 @@ class HomePageController {
     container.classList.add('categories-grid');
 
     categories.forEach(category => {
-      const categoryCard = new window.CategoryCard(category, selectedCategory => {
-        this.handleCategorySelect(selectedCategory);
-      });
-
+      const categoryCard = new window.CategoryCard(category);
       categoryCard.render(container);
       this.categoryCards.push(categoryCard);
     });
@@ -97,13 +104,12 @@ class HomePageController {
     const paginatorContainer = document.getElementById('paginator-container');
     if (!paginatorContainer) return;
 
-    const paginator = new window.Paginator(122, 12, 1);
-    paginator.render(paginatorContainer);
-  }
-
-  handleCategorySelect(selectedCategory) {
-    console.log('Category selected:', selectedCategory);
-    // Логика обработки в CategoryCard.ts
+    const paginator = new window.Paginator(paginatorContainer, {
+      totalPages: 5, // Example total pages, replace with actual data
+      perPage: 12, // Example items per page, replace with actual data
+      currentPage: 1, // Example current page, replace with actual data
+    });
+    paginator.render();
   }
 
   showEmptyState() {
@@ -111,6 +117,13 @@ class HomePageController {
       return;
     }
     this.emptyState.show('Категорії не знайдено');
+  }
+
+  showErrorState() {
+    if (!this.emptyState) {
+      return;
+    }
+    this.emptyState.show('Помилка завантаження даних.');
   }
 
   clearCategoryCards() {
@@ -131,11 +144,10 @@ class HomePageController {
   }
 
   initQuote() {
-    // Initialize Quote component for all device versions
     const selectors = [
-      '#quote-container', // mobile version
-      '.tablet-only .quote-section', // tablet version
-      '.desktop-only .quote-section', // desktop version
+      '#quote-container',
+      '.tablet-only .quote-section',
+      '.desktop-only .quote-section',
     ];
 
     selectors.forEach(selector => {
