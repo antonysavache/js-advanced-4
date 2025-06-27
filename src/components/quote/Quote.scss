@@ -1,0 +1,52 @@
+@use '../../styles/mixins.scss' as *;
+@use '../../styles/variables.scss' as *;
+
+.quote-block {
+  background: var(--gray14);
+  border-radius: 20px;
+  color: var(--page-bg);
+  padding: $spacing-lg;
+  max-width: 444px;
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: $spacing-xl;
+
+  .quote-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .quote-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .quote-title {
+      font-family: var(--dm-sans-family);
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 1.33;
+      letter-spacing: 0;
+      margin: 0;
+      color: #fff;
+    }
+  }
+
+  .quote-text {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #d4d4d4;
+    margin: 0;
+  }
+
+  .quote-author {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    margin-top: $spacing-sm;
+  }
+}
