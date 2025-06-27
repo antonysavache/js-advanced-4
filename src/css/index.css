@@ -4,3 +4,5 @@
 @import url(../partials/header-example/01-header-example.css);
 @import url(../partials/hero-page/hero-page.css);
 @import url(../partials/Footer/footer.css);
+
+@import url("../partials/modal/modal.css");
