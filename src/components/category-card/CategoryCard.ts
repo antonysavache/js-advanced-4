@@ -1,9 +1,8 @@
 import './CategoryCard.scss';
 import { YourEnergyAPI } from '../../api';
-import { ExerciseCard } from '../exercise-card/ExerciseCard.ts';
+import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts';
 
 interface CategoryData {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   _id: string;
   name: string;
   imgURL: string;
@@ -13,10 +12,12 @@ interface CategoryData {
 export class CategoryCard {
   private data: CategoryData;
   private readonly element: HTMLElement;
+  private exerciseGridInstance: ExerciseGrid;
 
   constructor(data: CategoryData) {
     this.data = data;
     this.element = this.createCard();
+    this.exerciseGridInstance = new ExerciseGrid('#exercise-container');
   }
 
   private createCard(): HTMLElement {
@@ -47,7 +48,7 @@ export class CategoryCard {
 
   private async handleCategoryClick(): Promise<void> {
     try {
-      const filterToParam = {
+      const filterToParam: { [key: string]: string } = {
         Muscles: 'muscles',
         'Body parts': 'bodypart',
         Equipment: 'equipment',
@@ -60,51 +61,29 @@ export class CategoryCard {
         [paramName]: this.data.name,
       };
 
-      const response = await YourEnergyAPI.getExercises(exerciseParams);
-
-      const exercises = response.results;
-      const container = document.getElementById('exercise-container');
-
-      if (!container) {
-        console.error('Контейнер для вправ не знайдено');
-
-        return;
+      const categoryGrid = document.getElementById('category-grid');
+      if (categoryGrid) {
+        categoryGrid.style.display = 'none';
       }
+      this.exerciseGridInstance.setLoading();
+      this.exerciseGridInstance.show();
 
-      container.innerHTML = '';
+      const response = await YourEnergyAPI.getExercises(exerciseParams);
+      const exercises = response.results;
 
       if (exercises && exercises.length) {
         exercises.forEach(exerciseData => {
-          const card = new ExerciseCard({
-            name: exerciseData.name,
-            calories: exerciseData.burnedCalories,
-            bodyPart: exerciseData.bodyPart,
-            target: exerciseData.target,
-            rating: exerciseData.rating,
-          });
-
-          card.render(container);
+            if (!exerciseData.gifUrl) {
+                console.warn(`Вправа "${exerciseData.name}" не має "gifUrl". Зображення може не відображатися.`);
+            }
         });
+        this.exerciseGridInstance.render(exercises);
       } else {
-        this.renderEmptyState(container);
+        this.exerciseGridInstance.showError('Вправи за цією категорією не знайдено.');
       }
     } catch (error: unknown) {
-      const container = document.getElementById('exercise-container');
-      if (!container) {
-        return;
-      }
-
-      container.innerHTML = '';
-      this.renderEmptyState(container);
-
       console.warn('Вправи не знайдено або сталася помилка:', error);
+      this.exerciseGridInstance.showError('Помилка завантаження вправ. Спробуйте пізніше.');
     }
-  }
-
-  private renderEmptyState(container: HTMLElement): void {
-    const emptyState = document.createElement('div');
-    emptyState.classList.add('empty-state');
-    emptyState.textContent = 'На жаль, вправи за цією категорією не знайдено.';
-    container.appendChild(emptyState);
   }
 }
