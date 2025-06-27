@@ -32,6 +32,17 @@ class HomePageController {
 
   async handleFilterChange(filter) {
     this.setActiveFilter(filter);
+    // При зміні фільтра, ховаємо сітку вправ і показуємо сітку категорій
+    const exerciseContainer = document.getElementById('exercise-container');
+    const categoryGrid = document.getElementById('category-grid');
+
+    if (exerciseContainer) {
+      exerciseContainer.style.display = 'none';
+    }
+    if (categoryGrid) {
+      categoryGrid.style.display = 'grid';
+    }
+
     await this.loadCategories(filter);
   }
 
@@ -84,10 +95,8 @@ class HomePageController {
     container.classList.add('categories-grid');
 
     categories.forEach(category => {
-      const categoryCard = new window.CategoryCard(category, selectedCategory => {
-        this.handleCategorySelect(selectedCategory);
-      });
-
+      // CategoryCard тепер сама обробляє клік та відображення вправ
+      const categoryCard = new window.CategoryCard(category);
       categoryCard.render(container);
       this.categoryCards.push(categoryCard);
     });
@@ -101,16 +110,18 @@ class HomePageController {
     paginator.render(paginatorContainer);
   }
 
-  handleCategorySelect(selectedCategory) {
-    console.log('Category selected:', selectedCategory);
-    // Логика обработки в CategoryCard.ts
-  }
-
   showEmptyState() {
     if (!this.emptyState) {
       return;
     }
     this.emptyState.show('Категорії не знайдено');
+  }
+
+  showErrorState() {
+    if (!this.emptyState) {
+      return;
+    }
+    this.emptyState.show('Помилка завантаження даних.');
   }
 
   clearCategoryCards() {
@@ -131,11 +142,10 @@ class HomePageController {
   }
 
   initQuote() {
-    // Initialize Quote component for all device versions
     const selectors = [
-      '#quote-container', // mobile version
-      '.tablet-only .quote-section', // tablet version
-      '.desktop-only .quote-section', // desktop version
+      '#quote-container',
+      '.tablet-only .quote-section',
+      '.desktop-only .quote-section',
     ];
 
     selectors.forEach(selector => {
