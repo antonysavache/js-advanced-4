@@ -34,9 +34,12 @@
 }
 
 .exercises-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: light-dark(var(--black), var(--white));
+  font-family: 'DM Sans';
+font-weight: 400;
+font-size: 44px;
+line-height: 48px;
+letter-spacing: -2%;
+  color: #242424;
   margin: 0;
 
   @include mobile {

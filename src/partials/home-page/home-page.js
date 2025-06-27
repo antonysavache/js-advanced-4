@@ -6,6 +6,8 @@ class HomePageController {
     this.loading = false;
     this.categoryCards = [];
     this.emptyState = null;
+    this.exercisesTitleElement = document.querySelector('.exercises-title');
+    this.backToCategoriesLink = document.getElementById('back-to-categories');
 
     this.init();
   }
@@ -16,6 +18,7 @@ class HomePageController {
     this.initQuote();
     this.initEmptyState();
     this.loadCategories(this.activeFilter);
+    this.updateExercisesTitle('Exercises', false);
   }
 
   bindEvents() {
@@ -28,19 +31,20 @@ class HomePageController {
         }
       });
     });
+
+    if (this.backToCategoriesLink) {
+      this.backToCategoriesLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.showCategoryGrid();
+        this.updateExercisesTitle('Exercises', false);
+      });
+    }
   }
 
   async handleFilterChange(filter) {
     this.setActiveFilter(filter);
-    const exerciseContainer = document.getElementById('exercise-container');
-    const categoryGrid = document.getElementById('category-grid');
-
-    if (exerciseContainer) {
-      exerciseContainer.style.display = 'none';
-    }
-    if (categoryGrid) {
-      categoryGrid.style.display = 'grid';
-    }
+    this.showCategoryGrid();
+    this.updateExercisesTitle('Exercises', false);
 
     await this.loadCategories(filter);
   }
@@ -94,7 +98,7 @@ class HomePageController {
     container.classList.add('categories-grid');
 
     categories.forEach(category => {
-      const categoryCard = new window.CategoryCard(category);
+      const categoryCard = new window.CategoryCard(category, this);
       categoryCard.render(container);
       this.categoryCards.push(categoryCard);
     });
@@ -153,6 +157,45 @@ class HomePageController {
         new window.Quote(selector);
       }
     });
+  }
+
+
+  updateExercisesTitle(titleContent, isCategorySelected) {
+    if (this.exercisesTitleElement && this.backToCategoriesLink) {
+      if (isCategorySelected) {
+        this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a> / <span class="exercise-category-title">${titleContent}</span>`;
+        this.backToCategoriesLink = document.getElementById('back-to-categories');
+        if (this.backToCategoriesLink) {
+            this.backToCategoriesLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showCategoryGrid();
+                this.updateExercisesTitle('Exercises', false);
+            });
+        }
+      } else {
+        this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a>`;
+        this.backToCategoriesLink = document.getElementById('back-to-categories');
+        if (this.backToCategoriesLink) {
+            this.backToCategoriesLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showCategoryGrid();
+                this.updateExercisesTitle('Exercises', false);
+            });
+        }
+      }
+    }
+  }
+
+  showCategoryGrid() {
+    const categoryGrid = document.getElementById('category-grid');
+    const exerciseContainer = document.getElementById('exercise-container');
+
+    if (categoryGrid) {
+      categoryGrid.style.display = 'flex';
+    }
+    if (exerciseContainer) {
+      exerciseContainer.style.display = 'none';
+    }
   }
 }
 
