@@ -41,7 +41,7 @@ body {
 }
 
 .favorites-section {
-  margin-top: 84px;
+  margin-top: 80px;
 }
 
 .container {
@@ -163,6 +163,10 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .exercise-card-info {
@@ -185,6 +189,10 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .exercise-card-info p span {
@@ -204,7 +212,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-top: 24px;
+  margin-top: 20px;
   flex-wrap: wrap;
 }
 
@@ -320,7 +328,27 @@ body {
   fill: #f4f4f4;
 }
 
+.favorites-block-flex {
+  margin-top: 20px;
+}
+
+.exercise-card-info-p1 {
+  width: 132px;
+}
+
+.exercise-card-info-p2 {
+  width: 88px;
+}
+
+.exercise-card-info-p3 {
+  width: 60px;
+}
+
 @media screen and (min-width: 768px) {
+  .favorites-section {
+    margin-top: 100px;
+  }
+
   .container {
     max-width: 768px;
     padding: 0 32px;
@@ -332,9 +360,108 @@ body {
     line-height: 48px;
     letter-spacing: -0.88px;
   }
+
+  #favorites-notfound {
+    font-size: 18px;
+    line-height: 24px;
+    width: 554px;
+    margin-top: 132px;
+  }
+
+  .exercise-card {
+    margin-top: 0;
+  }
+
+  #favorites-list li:first-child {
+    margin-top: 0;
+  }
+
+  #favorites-list {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 64px;
+  }
+
+  .exercise-card {
+    margin-top: 0;
+    width: calc((100% - 16px) / 2);
+  }
+
+  .favorites-block-flex {
+    margin-top: 32px;
+  }
+
+  .exercise-card-title h3 {
+    font-size: 24px;
+    line-height: 32px;
+    max-width: 270px;
+  }
+
+  .exercise-card-info {
+    margin-top: 8px;
+  }
+
+  .pagination {
+    margin-top: 32px;
+  }
+
+  .exercise-card-info-p1 {
+    width: 135px;
+  }
+
+  .exercise-card-info-p2 {
+    width: 91px;
+  }
+
+  .exercise-card-info-p3 {
+    width: 63px;
+  }
 }
 @media screen and (min-width: 1440px) {
+  .favorites-section {
+    margin-top: 90px;
+  }
+
   .container {
     max-width: 1440px;
+  }
+
+  #favorites-notfound {
+    margin-top: 114px;
+    margin-left: 148px;
+  }
+
+  .favorites-block-flex {
+    display: flex;
+    gap: 32px;
+  }
+
+  #favorites-list {
+    margin-top: 0;
+  }
+
+  #pagination {
+    display: none;
+  }
+
+  .exercise-card-info {
+    gap: 16px;
+  }
+
+  .exercise-card-title h3 {
+    max-width: 330px;
+  }
+
+  .exercise-card-info-p1 {
+    width: 160px;
+  }
+
+  .exercise-card-info-p2 {
+    width: 116px;
+  }
+
+  .exercise-card-info-p3 {
+    width: 73px;
   }
 }

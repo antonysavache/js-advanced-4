@@ -18,14 +18,20 @@
     <section class="favorites-section">
       <div class="container">
         <h1 class="favorites-header">Favorites</h1>
-        <load src="src/partials/quote/quote.html" />
-        <p id="favorites-notfound">
-          It appears that you haven't added any exercises to your favorites yet. To get started, you can add exercises that you like to your
-          favorites for easier access in the future.
-        </p>
-        <ul id="favorites-list"></ul>
+        <div class="favorites-block-flex">
+          <div>
+            <load src="src/partials/quote/quote.html" />
+          </div>
+          <div>
+            <p id="favorites-notfound">
+              It appears that you haven't added any exercises to your favorites yet. To get started, you can add exercises that you like to
+              your favorites for easier access in the future.
+            </p>
+            <ul id="favorites-list"></ul>
 
-        <div id="pagination" class="pagination"></div>
+            <div id="pagination" class="pagination"></div>
+          </div>
+        </div>
       </div>
     </section>
 
