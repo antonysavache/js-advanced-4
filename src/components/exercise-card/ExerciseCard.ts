@@ -86,10 +86,10 @@ export class ExerciseCard {
     modal.open(`
     <div class="exercise-modal-content">
       <h2>${this.data.name}</h2>
-      <p>Калорії: ${this.data.calories} ккал за 3 хв</p>
-      <p>Частина тіла: ${this.data.bodyPart}</p>
-      <p>Мета: ${this.data.target}</p>
-      <p>Рейтинг: ${this.data.rating} ⭐</p>
+      <p>Burned calories: ${this.data.calories} ккал за 3 хв</p>
+      <p>Body part: ${this.data.bodyPart}</p>
+      <p>Target: ${this.data.target}</p>
+      <p>Rating: ${this.data.rating} ⭐</p>
       <button class="exercise-start-btn">Start</button>
     </div>
   `);
