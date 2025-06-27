@@ -3,9 +3,9 @@ import 'modern-normalize/modern-normalize.css';
 import { fetchAndShowDetails } from '../partials/modal/modal';
 import { renderQuote } from '../partials/quote/quote';
 
-export const FAVORITES_KEY = 'yourEnergyFavorites';
+const FAVORITES_KEY = 'yourEnergyFavorites';
 
-const PER_PAGE = window.screen.width < 768 ? 8 : window.screen.width < 1440 ? 6 : 9999999;
+const PER_PAGE = window.screen.width < 768 ? 8 : window.screen.width < 1440 ? 10 : 9999999;
 
 document.addEventListener('DOMContentLoaded', () => {
   renderQuote();

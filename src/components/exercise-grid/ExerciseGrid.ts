@@ -1,4 +1,5 @@
 import './ExerciseGrid.scss';
+import { fetchAndShowDetails } from '../../partials/modal/modal.js';
 
 interface ExerciseData {
   name: string;
@@ -6,6 +7,7 @@ interface ExerciseData {
   bodyPart: string;
   target: string;
   rating: number;
+  _id: string;
 }
 
 export class ExerciseGrid {
@@ -40,11 +42,11 @@ export class ExerciseGrid {
                   </svg>
                 </span>
               </div>
-              <span class="exercise-grid-start-btn">Start
+              <button class="exercise-grid-start-btn">Start
                 <svg width="16" height="16">
                   <use href="/src/images/sprite.svg#icon-arrow-ex" />
                 </svg>
-              </span>
+              </button>
             </div>
             <div class="exercise-grid-body">
               <div class="run-icon">
@@ -60,6 +62,11 @@ export class ExerciseGrid {
               <p class="target-info">Target: <span class="exercise-grid-value">${exercise.target}</span></p>
             </div>
         `;
+
+        const startButton = card.querySelector('.exercise-grid-start-btn');
+        startButton.addEventListener('click', () => {
+          fetchAndShowDetails(exercise._id);
+        });
 
         this.container.appendChild(card);
       });
