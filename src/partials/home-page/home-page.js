@@ -32,7 +32,6 @@ class HomePageController {
 
   async handleFilterChange(filter) {
     this.setActiveFilter(filter);
-    // При зміні фільтра, ховаємо сітку вправ і показуємо сітку категорій
     const exerciseContainer = document.getElementById('exercise-container');
     const categoryGrid = document.getElementById('category-grid');
 
@@ -95,7 +94,6 @@ class HomePageController {
     container.classList.add('categories-grid');
 
     categories.forEach(category => {
-      // CategoryCard тепер сама обробляє клік та відображення вправ
       const categoryCard = new window.CategoryCard(category);
       categoryCard.render(container);
       this.categoryCards.push(categoryCard);
