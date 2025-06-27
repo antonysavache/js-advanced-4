@@ -1,6 +1,6 @@
 import './CategoryCard.scss';
 import { YourEnergyAPI } from '../../api';
-import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts'; // Тепер використовуємо ExerciseGrid
+import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts';
 
 interface CategoryData {
   _id: string;
@@ -12,12 +12,12 @@ interface CategoryData {
 export class CategoryCard {
   private data: CategoryData;
   private readonly element: HTMLElement;
-  private exerciseGridInstance: ExerciseGrid; // Екземпляр ExerciseGrid
+  private exerciseGridInstance: ExerciseGrid;
 
   constructor(data: CategoryData) {
     this.data = data;
     this.element = this.createCard();
-    this.exerciseGridInstance = new ExerciseGrid('#exercise-container'); // Ініціалізуємо ExerciseGrid
+    this.exerciseGridInstance = new ExerciseGrid('#exercise-container');
   }
 
   private createCard(): HTMLElement {
@@ -61,7 +61,6 @@ export class CategoryCard {
         [paramName]: this.data.name,
       };
 
-      // Ховаємо сітку категорій та показуємо сітку вправ
       const categoryGrid = document.getElementById('category-grid');
       if (categoryGrid) {
         categoryGrid.style.display = 'none';
