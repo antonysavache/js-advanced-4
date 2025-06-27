@@ -97,8 +97,12 @@ class HomePageController {
     const paginatorContainer = document.getElementById('paginator-container');
     if (!paginatorContainer) return;
 
-    const paginator = new window.Paginator(122, 12, 1);
-    paginator.render(paginatorContainer);
+    const paginator = new window.Paginator(paginatorContainer, {
+      totalPages: 5, // Example total pages, replace with actual data
+      perPage: 12, // Example items per page, replace with actual data
+      currentPage: 1, // Example current page, replace with actual data
+    });
+    paginator.render();
   }
 
   handleCategorySelect(selectedCategory) {
