@@ -48,7 +48,13 @@ class HomePageController {
     this.setActiveFilter(filter);
     this.showCategoryGrid();
     this.updateExercisesTitle('Exercises', false);
-
+    if (!this.categoryPaginator.isVisible) {
+      this.categoryPaginator.show();
+    }
+    if (this.exercisePaginator) {
+      this.exercisePaginator.destroy();
+      this.exercisePaginator = null;
+    }
     await this.loadCategories();
   }
 
@@ -82,8 +88,9 @@ class HomePageController {
       } else {
         this.showEmptyState();
       }
-      this.renderPaginator(page, perPage, response.totalPages);
+      this.renderCategoryPaginator(page, perPage, 10);
     } catch (error) {
+      console.log(error);
       this.showErrorState();
     } finally {
       this.loading = false;
@@ -106,16 +113,18 @@ class HomePageController {
     });
   }
 
-  renderPaginator(currentPage, perPage, totalPages) {
+  renderCategoryPaginator(currentPage, perPage, totalPages) {
     const paginatorContainer = document.getElementById('paginator-container');
     if (!paginatorContainer) return;
-    const paginator = new window.Paginator(paginatorContainer, this.loadCategories.bind(this), {
-      totalPages,
-      perPage,
-      currentPage,
-    });
-    this.categoryPaginator = paginator;
-    paginator.render();
+    if (!this.categoryPaginator) {
+      const paginator = new window.Paginator(paginatorContainer, this.loadCategories.bind(this), {
+        totalPages,
+        perPage,
+        currentPage,
+      });
+      this.categoryPaginator = paginator;
+    }
+    this.categoryPaginator.render(currentPage, perPage, totalPages);
   }
 
   showEmptyState() {
@@ -170,6 +179,9 @@ class HomePageController {
             e.preventDefault();
             this.showCategoryGrid();
             this.updateExercisesTitle('Exercises', false);
+            this.exercisePaginator.destroy();
+            this.exercisePaginator = null;
+            this.categoryPaginator.show();
           });
         }
       } else {
@@ -180,6 +192,9 @@ class HomePageController {
             e.preventDefault();
             this.showCategoryGrid();
             this.updateExercisesTitle('Exercises', false);
+            this.exercisePaginator?.destroy();
+            this.exercisePaginator = null;
+            this.categoryPaginator.show();
           });
         }
       }

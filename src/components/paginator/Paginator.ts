@@ -39,11 +39,20 @@ export class Paginator {
     this.loadManagedComponentData = loadManagedComponentData;
   }
 
-  render() {
-    this.cleanupPaginator();
+  render(
+    page: number = this.currentPage,
+    perPage: number = this.perPage,
+    totalPages: number = this.totalPages,
+  ) {
+    this.destroy();
+    this.currentPage = page;
+    this.perPage = perPage;
+    if (totalPages) {
+      this.totalPages = totalPages;
+    }
     const paginator = this.createPaginatorElement();
-    this.mainContainer.appendChild(paginator);
     this._paginatorElement = paginator;
+    this.mainContainer.appendChild(paginator);
     this.addEventListeners();
   }
 
@@ -60,11 +69,33 @@ export class Paginator {
   }
 
   setNewContainer(newContainer: HTMLElement) {
-    this.cleanupPaginator();
+    this.destroy();
     this._mainContainer = newContainer;
   }
 
-  createPaginatorElement(): HTMLDivElement {
+  destroy() {
+    this.cleanupEventListeners();
+    if (this._paginatorElement) {
+      this._mainContainer.removeChild(this._paginatorElement);
+    }
+    this.pageButtons = [];
+    this.firstPageButton = null;
+    this.lastPageButton = null;
+    this.prevButton = null;
+    this.nextButton = null;
+  }
+
+  hide() {
+    this._paginatorElement.style.display = 'none';
+    this._isVisible = false;
+  }
+
+  show() {
+    this._paginatorElement.style.display = '';
+    this._isVisible = true;
+  }
+
+  private createPaginatorElement(): HTMLDivElement {
     const paginatorElement = document.createElement('div');
     paginatorElement.className = 'paginator';
 
@@ -75,25 +106,6 @@ export class Paginator {
     }
 
     return paginatorElement;
-  }
-
-  cleanupPaginator() {
-    this.cleanupEventListeners();
-    this.pageButtons = [];
-    this.firstPageButton = null;
-    this.lastPageButton = null;
-    this.prevButton = null;
-    this.nextButton = null;
-    this._mainContainer.innerHTML = '';
-  }
-  hide() {
-    this._paginatorElement.style.display = 'none';
-    this._isVisible = false;
-  }
-
-  show() {
-    this._paginatorElement.style.display = 'block';
-    this._isVisible = true;
   }
 
   private createPrevOrNextBlock(type: 'previous' | 'next'): HTMLDivElement {
@@ -149,8 +161,8 @@ export class Paginator {
 
   private createPageButtons(): HTMLElement[] {
     const buttons: HTMLElement[] = [];
-    let needLeftEllipsis = this.currentPage > 3;
-    let needRightEllipsis = this.currentPage < this.totalPages - 2;
+    let needLeftEllipsis = this.currentPage > 2;
+    let needRightEllipsis = this.currentPage < this.totalPages - 1;
 
     // Add ellipsis on the left if needed
     if (needLeftEllipsis) {
@@ -240,7 +252,6 @@ export class Paginator {
 
   private handleFirstPageClick = async () => {
     this.currentPage = 1;
-    this.render();
     await this.reloadData();
   };
 
@@ -249,13 +260,11 @@ export class Paginator {
       return;
     }
     this.currentPage--;
-    this.render();
     await this.reloadData();
   };
 
   private handleLastPageClick = async () => {
     this.currentPage = this.totalPages;
-    this.render();
     await this.reloadData();
   };
 
@@ -264,7 +273,6 @@ export class Paginator {
       return;
     }
     this.currentPage++;
-    this.render();
     await this.reloadData();
   };
 
@@ -274,7 +282,6 @@ export class Paginator {
       const pageNumber = +target.textContent;
       if (pageNumber !== this.currentPage) {
         this.currentPage = pageNumber;
-        this.render();
         await this.reloadData();
       }
     }

@@ -73,21 +73,23 @@ export class CategoryCard {
       });
       this.exerciseGridInstance.render(exercises);
 
-      this.renderPaginator(page, perPage, response.totalPages);
+      this.renderExercisePaginator(page, perPage, response.totalPages);
     } else {
       this.exerciseGridInstance.showError('Вправи за цією категорією не знайдено.');
     }
   }
 
-  private renderPaginator(page: number, perPage: number, totalPages: number): void {
+  private renderExercisePaginator(page: number, perPage: number, totalPages: number): void {
     const paginatorContainer = document.getElementById('paginator-container');
-    const paginator = new Paginator(paginatorContainer, this.loadExercises.bind(this), {
-      currentPage: page,
-      perPage,
-      totalPages,
-    });
-    this.homePageController.exercisePaginator = paginator;
-    paginator.render();
+    if (!this.homePageController.exercisePaginator) {
+      const paginator = new Paginator(paginatorContainer, this.loadExercises.bind(this), {
+        currentPage: page,
+        perPage,
+        totalPages,
+      });
+      this.homePageController.exercisePaginator = paginator;
+    }
+    this.homePageController.exercisePaginator.render();
   }
 
   private async handleCategoryClick(): Promise<void> {
