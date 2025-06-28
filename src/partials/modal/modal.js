@@ -70,10 +70,13 @@ function toggleFavorite(ex) {
   const exists = favs.find(item => item._id === ex._id);
   favs = exists ? favs.filter(f => f._id !== ex._id) : [...favs, ex];
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs));
-  openExerciseModal(ex); // перерендер кнопки
+  openExerciseModal(ex);
+
+  if (window.location.hash === '#favorites' && window.renderFavorites) {
+    window.renderFavorites(1);
+  }
 }
 
-// Event Listeners для закриття модалки
 document.getElementById('close-modal-btn').onclick = closeExerciseModal;
 document.getElementById('exercise-modal').addEventListener('click', e => {
   if (e.target.id === 'exercise-modal') closeExerciseModal();
