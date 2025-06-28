@@ -99,5 +99,8 @@ export class HeaderComponent extends BaseComponent {
       }
     });
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onReady(): void {}
 }
 customElements.define('app-header', HeaderComponent);
