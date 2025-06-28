@@ -2,26 +2,27 @@
 @use '../../styles/variables.scss' as *;
 
 .quote-block {
+  position: relative;
   background: #242424;
   border-radius: 20px;
+  font-family: var(--dm-sans-family), sans-serif;
+  font-weight: 500;
   color: #ffffff;
   padding: $spacing-xl;
   max-width: 444px;
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: 16px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: $spacing-lg;
 
   .quote-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: $spacing-md;
-
     .quote-icon {
+      position: absolute;
+      left: $spacing-xl;
+      top: $spacing-xl;
       width: 34px;
       height: 34px;
 
@@ -35,14 +36,18 @@
     .quote-title {
       font-family: var(--dm-sans-family), sans-serif;
       font-weight: 600;
-      font-size: 20px;
+      font-size: 24px;
       line-height: 1.33;
-      margin: 0;
+      margin-bottom: 6px;
+      padding-left: 50px;
       color: #fff;
       white-space: nowrap;
     }
 
     .quote-decor {
+      position: absolute;
+      right: $spacing-xl;
+      top: $spacing-xl;
       width: 20px;
       height: 20px;
 
@@ -53,47 +58,67 @@
     }
   }
 
-  .quote-description {
+  .quote-text {
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.29;
+    color: rgba(244, 244, 244, 0.6);
+    padding-left: 50px;
+    margin-bottom: 8px;
+  }
+
+  .quote-author {
+    font-size: 16px;
+    line-height: 1.5;
     color: #ffffff;
+    padding-left: 50px;
   }
 }
 
 @include tablet {
   .quote-block {
     max-width: 400px;
-    padding: $spacing-lg;
+  }
+
+  .quote-header {
+    .quote-icon {
+      position: absolute;
+      left: 40px;
+      top: 40px;
+    }
+
+    .quote-title {
+      padding-left: 50px;
+    }
   }
 }
 
 @include mobile {
   .quote-block {
     max-width: 100%;
-    padding: $spacing-md;
 
     .quote-header {
-      gap: $spacing-sm;
+      margin-bottom: 8px;
 
       .quote-icon {
-        width: 28px;
-        height: 28px;
+        width: 34px;
+        height: 32px;
       }
 
-      .quote-info {
-        .quote-value {
-          font-size: 18px;
-        }
-
-        .quote-label {
-          font-size: 13px;
-        }
+      .quote-title {
+        font-size: 20px;
+        line-height: 1;
       }
     }
 
-    .quote-description {
-      font-size: 13px;
-      line-height: 1.3;
+    .quote-text {
+      font-size: 14px;
+      line-height: 1.29;
+      margin-bottom: 16px;
+    }
+
+    .quote-author {
+      font-size: 14px;
+      line-height: 1.29;
     }
   }
 }
