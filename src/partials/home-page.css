@@ -30,7 +30,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .exercises-title {
     font-size: 36px;
   }
@@ -78,7 +78,7 @@
 }
 
 /* MOBILE & TABLET: categories сверху, content снизу */
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1439px) {
   .exercises-content {
     grid-template-columns: 1fr;
   }
@@ -93,7 +93,7 @@
 }
 
 /* DESKTOP: content слева, categories справа */
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .exercises-content {
     grid-template-columns: 444px 1fr; /* Фиксированная ширина 444px для левой колонки */
     gap: 48px;
@@ -121,7 +121,7 @@
   display: none;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) and (max-width: 1439px) {
   .mobile-only {
     display: none;
   }
@@ -135,7 +135,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .mobile-only {
     display: none;
   }
@@ -327,7 +327,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .category-grid {
     max-width: 900px; /* Desktop */
     margin: 0;
