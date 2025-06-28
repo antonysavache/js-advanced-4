@@ -1,8 +1,9 @@
-import { FAVORITES_KEY } from '../../js/favorites';
 import axios from 'axios';
 
 const BACKEND_HOST = 'https://your-energy.b.goit.study/api';
 axios.defaults.baseURL = BACKEND_HOST;
+
+const FAVORITES_KEY = 'yourEnergyFavorites';
 
 export async function fetchAndShowDetails(id) {
   try {
@@ -21,7 +22,7 @@ function capitalizeFirstLetter(string) {
   }
 }
 
-export function openExerciseModal(data) {
+function openExerciseModal(data) {
   document.getElementById('exercise-img').src = data.gifUrl;
   document.getElementById('exercise-name').textContent = capitalizeFirstLetter(data.name);
   document.getElementById('target').textContent = capitalizeFirstLetter(data.target);

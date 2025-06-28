@@ -1,9 +1,8 @@
-@import url('modern-normalize/modern-normalize.css');
+@import url("modern-normalize/modern-normalize.css");
 
 :root {
-
-  --dm-sans-family: 'DM Sans', sans-serif;
-  --impact-family: 'Impact', sans-serif;
+  --dm-sans-family: "DM Sans", sans-serif;
+  --impact-family: "Impact", sans-serif;
 
   --black: #000;
   --gray14: #242424;

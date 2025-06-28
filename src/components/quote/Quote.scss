@@ -2,10 +2,10 @@
 @use '../../styles/variables.scss' as *;
 
 .quote-block {
-  background: var(--gray14);
+  background: #242424;
   border-radius: 20px;
-  color: var(--page-bg);
-  padding: $spacing-lg;
+  color: #ffffff;
+  padding: $spacing-xl;
   max-width: 444px;
   width: 100%;
   box-sizing: border-box;
@@ -13,40 +13,87 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: $spacing-xl;
+  gap: $spacing-lg;
 
   .quote-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: $spacing-md;
 
     .quote-icon {
-      width: 24px;
-      height: 24px;
+      width: 34px;
+      height: 34px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
 
     .quote-title {
-      font-family: var(--dm-sans-family);
-      font-weight: 500;
-      font-size: 24px;
+      font-family: var(--dm-sans-family), sans-serif;
+      font-weight: 600;
+      font-size: 20px;
       line-height: 1.33;
-      letter-spacing: 0;
       margin: 0;
       color: #fff;
+      white-space: nowrap;
+    }
+
+    .quote-decor {
+      width: 20px;
+      height: 20px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 
-  .quote-text {
+  .quote-description {
     font-size: 14px;
     line-height: 1.4;
-    color: #d4d4d4;
-    margin: 0;
+    color: #ffffff;
   }
+}
 
-  .quote-author {
-    font-size: 16px;
-    font-weight: 500;
-    color: #fff;
-    margin-top: $spacing-sm;
+@include tablet {
+  .quote-block {
+    max-width: 400px;
+    padding: $spacing-lg;
+  }
+}
+
+@include mobile {
+  .quote-block {
+    max-width: 100%;
+    padding: $spacing-md;
+
+    .quote-header {
+      gap: $spacing-sm;
+
+      .quote-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .quote-info {
+        .quote-value {
+          font-size: 18px;
+        }
+
+        .quote-label {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .quote-description {
+      font-size: 13px;
+      line-height: 1.3;
+    }
   }
 }
