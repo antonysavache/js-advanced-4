@@ -33,7 +33,7 @@ class HomePageController {
     });
 
     if (this.backToCategoriesLink) {
-      this.backToCategoriesLink.addEventListener('click', (e) => {
+      this.backToCategoriesLink.addEventListener('click', e => {
         e.preventDefault();
         this.showCategoryGrid();
         this.updateExercisesTitle('Exercises', false);
@@ -81,7 +81,6 @@ class HomePageController {
       }
       this.renderPaginator(page, perPage, response.totalPages);
     } catch (error) {
-      console.log(error);
       this.showErrorState();
     } finally {
       this.loading = false;
@@ -152,12 +151,10 @@ class HomePageController {
     selectors.forEach(selector => {
       const container = document.querySelector(selector);
       if (container && window.Quote) {
-        console.log(`Initializing Quote for: ${selector}`);
         new window.Quote(selector);
       }
     });
   }
-
 
   updateExercisesTitle(titleContent, isCategorySelected) {
     if (this.exercisesTitleElement && this.backToCategoriesLink) {
@@ -165,21 +162,21 @@ class HomePageController {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a> / <span class="exercise-category-title">${titleContent}</span>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-            this.backToCategoriesLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showCategoryGrid();
-                this.updateExercisesTitle('Exercises', false);
-            });
+          this.backToCategoriesLink.addEventListener('click', e => {
+            e.preventDefault();
+            this.showCategoryGrid();
+            this.updateExercisesTitle('Exercises', false);
+          });
         }
       } else {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-            this.backToCategoriesLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showCategoryGrid();
-                this.updateExercisesTitle('Exercises', false);
-            });
+          this.backToCategoriesLink.addEventListener('click', e => {
+            e.preventDefault();
+            this.showCategoryGrid();
+            this.updateExercisesTitle('Exercises', false);
+          });
         }
       }
     }
