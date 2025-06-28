@@ -8,7 +8,6 @@ import { CategoryCard } from './components/category-card/CategoryCard';
 import { EmptyState } from './components/empty-state/EmptyState';
 import { Paginator } from './components/paginator/Paginator';
 
-// Expose components to the global window object for use in partials
 (window as any).YourEnergyAPI = YourEnergyAPI;
 (window as any).Quote = Quote;
 (window as any).CategoryCard = CategoryCard;
@@ -41,6 +40,10 @@ function handleRouteChange(): void {
     } else if (currentHash === '#favorites') {
       homeSection.style.display = 'none';
       favoritesSection.style.display = 'block';
+
+      if ((window as any).renderFavorites) {
+        (window as any).renderFavorites(1);
+      }
     }
   }
 }
@@ -48,5 +51,3 @@ function handleRouteChange(): void {
 window.addEventListener('hashchange', handleRouteChange);
 
 document.addEventListener('DOMContentLoaded', initializeRouting);
-
-// Components will be initialized by their respective partials/files
