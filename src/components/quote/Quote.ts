@@ -78,24 +78,26 @@ export class Quote {
 
     this.container.innerHTML = `
       <div class="quote-block">
-        <div class="quote-header">
-          <div class="quote-icon">
-            <img src="images/running-man/run-man.png" 
-                srcset="images/running-man/run-man.png 1x, 
-                        images/running-man/run-man@2x.png 2x, 
-                        images/running-man/run-man@3x.png 3x" 
-                alt="icon" 
-            />
+<!--        <div class="quote-content">-->
+          <div class="quote-header">
+            <div class="quote-icon">
+              <img src="images/running-man/run-man.png" 
+                  srcset="images/running-man/run-man.png 1x, 
+                          images/running-man/run-man@2x.png 2x, 
+                          images/running-man/run-man@3x.png 3x" 
+                  alt="icon" 
+              />
+            </div>
+            <h2 class="quote-title">Quote of the day</h2>
+            <div class="quote-decor">
+              <svg class="icon">
+                <use xlink:href="sprite.svg#inverted-commas"></use>
+              </svg>
+            </div>
           </div>
-          <h2 class="quote-title">Quote of the day</h2>
-          <div class="quote-decor">
-            <svg class="icon">
-              <use xlink:href="sprite.svg#inverted-commas"></use>
-            </svg>
-          </div>
-        </div>
-        <p class="quote-text">${quote}</p>
-        <p class="quote-author">${author}</p>
+          <div class="quote-textual">${quote}</div>
+          <div class="quote-author">${author}</div>
+<!--        </div>-->
       </div>
     `;
   }

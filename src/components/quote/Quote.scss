@@ -35,7 +35,7 @@
 
     .quote-title {
       font-family: var(--dm-sans-family), sans-serif;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 24px;
       line-height: 1.33;
       margin-bottom: 6px;
@@ -58,7 +58,8 @@
     }
   }
 
-  .quote-text {
+  .quote-textual {
+    font-weight: 400;
     font-size: 14px;
     line-height: 1.29;
     color: rgba(244, 244, 244, 0.6);
@@ -67,6 +68,7 @@
   }
 
   .quote-author {
+    font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
     color: #ffffff;
@@ -76,17 +78,46 @@
 
 @include tablet {
   .quote-block {
-    max-width: 400px;
-  }
+    width: 400px;
+    box-sizing: border-box;
+    padding: 40px;
+    min-height: 249px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 
-  .quote-header {
-    .quote-icon {
-      position: absolute;
-      left: 40px;
-      top: 40px;
+    .quote-header {
+      .quote-icon {
+        position: absolute;
+        left: 40px;
+        top: 40px;
+      }
+
+      .quote-title {
+        font-weight: 400;
+        padding-left: 50px;
+        margin-bottom: 6px;
+      }
+
+      .quote-decor {
+        position: absolute;
+        right: 40px;
+        top: 40px;
+      }
     }
-
-    .quote-title {
+    .quote-textual {
+      font-weight: 400;
+      margin-bottom: 18px;
+      padding-left: 50px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      font-size: 14px;
+      line-height: 1.29;
+      color: rgba(244, 244, 244, 0.6);
+    }
+    .quote-author {
+      font-weight: 400;
       padding-left: 50px;
     }
   }
@@ -94,12 +125,21 @@
 
 @include mobile {
   .quote-block {
-    max-width: 100%;
+    position: relative;
+    width: 335px;
+    box-sizing: border-box;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0;
 
     .quote-header {
-      margin-bottom: 8px;
-
       .quote-icon {
+        position: absolute;
+        left: 20px;
+        top: 20px;
         width: 34px;
         height: 32px;
       }
@@ -107,10 +147,24 @@
       .quote-title {
         font-size: 20px;
         line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .quote-decor {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
 
-    .quote-text {
+    .quote-textual {
       font-size: 14px;
       line-height: 1.29;
       margin-bottom: 16px;
