@@ -3,6 +3,15 @@
   padding: 16px;
   border-radius: 15px;
   font-family: "DM Sans";
+  max-width: 335px;
+
+  @media screen and (min-width:768px){
+    max-width: 344px;
+  }
+
+  @media screen and (min-width:1200px) {
+    max-width: 442px;
+  }
 }
 
 .exercise-grid-header {
@@ -45,6 +54,10 @@
   line-height: 18px;
   letter-spacing: 0px;
   color: #242424;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .exercise-grid-body {
@@ -63,6 +76,9 @@
   height: 24px;
   border-radius: 50%;
   margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .exercise-grid-title {
@@ -72,11 +88,20 @@
   letter-spacing: 0px;
   color: #242424;
   text-transform: capitalize;
+  display: inline-block;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   @media screen and (min-width: 768px) {
     font-size: 24px;
     line-height: 32px;
     letter-spacing: 0px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 358px;
   }
 }
 
@@ -94,4 +119,36 @@
 .exercise-grid-value {
   color: #242424;
   text-transform: capitalize;
+}
+
+.exercise-grid-footer p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  font-size: 12px;
+}
+
+.exercise-grid-value {
+  display: inline-block;
+  max-width: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 480px) {
+  .exercise-grid-footer p {
+    font-size: 12px;
+  }
+
+  .exercise-grid-value {
+    max-width: 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .exercise-grid-value {
+    max-width: 100%;
+  }
 }
