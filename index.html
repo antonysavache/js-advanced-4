@@ -11,13 +11,20 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="src/css/index.css" />
+    <link rel="stylesheet" href="src/css/favorites.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body>
   <app-header></app-header>
     <main>
-      <load src="src/partials/hero-page/hero-page.html" />
-      <load src="src/partials/home-page/home-page.html" />
+      <section id="home-section" >
+        <load src="src/partials/hero-page/hero-page.html" />
+        <load src="src/partials/home-page/home-page.html" />
+      </section>
+      
+      <section id="favorites-section" style="display: none;">
+        <load src="src/partials/favorites-page/favorites-page.html" />
+      </section>
     </main>
 
   <aside class="mobile-menu">
@@ -54,5 +61,6 @@
     <load src="src/partials/Footer/footer.html" />
     <script type="module" src="src/main.ts"></script>
     <script type="module" src="src/js/main.js"></script>
+    <script type="module" src="src/js/favorites.js"></script>
   </body>
 </html>

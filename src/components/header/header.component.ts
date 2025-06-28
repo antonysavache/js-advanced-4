@@ -8,22 +8,24 @@ export class HeaderComponent extends BaseComponent {
   private closeBtn!: HTMLButtonElement;
   private mobileMenu!: HTMLElement;
   private mobileMenuLinks!: NodeListOf<HTMLAnchorElement>;
+  #currentRoute = '';
 
   constructor() {
     super(headerTemplate);
+    this.#currentRoute = window.location.hash;
   }
 
   initializeElements(): void {
-    /* inside header */
     this.navButtons = this.querySelectorAll('.nav__button');
     this.burgerBtn = this.querySelector<HTMLButtonElement>('.burger')!;
 
-    /* single panel in global DOM */
     this.mobileMenu = document.querySelector<HTMLElement>('.mobile-menu')!;
     this.closeBtn = this.mobileMenu.querySelector<HTMLButtonElement>('.mobile-menu__close')!;
 
     this.mobileMenuLinks =
       this.mobileMenu.querySelectorAll<HTMLAnchorElement>('.mobile-menu__links a');
+
+    this.setActiveButtonFromSnapshot();
   }
 
   bindEvents(): void {
@@ -67,7 +69,6 @@ export class HeaderComponent extends BaseComponent {
     document.removeEventListener('keydown', this.handleEscapePress);
   };
 
-  // Close when clicked outside the menu
   private handleOutsideClick = (e: MouseEvent): void => {
     const target = e.target as HTMLElement;
     if (
@@ -79,12 +80,25 @@ export class HeaderComponent extends BaseComponent {
     }
   };
 
-  // Close by ESC
   private handleEscapePress = (e: KeyboardEvent): void => {
     if (e.key === 'Escape' && this.mobileMenu.classList.contains('mobile-menu--open')) {
       this.closeMenu();
     }
   };
+
+  private setActiveButtonFromSnapshot(): void {
+    const routeSnapshot = this.#currentRoute || '#home';
+
+    this.navButtons.forEach(button => {
+      const href = button.getAttribute('href');
+
+      if (href === routeSnapshot) {
+        button.classList.add('nav__button--active');
+      } else {
+        button.classList.remove('nav__button--active');
+      }
+    });
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onReady(): void {}
