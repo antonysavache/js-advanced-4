@@ -11,12 +11,46 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="src/css/index.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body>
+  <app-header></app-header>
     <main>
       <load src="src/partials/hero-page/hero-page.html" />
       <load src="src/partials/home-page/home-page.html" />
     </main>
+
+  <aside class="mobile-menu">
+    <button class="mobile-menu__close" aria-label="Close menu">
+      <img src="src/images/close.png" alt="close icon" />
+    </button>
+
+    <nav class="mobile-menu__links">
+      <a href="#home">Home</a>
+      <a href="#favorites">Favorites</a>
+    </nav>
+
+    <ul class="mobile-menu__social social-links">
+      <li class="social-links__item">
+        <a href="https://www.facebook.com/goITclub/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-facebook"></use></svg>
+        </a>
+      </li>
+      <li class="social-links__item">
+        <a href="https://www.instagram.com/goitclub/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-instagram"></use></svg>
+        </a>
+      </li>
+      <li class="social-links__item">
+        <a href="https://www.youtube.com/c/GoIT" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-youtube"></use></svg>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+    <load src="src/partials/modal/modal.html" />
+
     <load src="src/partials/Footer/footer.html" />
     <script type="module" src="src/main.ts"></script>
     <script type="module" src="src/js/main.js"></script>

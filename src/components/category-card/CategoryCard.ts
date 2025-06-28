@@ -13,11 +13,13 @@ export class CategoryCard {
   private data: CategoryData;
   private readonly element: HTMLElement;
   private exerciseGridInstance: ExerciseGrid;
+  private homePageController: any;
 
-  constructor(data: CategoryData) {
+  constructor(data: CategoryData, homePageController: any) {
     this.data = data;
     this.element = this.createCard();
     this.exerciseGridInstance = new ExerciseGrid('#exercise-container');
+    this.homePageController = homePageController;
   }
 
   private createCard(): HTMLElement {
@@ -67,6 +69,11 @@ export class CategoryCard {
       }
       this.exerciseGridInstance.setLoading();
       this.exerciseGridInstance.show();
+
+      if (this.homePageController) {
+        this.homePageController.updateExercisesTitle(this.data.name, true);
+      }
+
 
       const response = await YourEnergyAPI.getExercises(exerciseParams);
       const exercises = response.results;
