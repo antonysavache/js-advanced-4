@@ -31,9 +31,6 @@
 }
 .exercise-gif {
   border-radius: 12px;
-  background:
-    linear-gradient(0deg, rgba(4, 4, 4, 0.2) 0%, rgba(4, 4, 4, 0.2) 100%),
-    url(<path-to-image>) lightgray -7.072px -25.893px / 107.482% 121.729% no-repeat;
 
   width: 295px;
   height: 258px;
