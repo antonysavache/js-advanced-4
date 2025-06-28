@@ -17,8 +17,10 @@ export class Paginator {
   private totalPages: number;
   private currentPage: number;
   private perPage: number;
+  private _isVisible: boolean = true;
 
   private _mainContainer: HTMLElement;
+  private _paginatorElement: HTMLDivElement | null = null;
   private pageButtons: HTMLButtonElement[] = [];
   private firstPageButton: HTMLButtonElement | null = null;
   private lastPageButton: HTMLButtonElement | null = null;
@@ -41,11 +43,20 @@ export class Paginator {
     this.cleanupPaginator();
     const paginator = this.createPaginatorElement();
     this.mainContainer.appendChild(paginator);
+    this._paginatorElement = paginator;
     this.addEventListeners();
   }
 
   get mainContainer(): HTMLElement {
     return this._mainContainer;
+  }
+
+  get isVisible(): boolean {
+    return this._isVisible;
+  }
+
+  get paginatorElement(): HTMLDivElement | null {
+    return this._paginatorElement;
   }
 
   setNewContainer(newContainer: HTMLElement) {
@@ -64,6 +75,25 @@ export class Paginator {
     }
 
     return paginatorElement;
+  }
+
+  cleanupPaginator() {
+    this.cleanupEventListeners();
+    this.pageButtons = [];
+    this.firstPageButton = null;
+    this.lastPageButton = null;
+    this.prevButton = null;
+    this.nextButton = null;
+    this._mainContainer.innerHTML = '';
+  }
+  hide() {
+    this._paginatorElement.style.display = 'none';
+    this._isVisible = false;
+  }
+
+  show() {
+    this._paginatorElement.style.display = 'block';
+    this._isVisible = true;
   }
 
   private createPrevOrNextBlock(type: 'previous' | 'next'): HTMLDivElement {
@@ -249,16 +279,6 @@ export class Paginator {
       }
     }
   };
-
-  private cleanupPaginator() {
-    this.cleanupEventListeners();
-    this.pageButtons = [];
-    this.firstPageButton = null;
-    this.lastPageButton = null;
-    this.prevButton = null;
-    this.nextButton = null;
-    this._mainContainer.innerHTML = '';
-  }
 
   private async reloadData() {
     await this.loadManagedComponentData(this.currentPage, this.perPage, this.totalPages);

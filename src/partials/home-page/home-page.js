@@ -1,6 +1,9 @@
 import { ExerciseFilter } from '../../api/api.interface';
 
 class HomePageController {
+  categoryPaginator = null;
+  exercisePaginator = null;
+
   constructor() {
     this.activeFilter = 'Muscles';
     this.loading = false;
@@ -33,7 +36,7 @@ class HomePageController {
     });
 
     if (this.backToCategoriesLink) {
-      this.backToCategoriesLink.addEventListener('click', (e) => {
+      this.backToCategoriesLink.addEventListener('click', e => {
         e.preventDefault();
         this.showCategoryGrid();
         this.updateExercisesTitle('Exercises', false);
@@ -112,6 +115,7 @@ class HomePageController {
       perPage,
       currentPage,
     });
+    this.categoryPaginator = paginator;
     paginator.render();
   }
 
@@ -158,28 +162,27 @@ class HomePageController {
     });
   }
 
-
   updateExercisesTitle(titleContent, isCategorySelected) {
     if (this.exercisesTitleElement && this.backToCategoriesLink) {
       if (isCategorySelected) {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a> / <span class="exercise-category-title">${titleContent}</span>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-            this.backToCategoriesLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showCategoryGrid();
-                this.updateExercisesTitle('Exercises', false);
-            });
+          this.backToCategoriesLink.addEventListener('click', e => {
+            e.preventDefault();
+            this.showCategoryGrid();
+            this.updateExercisesTitle('Exercises', false);
+          });
         }
       } else {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-            this.backToCategoriesLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showCategoryGrid();
-                this.updateExercisesTitle('Exercises', false);
-            });
+          this.backToCategoriesLink.addEventListener('click', e => {
+            e.preventDefault();
+            this.showCategoryGrid();
+            this.updateExercisesTitle('Exercises', false);
+          });
         }
       }
     }
