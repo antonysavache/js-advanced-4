@@ -25,7 +25,12 @@ export class ExerciseCard {
     <span class="exercise-label">WORKOUT</span>
 
     <div class="exercise-rating">
-      ${this.data.rating} <span class="exercise-star">★</span>
+      ${this.data.rating} 
+      <span class="exercise-star">
+        <svg style="margin-left: 5px" width="16" height="16">
+          <use href="/src/images/sprite.svg#icon-Star-1" />
+        </svg>
+      </span>
     </div>
 
     <button class="exercise-start-btn">
