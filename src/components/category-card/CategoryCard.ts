@@ -3,6 +3,7 @@ import { YourEnergyAPI } from '../../api';
 import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts';
 
 interface CategoryData {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   _id: string;
   name: string;
   imgURL: string;
@@ -51,8 +52,11 @@ export class CategoryCard {
   private async handleCategoryClick(): Promise<void> {
     try {
       const filterToParam: { [key: string]: string } = {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         Muscles: 'muscles',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Body parts': 'bodypart',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         Equipment: 'equipment',
       };
 
@@ -74,15 +78,16 @@ export class CategoryCard {
         this.homePageController.updateExercisesTitle(this.data.name, true);
       }
 
-
       const response = await YourEnergyAPI.getExercises(exerciseParams);
       const exercises = response.results;
 
       if (exercises && exercises.length) {
         exercises.forEach(exerciseData => {
-            if (!exerciseData.gifUrl) {
-                console.warn(`Вправа "${exerciseData.name}" не має "gifUrl". Зображення може не відображатися.`);
-            }
+          if (!exerciseData.gifUrl) {
+            console.warn(
+              `Вправа "${exerciseData.name}" не має "gifUrl". Зображення може не відображатися.`,
+            );
+          }
         });
         this.exerciseGridInstance.render(exercises);
       } else {
