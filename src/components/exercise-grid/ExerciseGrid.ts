@@ -38,20 +38,20 @@ export class ExerciseGrid {
                 <span class="exercise-grid-workout">WORKOUT</span>
                 <span class="exercise-grid-rating">${exercise.rating ? exercise.rating.toFixed(1) : 'N/A'}
                   <svg style="margin-left: 5px" width="16" height="16">
-                    <use href="/src/images/sprite.svg#icon-Star-1" />
+                    <use href="/sprite.svg#icon-Star-1" />
                   </svg>
                 </span>
               </div>
               <button class="exercise-grid-start-btn">Start
                 <svg width="16" height="16">
-                  <use href="/src/images/sprite.svg#icon-arrow-ex" />
+                  <use href="/sprite.svg#icon-arrow-ex" />
                 </svg>
               </button>
             </div>
             <div class="exercise-grid-body">
               <div class="run-icon">
                 <svg width="16" height="16">
-                  <use href="/src/images/sprite.svg#icon-run" />
+                  <use href="/sprite.svg#icon-run" />
                 </svg>
               </div>
               <h3 class="exercise-grid-title">${exercise.name}</h3>
