@@ -17,7 +17,7 @@ class HomePageController {
     this.setDefaultFilter();
     this.initQuote();
     this.initEmptyState();
-    this.loadCategories(this.activeFilter);
+    this.loadCategories();
     this.updateExercisesTitle('Exercises', false);
   }
 
@@ -46,7 +46,7 @@ class HomePageController {
     this.showCategoryGrid();
     this.updateExercisesTitle('Exercises', false);
 
-    await this.loadCategories(filter);
+    await this.loadCategories();
   }
 
   setActiveFilter(filter) {
@@ -67,19 +67,19 @@ class HomePageController {
     this.setActiveFilter('Muscles');
   }
 
-  async loadCategories(filter) {
+  async loadCategories(page = 1, perPage = 12) {
     try {
       this.loading = true;
 
-      const apiFilter = ExerciseFilter[filter];
-      const response = await window.YourEnergyAPI.getFilters(apiFilter, 1, 12);
+      const apiFilter = ExerciseFilter[this.activeFilter];
+      const response = await window.YourEnergyAPI.getFilters(apiFilter, page, perPage);
 
       if (response && response.results && response.results.length) {
         this.renderCategories(response.results);
       } else {
         this.showEmptyState();
       }
-      this.renderPaginator();
+      this.renderPaginator(page, perPage, response.totalPages);
     } catch (error) {
       console.log(error);
       this.showErrorState();
@@ -104,14 +104,13 @@ class HomePageController {
     });
   }
 
-  renderPaginator() {
+  renderPaginator(currentPage, perPage, totalPages) {
     const paginatorContainer = document.getElementById('paginator-container');
     if (!paginatorContainer) return;
-
-    const paginator = new window.Paginator(paginatorContainer, {
-      totalPages: 5, // Example total pages, replace with actual data
-      perPage: 12, // Example items per page, replace with actual data
-      currentPage: 1, // Example current page, replace with actual data
+    const paginator = new window.Paginator(paginatorContainer, this.loadCategories.bind(this), {
+      totalPages,
+      perPage,
+      currentPage,
     });
     paginator.render();
   }
@@ -148,11 +147,7 @@ class HomePageController {
   }
 
   initQuote() {
-    const selectors = [
-      '#quote-container',
-      '.tablet-only .quote-section',
-      '.desktop-only .quote-section',
-    ];
+    const selectors = ['#quote-container', '.tablet-only .quote-section', '.desktop-only .quote-section'];
 
     selectors.forEach(selector => {
       const container = document.querySelector(selector);

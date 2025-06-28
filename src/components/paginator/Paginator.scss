@@ -19,11 +19,12 @@
   gap: 4px;
 
   .paginator__arrow-button {
+    box-sizing: border-box;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 31px;
+      height: 31px;
       border: 1px solid #242424;
       border-radius: 50%;
   
@@ -34,6 +35,11 @@
         .paginator__arrow-icon {
           fill: #24242480;
         }
+      }
+
+      @media screen and (min-width: 768px) {
+        width: 32px;
+        height: 32px;
       }
     }
 }
@@ -46,20 +52,33 @@
 .paginator__pages-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   color: #d4d4d4;
 
   .paginator__page-button {
+    box-sizing: border-box;
+    font-size: 20px;
     &--active {
       cursor: default;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #242424;
-      width: 32px;
-      height: 32px;
+      width: 31px;
+      height: 31px;
       border: 1px solid #242424;
       border-radius: 50%;
+      
+      @media screen and (min-width: 768px) {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+      
     }
   }
 
