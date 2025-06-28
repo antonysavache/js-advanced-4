@@ -8,7 +8,7 @@
 .header {
   width: 100%;
   padding: 24px 0;
-  background: #fff;
+  background: var(--page-bg);
   border-bottom: 1px solid #e0e0e0;
 
   &__container {
