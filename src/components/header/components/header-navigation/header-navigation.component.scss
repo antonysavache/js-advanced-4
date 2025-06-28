@@ -1,0 +1,25 @@
+.nav {
+  &__list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__link {
+    color: #111;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #3ebf91;
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+    // Or transform into mobile nav if required
+  }
+}
