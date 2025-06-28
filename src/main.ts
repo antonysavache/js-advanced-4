@@ -15,4 +15,38 @@ import { Paginator } from './components/paginator/Paginator';
 (window as any).EmptyState = EmptyState;
 (window as any).Paginator = Paginator;
 
+function initializeRouting(): void {
+  const currentHash = window.location.hash;
+  const validHashes = ['#home', '#favorites'];
+
+  if (!currentHash) {
+    window.location.hash = '#home';
+  } else if (!validHashes.includes(currentHash)) {
+    window.location.hash = '#home';
+  }
+
+  handleRouteChange();
+}
+
+function handleRouteChange(): void {
+  const currentHash = window.location.hash || '#home';
+
+  const homeSection = document.getElementById('home-section');
+  const favoritesSection = document.getElementById('favorites-section');
+
+  if (homeSection && favoritesSection) {
+    if (currentHash === '#home') {
+      homeSection.style.display = 'block';
+      favoritesSection.style.display = 'none';
+    } else if (currentHash === '#favorites') {
+      homeSection.style.display = 'none';
+      favoritesSection.style.display = 'block';
+    }
+  }
+}
+
+window.addEventListener('hashchange', handleRouteChange);
+
+document.addEventListener('DOMContentLoaded', initializeRouting);
+
 // Components will be initialized by their respective partials/files
