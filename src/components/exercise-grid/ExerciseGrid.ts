@@ -11,21 +11,25 @@ interface ExerciseData {
 }
 
 export class ExerciseGrid {
-  private container: HTMLElement | null;
+  private _container: HTMLElement | null;
 
   constructor(containerSelector: string) {
-    this.container = document.querySelector(containerSelector);
+    this._container = document.querySelector(containerSelector);
     if (!this.container) {
       console.error(`Контейнер для ExerciseGrid не знайдено за селектором: ${containerSelector}`);
     }
   }
 
+  get container(): HTMLElement | null {
+    return this._container;
+  }
+
   public render(exercises: ExerciseData[]): void {
-    if (!this.container) {
+    if (!this._container) {
       return;
     }
 
-    this.container.innerHTML = '';
+    this._container.innerHTML = '';
 
     if (exercises && exercises.length > 0) {
       exercises.forEach(exercise => {
@@ -68,35 +72,35 @@ export class ExerciseGrid {
           fetchAndShowDetails(exercise._id);
         });
 
-        this.container.appendChild(card);
+        this._container.appendChild(card);
       });
     } else {
-      this.container.innerHTML =
+      this._container.innerHTML =
         '<p class="empty-state-message-custom">Вправи за цією категорією не знайдено.</p>';
     }
   }
 
   public setLoading(): void {
-    if (this.container) {
-      this.container.innerHTML = '<p class="loading-message-custom">Завантаження вправ...</p>';
+    if (this._container) {
+      this._container.innerHTML = '<p class="loading-message-custom">Завантаження вправ...</p>';
     }
   }
 
   public showError(message: string): void {
-    if (this.container) {
-      this.container.innerHTML = `<p class="error-message-custom">${message}</p>`;
+    if (this._container) {
+      this._container.innerHTML = `<p class="error-message-custom">${message}</p>`;
     }
   }
 
   public show(): void {
-    if (this.container) {
-      this.container.style.display = 'grid';
+    if (this._container) {
+      this._container.style.display = 'grid';
     }
   }
 
   public hide(): void {
-    if (this.container) {
-      this.container.style.display = 'none';
+    if (this._container) {
+      this._container.style.display = 'none';
     }
   }
 }

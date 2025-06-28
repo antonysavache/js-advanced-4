@@ -1,6 +1,9 @@
 import { ExerciseFilter } from '../../api/api.interface';
 
 class HomePageController {
+  categoryPaginator = null;
+  exercisePaginator = null;
+
   constructor() {
     this.activeFilter = 'Muscles';
     this.loading = false;
@@ -111,6 +114,7 @@ class HomePageController {
       perPage,
       currentPage,
     });
+    this.categoryPaginator = paginator;
     paginator.render();
   }
 

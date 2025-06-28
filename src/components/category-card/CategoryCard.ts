@@ -1,6 +1,7 @@
 import './CategoryCard.scss';
 import { YourEnergyAPI } from '../../api';
 import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts';
+import { Paginator } from '../paginator/Paginator.ts';
 
 interface CategoryData {
   _id: string;
@@ -8,6 +9,12 @@ interface CategoryData {
   imgURL: string;
   filter: string;
 }
+
+const filterToParam: { [key: string]: string } = {
+  Muscles: 'muscles',
+  'Body parts': 'bodypart',
+  Equipment: 'equipment',
+};
 
 export class CategoryCard {
   private data: CategoryData;
@@ -48,24 +55,58 @@ export class CategoryCard {
     container.appendChild(this.element);
   }
 
+  public async loadExercises(page: number, perPage: number): Promise<void> {
+    const response = await YourEnergyAPI.getExercises({
+      page,
+      limit: perPage,
+      [filterToParam[this.data.filter]]: this.data.name,
+    });
+    const exercises = response.results;
+
+    if (exercises && exercises.length) {
+      exercises.forEach(exerciseData => {
+        if (!exerciseData.gifUrl) {
+          console.warn(
+            `Вправа "${exerciseData.name}" не має "gifUrl". Зображення може не відображатися.`,
+          );
+        }
+      });
+      this.exerciseGridInstance.render(exercises);
+
+      this.renderPaginator(page, perPage, response.totalPages);
+    } else {
+      this.exerciseGridInstance.showError('Вправи за цією категорією не знайдено.');
+    }
+  }
+
+  private renderPaginator(page: number, perPage: number, totalPages: number): void {
+    const paginatorContainer = document.getElementById('paginator-container');
+    const paginator = new Paginator(paginatorContainer, this.loadExercises.bind(this), {
+      currentPage: page,
+      perPage,
+      totalPages,
+    });
+    this.homePageController.exercisePaginator = paginator;
+    paginator.render();
+  }
+
   private async handleCategoryClick(): Promise<void> {
     try {
-      const filterToParam: { [key: string]: string } = {
-        Muscles: 'muscles',
-        'Body parts': 'bodypart',
-        Equipment: 'equipment',
-      };
-
-      const paramName = filterToParam[this.data.filter];
       const exerciseParams = {
         page: 1,
         limit: 12,
-        [paramName]: this.data.name,
       };
 
       const categoryGrid = document.getElementById('category-grid');
+
       if (categoryGrid) {
         categoryGrid.style.display = 'none';
+        if (
+          this.homePageController.categoryPaginator &&
+          this.homePageController.categoryPaginator.isVisible
+        ) {
+          this.homePageController.categoryPaginator.hide();
+        }
       }
       this.exerciseGridInstance.setLoading();
       this.exerciseGridInstance.show();
@@ -74,20 +115,7 @@ export class CategoryCard {
         this.homePageController.updateExercisesTitle(this.data.name, true);
       }
 
-
-      const response = await YourEnergyAPI.getExercises(exerciseParams);
-      const exercises = response.results;
-
-      if (exercises && exercises.length) {
-        exercises.forEach(exerciseData => {
-            if (!exerciseData.gifUrl) {
-                console.warn(`Вправа "${exerciseData.name}" не має "gifUrl". Зображення може не відображатися.`);
-            }
-        });
-        this.exerciseGridInstance.render(exercises);
-      } else {
-        this.exerciseGridInstance.showError('Вправи за цією категорією не знайдено.');
-      }
+      await this.loadExercises(exerciseParams.page, exerciseParams.limit);
     } catch (error: unknown) {
       console.warn('Вправи не знайдено або сталася помилка:', error);
       this.exerciseGridInstance.showError('Помилка завантаження вправ. Спробуйте пізніше.');
