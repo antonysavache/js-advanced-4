@@ -48,8 +48,6 @@
   margin-bottom: 20px;
 }
 
-.footer-logo-link {
-}
 
 .logo-icon {
   fill: var(--page-bg);
@@ -80,20 +78,19 @@
 .social-links-icon {
   width: 24px;
   height: 24px;
-  fill: #f4f4f4;
+  fill: var(--page-bg);
   transition: fill 0.3s;
 }
 
-.social-links-link:hover,
-.social-links-link:focus {
-  background-color: #f4f4f4;
-  color: #242424;
+.social-links-link:hover {
+  background-color: var(--page-bg);
+  color: var(--gray14);
 }
 
-.social-links-link:hover .social-links-icon,
-.social-links-link:focus .social-links-icon {
+.social-links-link:hover .social-links-icon {
   fill: var(--gray14);
 }
+
 
 @media screen and (min-width: 768px) {
   .social {
@@ -178,7 +175,7 @@
   border: 1px solid var(--page-bg);
   border-radius: 30px;
   background-color: transparent;
-  color: #ffffff;
+  color: var(--white);
   font-family: var(--dm-sans-family);
   font-size: 14px;
   line-height: 1.5;
