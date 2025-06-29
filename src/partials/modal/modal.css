@@ -1,4 +1,4 @@
-.modal {
+.my-modal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
@@ -7,18 +7,18 @@
   align-items: center;
   z-index: 999;
 }
-.modal.is-hidden {
+.my-modal.is-hidden {
   display: none;
 }
 
-.modal-content {
+.my-modal-content {
   border-radius: 20px;
   background: #242424;
   padding: 40px 20px;
 
   position: relative;
 }
-.modal-close {
+.my-modal-close {
   position: absolute;
   right: 14px;
   top: 14px;
@@ -29,14 +29,14 @@
   height: 24px;
   padding: 0;
 }
-.exercise-gif {
+.my-exercise-gif {
   border-radius: 12px;
 
   width: 295px;
   height: 258px;
 }
 
-#exercise-name {
+#my-exercise-name {
   color: #f4f4f4;
   font-feature-settings:
     "liga" off,
@@ -49,7 +49,7 @@
   margin-top: 20px;
 }
 
-.stars {
+.my-stars {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +57,7 @@
   margin-top: 10px;
 }
 
-.stars-text {
+.my-stars-text {
   color: #f4f4f4;
   font-feature-settings:
     "liga" off,
@@ -69,13 +69,13 @@
   line-height: 18px;
 }
 
-.exercise-line1 {
+.my-exercise-line1 {
   margin-top: 20px;
   stroke-width: 1px;
   stroke: rgba(244, 244, 244, 0.2);
 }
 
-.exercise-info {
+.my-exercise-info {
   display: flex;
 
   align-items: flex-start;
@@ -85,14 +85,14 @@
   margin-top: 10px;
 }
 
-.exercise-info-block {
+.my-exercise-info-block {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
 }
 
-.exercise-info-h {
+.my-exercise-info-h {
   color: rgba(244, 244, 244, 0.4);
   font-feature-settings:
     "liga" off,
@@ -104,7 +104,7 @@
   line-height: 18px;
 }
 
-.exercise-info-t {
+.my-exercise-info-t {
   color: #f4f4f4;
   font-feature-settings:
     "liga" off,
@@ -116,13 +116,13 @@
   line-height: 18px;
 }
 
-.exercise-line2 {
+.my-exercise-line2 {
   margin-top: 10px;
   stroke-width: 1px;
   stroke: rgba(244, 244, 244, 0.2);
 }
 
-.description {
+.my-description {
   margin-top: 20px;
   color: rgba(244, 244, 244, 0.6);
   font-family: "DM Sans";
@@ -132,11 +132,11 @@
   line-height: 18px;
 }
 
-.favorite-buttons {
+.my-favorite-buttons {
   margin-top: 40px;
 }
 
-#favorite-btn {
+#my-favorite-btn {
   width: 100%;
   display: flex;
   padding: 12px 0;
@@ -155,14 +155,11 @@
   line-height: 18px;
 }
 
-#favorite-btn-text {
-}
-
-#favorite-btn-icon-remove {
+#my-favorite-btn-icon-remove {
   display: none;
 }
 
-#rating-btn {
+#my-rating-btn {
   width: 100%;
   margin-top: 10px;
   display: inline-flex;
@@ -181,92 +178,92 @@
   line-height: 18px;
 }
 
-#rating-btn:hover,
-#rating-btn:active {
+#my-rating-btn:hover,
+#my-rating-btn:active {
   background: #f4f4f4;
 
   color: #242424;
 }
 
-#favorite-btn:hover,
-#favorite-btn:active {
+#my-favorite-btn:hover,
+#my-favorite-btn:active {
   background: #242424;
   border: 1px solid #f4f4f4;
   color: #f4f4f4;
 }
 
-#favorite-btn:hover #favorite-btn-icon-add,
-#favorite-btn:active #favorite-btn-icon-add,
-#favorite-btn:hover #favorite-btn-icon-remove,
-#favorite-btn:active #favorite-btn-icon-remove {
+#my-favorite-btn:hover #my-favorite-btn-icon-add,
+#my-favorite-btn:active #my-favorite-btn-icon-add,
+#my-favorite-btn:hover #my-favorite-btn-icon-remove,
+#my-favorite-btn:active #my-favorite-btn-icon-remove {
   fill: #f4f4f4;
 }
 
-.modal-close-icon {
+.my-modal-close-icon {
   fill: rgba(244, 244, 244, 0.2);
 }
 
 @media screen and (min-width: 768px) {
-  .modal-close {
+  .my-modal-close {
     right: 16px;
     top: 16px;
     width: 28px;
     height: 28px;
   }
 
-  .modal-content {
+  .my-modal-content {
     padding: 32px;
     display: flex;
     gap: 32px;
   }
 
-  #exercise-name {
+  #my-exercise-name {
     margin-top: 0;
 
     font-size: 24px;
     line-height: 32px;
   }
 
-  .exercise-gif {
+  .my-exercise-gif {
     width: 270px;
     height: 259px;
   }
 
-  .stars {
+  .my-stars {
     margin-top: 8px;
   }
 
-  .exercise-line1 {
+  .my-exercise-line1 {
     margin-top: 16px;
     width: 338px;
   }
 
-  .exercise-line2 {
+  .my-exercise-line2 {
     margin-top: 8px;
     width: 338px;
   }
 
-  .exercise-info {
+  .my-exercise-info {
     margin-top: 8px;
     gap: 16px;
   }
 
-  .description {
+  .my-description {
     margin-top: 16px;
   }
 
-  .favorite-buttons {
+  .my-favorite-buttons {
     margin-top: 64px;
   }
 
-  #favorite-btn {
+  #my-favorite-btn {
     width: 220px;
 
     font-size: 16px;
     line-height: 24px;
   }
 
-  #rating-btn {
+  #my-rating-btn {
     width: auto;
     padding: 12px 12px;
     margin-top: 0;
@@ -274,22 +271,22 @@
     line-height: 24px;
   }
 
-  .favorite-buttons {
+  .my-favorite-buttons {
     display: flex;
     justify-content: space-between;
   }
 }
 @media screen and (min-width: 1440px) {
-  .modal-content {
+  .my-modal-content {
     width: 708px;
     margin: 0 auto;
   }
 
-  .exercise-line1 {
+  .my-exercise-line1 {
     width: 342px;
   }
 
-  .exercise-line2 {
+  .my-exercise-line2 {
     width: 342px;
   }
 }

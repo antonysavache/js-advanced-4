@@ -1,26 +1,26 @@
-.quote-box {
+.my-quote-box {
   border-radius: 20px;
   background: #242424;
   padding: 20px;
 }
 
-.quote-block {
+.my-quote-block {
   display: flex;
 
   align-items: flex-start;
   gap: 18px;
 }
 
-.quote-text {
+.my-quote-text {
   width: 243px;
 }
 
-.quote-header-box {
+.my-quote-header-box {
   display: flex;
   justify-content: space-between;
 }
 
-.quote-header {
+.my-quote-header {
   color: #f4f4f4;
   font-feature-settings:
     "liga" off,
@@ -32,7 +32,7 @@
   line-height: 20px;
 }
 
-.quote-card {
+.my-quote-card {
   margin-top: 8px;
   color: rgba(244, 244, 244, 0.6);
   font-family: "DM Sans";
@@ -42,7 +42,7 @@
   line-height: 18px;
 }
 
-.quote-card-author {
+.my-quote-card-author {
   margin-top: 16px;
   color: #f4f4f4;
   font-family: "DM Sans";
@@ -52,13 +52,13 @@
   line-height: 18px;
 }
 
-.daily-info {
+.my-daily-info {
   padding: 20px;
   border-radius: 20px;
   background: #fff;
 }
 
-.daily-info h3 {
+.my-daily-info h3 {
   margin-top: 15px;
   color: #242424;
   font-feature-settings:
@@ -71,11 +71,11 @@
   line-height: 20px;
 }
 
-.quote-flex {
+.my-quote-flex {
   margin-top: 20px;
 }
 
-.daily-info p {
+.my-daily-info p {
   margin-top: 6px;
   color: rgba(36, 36, 36, 0.6);
   font-family: "DM Sans";
@@ -85,7 +85,7 @@
   line-height: 18px;
 }
 
-.quote-women {
+.my-quote-women {
   margin-top: 20px;
   border-radius: 20px;
   background: #fff;
@@ -98,93 +98,93 @@
 }
 
 @media (min-resolution: 192dpi) {
-  .quote-women {
+  .my-quote-women {
     background-image: url(/src/images/women_mobile@2x.jpg);
   }
 }
 
 @media (min-width: 768px) {
-  .quote-women {
+  .my-quote-women {
     background-image: url(/src/images/women_tablet.jpg);
     width: 344px;
     height: 141px;
     margin-top: 0;
   }
 
-  .quote-box {
+  .my-quote-box {
     padding: 40px;
   }
 
-  .quote-text {
+  .my-quote-text {
     width: 574px;
   }
 
-  .quote-header {
+  .my-quote-header {
     font-size: 24px;
 
     line-height: 32px;
   }
 
-  .quote-header-icon {
+  .my-quote-header-icon {
     width: 24px;
     height: 24px;
   }
 
-  .quote-card-author {
+  .my-quote-card-author {
     margin-top: 18px;
     font-size: 16px;
     line-height: 24px;
   }
 
-  .quote-card {
+  .my-quote-card {
     margin-top: 6px;
   }
 
-  .quote-flex {
+  .my-quote-flex {
     display: flex;
     margin-top: 16px;
     gap: 16px;
   }
 
-  .daily-info {
+  .my-daily-info {
     padding: 25px;
     width: 344px;
     height: 141px;
   }
 
-  .daily-info h3 {
+  .my-daily-info h3 {
     font-size: 24px;
     line-height: 32px;
   }
 }
 
 @media (min-width: 768px) and (min-resolution: 192dpi) {
-  .quote-women {
+  .my-quote-women {
     background-image: url(/src/images/women_tablet@2x.jpg);
   }
 }
 
 @media (min-width: 1440px) {
-  .quote-women {
+  .my-quote-women {
     background-image: url(/src/images/women_desktop.jpg);
     width: 239px;
     height: 141px;
   }
-  .quote-box {
+  .my-quote-box {
     width: 494px;
   }
 
-  .quote-text {
+  .my-quote-text {
     width: 364px;
   }
 
-  .daily-info {
+  .my-daily-info {
     width: 239px;
   }
 }
 
 @media (min-width: 1440px) and (min-resolution: 192dpi) {
-  .quote-women {
+  .my-quote-women {
     background-image: url(/src/images/women_desktop@2x.jpg);
   }
 }
