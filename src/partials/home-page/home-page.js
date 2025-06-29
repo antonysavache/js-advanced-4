@@ -88,7 +88,7 @@ class HomePageController {
       } else {
         this.showEmptyState();
       }
-      this.renderCategoryPaginator(page, perPage, 10);
+      this.renderCategoryPaginator(page, perPage, response.totalPages);
     } catch (error) {
       console.log(error);
       this.showErrorState();
