@@ -1,6 +1,9 @@
 import './Quote.scss';
 import { YourEnergyAPI } from '../../api';
 import { type Quote as QuoteModel } from '../../api/api.interface';
+import { loadQuote, saveQuote } from '../../shared/utils/quote-storage';
+import { getTodayDate } from '../../shared/utils/date';
+
 
 interface QuoteData {
   quote: string;
@@ -10,7 +13,6 @@ interface QuoteData {
 
 export class Quote {
   private readonly container: HTMLElement | null;
-  private storageKey: string = 'daily-quote';
 
   constructor(containerSelector: string) {
     this.container = document.querySelector<HTMLElement>(containerSelector);
@@ -26,7 +28,7 @@ export class Quote {
 
   private init(): void {
     const cached = this.getCachedQuote();
-    const today = this.getTodayDate();
+    const today = getTodayDate();
 
     if (cached && cached.date === today) {
       this.render(cached.quote, cached.author);
@@ -35,41 +37,28 @@ export class Quote {
     }
   }
 
-  private getCachedQuote(): QuoteData | null {
-    const raw = localStorage.getItem(this.storageKey);
-    if (!raw) {
-      return null;
-    }
+private getCachedQuote(): QuoteData | null {
+  return loadQuote();
+}
 
-    try {
-      return JSON.parse(raw) as QuoteData;
-    } catch {
-      return null;
-    }
-  }
+private getQuote(): void {
+  YourEnergyAPI.getQuote()
+    .then((quote: QuoteModel) => {
+      const today = getTodayDate();
+      const quoteData: QuoteData = {
+        quote: quote.quote,
+        author: quote.author,
+        date: today,
+      };
 
-  private getTodayDate(): string {
-    return new Date().toISOString().split('T')[0];
-  }
-
-  private getQuote(): void {
-    YourEnergyAPI.getQuote()
-      .then((quote: QuoteModel) => {
-        const today = this.getTodayDate();
-        const quoteData: QuoteData = {
-          quote: quote.quote,
-          author: quote.author,
-          date: today,
-        };
-
-        this.render(quote.quote, quote.author);
-        localStorage.setItem(this.storageKey, JSON.stringify(quoteData));
-      })
-      .catch(err => {
-        console.warn('Ошибка загрузки цитаты, используется дефолт', err);
-        this.render("Здоров'я — це не все, але без нього все — ніщо.", 'Сократ');
-      });
-  }
+      this.render(quote.quote, quote.author);
+      saveQuote(quoteData);
+    })
+    .catch(err => {
+      console.warn('Ошибка загрузки цитаты, используется дефолт', err);
+      this.render("Здоров'я — це не все, але без нього все — ніщо.", 'Сократ');
+    });
+}
 
   private render(quote: string, author: string): void {
     if (!this.container) {
