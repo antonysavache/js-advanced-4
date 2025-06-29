@@ -161,8 +161,8 @@ export class Paginator {
 
   private createPageButtons(): HTMLElement[] {
     const buttons: HTMLElement[] = [];
-    let needLeftEllipsis = this.currentPage > 2;
-    let needRightEllipsis = this.currentPage < this.totalPages - 1;
+    let needLeftEllipsis = this.totalPages > 3 && this.currentPage > 2;
+    let needRightEllipsis = this.totalPages > 3 && this.currentPage < this.totalPages - 1;
 
     // Add ellipsis on the left if needed
     if (needLeftEllipsis) {
