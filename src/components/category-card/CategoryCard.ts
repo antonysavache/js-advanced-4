@@ -1,6 +1,13 @@
 import './CategoryCard.scss';
 import { YourEnergyAPI } from '../../api';
-import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts';
+import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts'; 
+
+declare global {
+  interface Window {
+    exerciseGrid: ExerciseGrid;
+    homePageController: any;
+  }
+}
 
 interface CategoryData {
   _id: string;
@@ -18,7 +25,7 @@ export class CategoryCard {
   constructor(data: CategoryData, homePageController: any) {
     this.data = data;
     this.element = this.createCard();
-    this.exerciseGridInstance = new ExerciseGrid('#exercise-container');
+    this.exerciseGridInstance = window.exerciseGrid;
     this.homePageController = homePageController;
   }
 
@@ -74,7 +81,6 @@ export class CategoryCard {
         this.homePageController.updateExercisesTitle(this.data.name, true);
       }
 
-
       const response = await YourEnergyAPI.getExercises(exerciseParams);
       const exercises = response.results;
 
@@ -84,7 +90,11 @@ export class CategoryCard {
                 console.warn(`Вправа "${exerciseData.name}" не має "gifUrl". Зображення може не відображатися.`);
             }
         });
-        this.exerciseGridInstance.render(exercises);
+        if (this.homePageController && this.homePageController.displayExercises) {
+            this.homePageController.displayExercises(exercises);
+        } else {
+            this.exerciseGridInstance.render(exercises); 
+        }
       } else {
         this.exerciseGridInstance.showError('Вправи за цією категорією не знайдено.');
       }
