@@ -17,10 +17,14 @@ class HomePageController {
     this.isDisplayingExercises = false;
     this.searchWrapper = document.querySelector('.search-exercises-wrapper');
 
-    this.paginatorInstance = null;
+    this.paginatorInstance = null; // Для категорій
+    this.paginatorExerciseInstance = null; // Для вправ
     this.currentPage = 1;
     this.perPage = 12;
     this.totalPages = 1;
+
+    this.currentCategoryName = ''; // Зберігаємо ім'я поточної категорії для пагінації вправ
+    this.currentExerciseSearchQuery = ''; // Для пошуку вправ
 
     this.init();
   }
@@ -68,7 +72,7 @@ class HomePageController {
 
   async handleFilterChange(filter) {
     this.setActiveFilter(filter);
-    this.showCategoryGrid();
+    this.showCategoryGrid(); // Повертаємося до категорій, приховуючи пагінатор вправ
     this.updateExercisesTitle('Exercises', false);
     this.clearSearch();
     this.hideSearchInput();
@@ -98,6 +102,9 @@ class HomePageController {
   async loadCategories(filter, page, perPage) {
     try {
       this.loading = true;
+      if (this.paginatorExerciseInstance) {
+        this.paginatorExerciseInstance.hide(); // Приховуємо пагінатор вправ, коли завантажуємо категорії
+      }
 
       const apiFilter = ExerciseFilter[filter];
       const response = await window.YourEnergyAPI.getFilters(apiFilter, page, perPage);
@@ -124,6 +131,59 @@ class HomePageController {
     }
   }
 
+  async loadExercises(categoryName, page = 1, perPage = 12, searchQuery = '') {
+    try {
+      this.loading = true;
+      this.currentCategoryName = categoryName; // Зберігаємо поточну категорію
+      this.currentExerciseSearchQuery = searchQuery; // Зберігаємо поточний пошуковий запит
+      if (this.paginatorInstance) {
+        this.paginatorInstance.hide(); // Приховуємо пагінатор категорій
+      }
+
+      const filterToParam = {
+        Muscles: 'muscles',
+        'Body parts': 'bodypart',
+        Equipment: 'equipment',
+      };
+      const apiFilter = ExerciseFilter[this.activeFilter];
+      const paramName = filterToParam[this.activeFilter];
+
+      const exerciseParams = {
+        page: page,
+        limit: perPage,
+        [paramName]: categoryName,
+        keyword: searchQuery, // Додаємо пошуковий запит до параметрів
+      };
+
+      const response = await window.YourEnergyAPI.getExercises(exerciseParams);
+      const exercises = response.results;
+
+      if (exercises && exercises.length) {
+        this.displayExercises(exercises); // Тепер ця функція лише рендерить
+        this.currentExercises = exercises; // Оновлюємо currentExercises для локального пошуку
+
+        this.totalPages = response.totalPages || 1;
+        this.currentPage = response.page || 1;
+        this.perPage = response.perPage || perPage;
+
+        this.renderExercisePaginator(this.currentPage, this.perPage, this.totalPages);
+      } else {
+        window.exerciseGrid.showError('Вправи за цією категорією не знайдено.');
+        if (this.paginatorExerciseInstance) {
+          this.paginatorExerciseInstance.hide();
+        }
+      }
+    } catch (error) {
+      console.warn('Вправи не знайдено або сталася помилка:', error);
+      window.exerciseGrid.showError('Помилка завантаження вправ. Спробуйте пізніше.');
+      if (this.paginatorExerciseInstance) {
+        this.paginatorExerciseInstance.hide();
+      }
+    } finally {
+      this.loading = false;
+    }
+  }
+
   renderCategories(categories) {
     const container = document.getElementById('category-grid');
     if (!container) return;
@@ -142,20 +202,17 @@ class HomePageController {
 
   displayExercises(exercises) {
     if (this.exerciseContainer && window.exerciseGrid) {
-      this.currentExercises = exercises;
       window.exerciseGrid.render(exercises);
       window.exerciseGrid.show();
       document.getElementById('category-grid').style.display = 'none';
       this.isDisplayingExercises = true;
       this.showSearchInput();
-      if (this.paginatorInstance) {
-          this.paginatorInstance.hide();
-      }
     }
   }
 
   handleSearch() {
     const query = this.exerciseSearchInput.value.toLowerCase().trim();
+    this.currentExerciseSearchQuery = query; // Оновлюємо пошуковий запит
     if (query) {
       this.clearSearchBtn.style.display = 'block';
       if (this.searchIconPlaceholder) {
@@ -168,34 +225,18 @@ class HomePageController {
       }
     }
 
-    if (this.currentExercises.length > 0) {
-      const filteredExercises = this.currentExercises.filter(exercise => exercise.name.toLowerCase().includes(query));
-
-      if (window.exerciseGrid) {
-        window.exerciseGrid.render(filteredExercises);
-        if (query) {
-          window.exerciseGrid.show();
-          document.getElementById('category-grid').style.display = 'none';
-          this.isDisplayingExercises = true;
-        } else {
-          if (this.isDisplayingExercises) {
-            window.exerciseGrid.render(this.currentExercises);
-            window.exerciseGrid.show();
-            document.getElementById('category-grid').style.display = 'none';
-          } else {
-            this.showCategoryGrid();
-          }
-        }
+    // Тепер пошук завжди викликає loadExercises для отримання даних з бекенду
+    if (this.isDisplayingExercises && this.currentCategoryName) {
+      this.currentPage = 1; // Скидаємо сторінку при пошуку
+      this.loadExercises(this.currentCategoryName, this.currentPage, this.perPage, this.currentExerciseSearchQuery);
+    } else if (!query) {
+      // Якщо пошук очищено, а ми на сторінці вправ, перезавантажуємо поточні вправи
+      if (this.isDisplayingExercises && this.currentCategoryName) {
+        this.currentPage = 1; // Скидаємо сторінку
+        this.loadExercises(this.currentCategoryName, this.currentPage, this.perPage, '');
+      } else {
+        this.showCategoryGrid(); // Якщо ми на категоріях і очистили пошук, показуємо категорії
       }
-    } else if (query) {
-      if (window.exerciseGrid) {
-        window.exerciseGrid.render([]);
-        window.exerciseGrid.show();
-        document.getElementById('category-grid').style.display = 'none';
-        this.isDisplayingExercises = true;
-      }
-    } else {
-      this.showCategoryGrid();
     }
   }
 
@@ -207,10 +248,11 @@ class HomePageController {
         this.searchIconPlaceholder.style.display = 'block';
       }
     }
-    if (this.isDisplayingExercises) {
-      if (window.exerciseGrid) {
-        window.exerciseGrid.render(this.currentExercises);
-      }
+    // Коли пошук очищено, якщо ми переглядаємо вправи, перезавантажуємо їх без фільтра пошуку
+    if (this.isDisplayingExercises && this.currentCategoryName) {
+      this.currentExerciseSearchQuery = ''; // Очищаємо збережений пошуковий запит
+      this.currentPage = 1; // Скидаємо сторінку
+      this.loadExercises(this.currentCategoryName, this.currentPage, this.perPage, '');
     } else {
       this.showCategoryGrid();
     }
@@ -238,9 +280,40 @@ class HomePageController {
 
     if (this.paginatorInstance) {
       this.paginatorInstance.render(paginationData.currentPage, paginationData.perPage, paginationData.totalPages);
+      this.paginatorInstance.show(); // Переконайтеся, що пагінатор категорій видимий
     } else {
       this.paginatorInstance = new window.Paginator(paginatorContainer, loadManagedDataFunction, paginationData);
       this.paginatorInstance.render();
+    }
+  }
+
+  renderExercisePaginator(currentPage, perPage, totalPages) {
+    const paginatorContainer = document.getElementById('paginator-container');
+    if (!paginatorContainer) {
+      console.warn("Елемент #paginator-container не знайдено для пагінатора вправ. Переконайтеся, що він існує у вашому HTML.");
+      return;
+    }
+
+    const paginationData = {
+      totalPages: totalPages,
+      perPage: perPage,
+      currentPage: currentPage,
+    };
+
+    // Функція завантаження даних для пагінатора вправ
+    const loadManagedDataFunction = async (newPage, currentPerPage, currentTotalPages) => {
+      this.currentPage = newPage;
+      this.perPage = currentPerPage;
+      this.totalPages = currentTotalPages;
+      await this.loadExercises(this.currentCategoryName, this.currentPage, this.perPage, this.currentExerciseSearchQuery);
+    };
+
+    if (this.paginatorExerciseInstance) {
+      this.paginatorExerciseInstance.render(paginationData.currentPage, paginationData.perPage, paginationData.totalPages);
+      this.paginatorExerciseInstance.show(); // Переконайтеся, що пагінатор вправ видимий
+    } else {
+      this.paginatorExerciseInstance = new window.Paginator(paginatorContainer, loadManagedDataFunction, paginationData);
+      this.paginatorExerciseInstance.render();
     }
   }
 
@@ -252,6 +325,9 @@ class HomePageController {
     if (this.paginatorInstance) {
         this.paginatorInstance.hide();
     }
+    if (this.paginatorExerciseInstance) {
+        this.paginatorExerciseInstance.hide();
+    }
   }
 
   showErrorState() {
@@ -261,6 +337,9 @@ class HomePageController {
     this.emptyState.show('Помилка завантаження даних.');
     if (this.paginatorInstance) {
         this.paginatorInstance.hide();
+    }
+    if (this.paginatorExerciseInstance) {
+        this.paginatorExerciseInstance.hide();
     }
   }
 
@@ -293,37 +372,34 @@ class HomePageController {
   }
 
   updateExercisesTitle(titleContent, isCategorySelected) {
-    if (this.exercisesTitleElement && this.backToCategoriesLink) {
+    if (this.exercisesTitleElement) {
       if (isCategorySelected) {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a> / <span class="exercise-category-title">${titleContent}</span>`;
+        // Оновлюємо посилання на back-to-categories, якщо воно було ре-рендерене
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-          this.backToCategoriesLink.addEventListener('click', e => {
-            e.preventDefault();
-            this.showCategoryGrid();
-            this.updateExercisesTitle('Exercises', false);
-            this.clearSearch();
-            this.hideSearchInput();
-            this.currentPage = 1;
-            this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
-          });
+          this.backToCategoriesLink.removeEventListener('click', this.handleBackToCategoriesClick); // Видаляємо стару, якщо є
+          this.backToCategoriesLink.addEventListener('click', this.handleBackToCategoriesClick); // Додаємо нову
         }
       } else {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-          this.backToCategoriesLink.addEventListener('click', e => {
-            e.preventDefault();
-            this.showCategoryGrid();
-            this.updateExercisesTitle('Exercises', false);
-            this.clearSearch();
-            this.hideSearchInput();
-            this.currentPage = 1;
-            this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
-          });
+          this.backToCategoriesLink.removeEventListener('click', this.handleBackToCategoriesClick);
+          this.backToCategoriesLink.addEventListener('click', this.handleBackToCategoriesClick);
         }
       }
     }
+  }
+
+  handleBackToCategoriesClick = (e) => {
+    e.preventDefault();
+    this.showCategoryGrid();
+    this.updateExercisesTitle('Exercises', false);
+    this.clearSearch();
+    this.hideSearchInput();
+    this.currentPage = 1;
+    this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
   }
 
   showCategoryGrid() {
@@ -342,7 +418,10 @@ class HomePageController {
     this.isDisplayingExercises = false;
     this.hideSearchInput();
     if (this.paginatorInstance) {
-        this.paginatorInstance.show();
+      this.paginatorInstance.show(); // Показуємо пагінатор категорій
+    }
+    if (this.paginatorExerciseInstance) {
+      this.paginatorExerciseInstance.hide(); // Приховуємо пагінатор вправ
     }
   }
 

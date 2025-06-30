@@ -6,6 +6,9 @@
   gap: 20px;
 }
 
+.paginator__next-container button:first-child{
+  transform: rotate(360deg) !important;
+}
 
 .paginator__previous-container,
 .paginator__next-container {

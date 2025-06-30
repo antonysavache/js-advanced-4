@@ -133,7 +133,7 @@ export class Paginator {
       doubleArrowButton.classList.add('paginator__arrow-button--disabled');
     }
     doubleArrowButton.innerHTML =
-      `<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-double-${type === 'previous' ? 'left' : 'right'}"></use></svg>`;
+      `<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-double-left"></use></svg>`;
 
     const singleArrowButton = document.createElement('button');
     singleArrowButton.classList.add('paginator__arrow-button');
