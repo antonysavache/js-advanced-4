@@ -42,9 +42,8 @@ export class ExerciseGrid {
                   </svg>
                 </span>
               </div>
-<!--              <button class="exercise-grid-start-btn">Start-->
-<!--                <img src="/src/images/arrow.png" alt="start" width="16" height="16">-->
-<!--              </button>-->
+              <button class="exercise-grid-start-btn">Start
+              </button>
             </div>
             <div class="exercise-grid-body">
               <div class="run-icon">
