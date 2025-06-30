@@ -11,21 +11,25 @@ interface ExerciseData {
 }
 
 export class ExerciseGrid {
-  private container: HTMLElement | null;
+  private _container: HTMLElement | null;
 
   constructor(containerSelector: string) {
-    this.container = document.querySelector(containerSelector);
+    this._container = document.querySelector(containerSelector);
     if (!this.container) {
       console.error(`Контейнер для ExerciseGrid не знайдено за селектором: ${containerSelector}`);
     }
   }
 
+  get container(): HTMLElement | null {
+    return this._container;
+  }
+
   public render(exercises: ExerciseData[]): void {
-    if (!this.container) {
+    if (!this._container) {
       return;
     }
 
-    this.container.innerHTML = '';
+    this._container.innerHTML = '';
 
     if (exercises && exercises.length > 0) {
       exercises.forEach(exercise => {
@@ -38,20 +42,20 @@ export class ExerciseGrid {
                 <span class="exercise-grid-workout">WORKOUT</span>
                 <span class="exercise-grid-rating">${exercise.rating ? exercise.rating.toFixed(1) : 'N/A'}
                   <svg style="margin-left: 5px" width="16" height="16">
-                    <use href="/src/images/sprite.svg#icon-Star-1" />
+                    <use href="/sprite.svg#icon-Star-1" />
                   </svg>
                 </span>
               </div>
               <button class="exercise-grid-start-btn">Start
                 <svg width="16" height="16">
-                  <use href="/src/images/sprite.svg#icon-arrow-ex" />
+                  <use href="/sprite.svg#icon-arrow-ex" />
                 </svg>
               </button>
             </div>
             <div class="exercise-grid-body">
               <div class="run-icon">
                 <svg width="16" height="16">
-                  <use href="/src/images/sprite.svg#icon-run" />
+                  <use href="/sprite.svg#icon-run" />
                 </svg>
               </div>
               <h3 class="exercise-grid-title">${exercise.name}</h3>
@@ -70,35 +74,37 @@ export class ExerciseGrid {
           });
         }
 
-        this.container.appendChild(card);
+        this._container.appendChild(card);
       });
     } else {
       this.container.innerHTML =
         '<p class="empty-state-message-custom">Nothing found</p>';
+
     }
   }
 
   public setLoading(): void {
     if (this.container) {
       this.container.innerHTML = '<p class="loading-message-custom">Loading exercises...</p>';
+
     }
   }
 
   public showError(message: string): void {
-    if (this.container) {
-      this.container.innerHTML = `<p class="error-message-custom">${message}</p>`;
+    if (this._container) {
+      this._container.innerHTML = `<p class="error-message-custom">${message}</p>`;
     }
   }
 
   public show(): void {
-    if (this.container) {
-      this.container.style.display = 'grid';
+    if (this._container) {
+      this._container.style.display = 'grid';
     }
   }
 
   public hide(): void {
-    if (this.container) {
-      this.container.style.display = 'none';
+    if (this._container) {
+      this._container.style.display = 'none';
     }
   }
 }

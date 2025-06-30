@@ -40,17 +40,18 @@ body {
   margin: 0;
 }
 
-.favorites-section {
+.my-favorites-section {
   margin-top: 80px;
+  margin-bottom: 40px;
 }
 
-.container {
+container {
   width: 100%;
   max-width: 335px;
   margin: auto;
 }
 
-.favorites-header {
+.my-favorites-header {
   color: #242424;
   font-family: "DM Sans";
   font-size: 28px;
@@ -60,7 +61,7 @@ body {
   letter-spacing: -0.56px;
 }
 
-#favorites-notfound {
+#my-favorites-notfound {
   margin: 0 auto;
   color: #242424;
   text-align: center;
@@ -74,11 +75,11 @@ body {
   margin-top: 20px;
 }
 
-#favorites-list {
+#my-favorites-list {
   margin-top: 40px;
 }
 
-.exercise-card {
+.my-exercise-card {
   display: block;
   border-radius: 15px;
   background: #fff;
@@ -86,23 +87,23 @@ body {
   margin-top: 20px;
 }
 
-#favorites-list li:first-child {
+#my-favorites-list li:first-child {
   margin-top: 40px;
 }
 
-.exercise-card-header {
+.my-exercise-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.exercise-card-workout-box {
+.my-exercise-card-workout-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 9px;
 }
-.exercise-card-workout-text {
+.my-exercise-card-workout-text {
   border-radius: 15px;
   border: 1px solid #242424;
   padding: 5px 8px;
@@ -116,7 +117,7 @@ body {
   line-height: normal;
 }
 
-.exercise-card-workout-button {
+.my-exercise-card-workout-button {
   background: inherit;
   padding: 0;
   margin: 0;
@@ -125,7 +126,7 @@ body {
   height: 16px;
 }
 
-.exercise-card-workout-start {
+.my-exercise-card-workout-start {
   background: inherit;
   padding: 0;
   margin: 0;
@@ -144,7 +145,7 @@ body {
   gap: 8px;
 }
 
-.exercise-card-title {
+.my-exercise-card-title {
   margin-top: 25px;
   display: flex;
   justify-content: flex-start;
@@ -152,7 +153,7 @@ body {
   gap: 16px;
 }
 
-.exercise-card-title h3 {
+.my-exercise-card-title h3 {
   color: #242424;
   font-feature-settings:
     "liga" off,
@@ -168,7 +169,7 @@ body {
   text-overflow: ellipsis;
 }
 
-.exercise-card-info {
+.my-exercise-card-info {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -176,7 +177,7 @@ body {
   margin-top: 16px;
 }
 
-.exercise-card-info p {
+.my-exercise-card-info p {
   overflow: hidden;
   color: #242424;
   font-feature-settings:
@@ -194,7 +195,7 @@ body {
   text-overflow: ellipsis;
 }
 
-.exercise-card-info p span {
+.my-exercise-card-info p span {
   color: rgba(36, 36, 36, 0.4);
   font-feature-settings:
     "liga" off,
@@ -206,7 +207,7 @@ body {
   line-height: 18px;
 }
 
-.pagination {
+.my-pagination {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,7 +216,7 @@ body {
   flex-wrap: wrap;
 }
 
-.pagination-group {
+.my-pagination-group {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -223,7 +224,7 @@ body {
   flex-wrap: wrap;
 }
 
-.nav-btn {
+.my-nav-btn {
   width: 34px;
   height: 34px;
   border-radius: 18px;
@@ -234,7 +235,7 @@ body {
   justify-content: center;
 }
 
-.page-btn {
+.my-page-btn {
   color: #d4d4d4;
   font-family: "DM Sans";
   font-size: 20px;
@@ -245,7 +246,7 @@ body {
   background: inherit;
 }
 
-.dots {
+.my-dots {
   color: #d4d4d4;
   font-family: "DM Sans";
   font-size: 20px;
@@ -256,12 +257,12 @@ body {
   background: inherit;
 }
 
-.nav-btn svg {
+.my-nav-btn svg {
   stroke: #242424;
   fill: #242424;
 }
 
-.page-btn.active {
+.my-page-btn.active {
   border-radius: 18px;
   border: 1px solid #242424;
   display: flex;
@@ -279,19 +280,19 @@ body {
   letter-spacing: 0.8px;
 }
 
-.nav-btn:disabled,
-.page-btn.disabled {
+.my-nav-btn:disabled,
+.my-page-btn.disabled {
   border-color: #e0e0e0;
   color: #c0c0c0;
   cursor: default;
 }
 
-.nav-btn:disabled svg {
+.my-nav-btn:disabled svg {
   stroke: #d4d4d4;
   fill: #d4d4d4;
 }
 
-.page-numbers {
+.my-page-numbers {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -299,10 +300,10 @@ body {
   flex-wrap: wrap;
 }
 
-.nav-btn:not(:disabled):hover,
-.nav-btn:not(:disabled):active,
-.page-btn:hover,
-.page-btn:active {
+.my-nav-btn:not(:disabled):hover,
+.my-nav-btn:not(:disabled):active,
+.my-page-btn:hover,
+.my-page-btn:active {
   border-radius: 18px;
   border: 1px solid #242424;
   background: #242424;
@@ -321,30 +322,30 @@ body {
   letter-spacing: 0.8px;
 }
 
-.nav-btn:not(:disabled):hover svg,
-.nav-btn:not(:disabled):active svg {
+.my-nav-btn:not(:disabled):hover svg,
+.my-nav-btn:not(:disabled):active svg {
   stroke: #f4f4f4;
   fill: #f4f4f4;
 }
 
-.favorites-block-flex {
+.my-favorites-block-flex {
   margin-top: 20px;
 }
 
-.exercise-card-info-p1 {
+.my-exercise-card-info-p1 {
   width: 132px;
 }
 
-.exercise-card-info-p2 {
+.my-exercise-card-info-p2 {
   width: 88px;
 }
 
-.exercise-card-info-p3 {
+.my-exercise-card-info-p3 {
   width: 60px;
 }
 
 @media screen and (min-width: 768px) {
-  .favorites-section {
+  .my-favorites-section {
     margin-top: 100px;
   }
 
@@ -352,72 +353,73 @@ body {
     max-width: 704px;
   }
 
-  .favorites-header {
+  .my-favorites-header {
     font-size: 44px;
 
     line-height: 48px;
     letter-spacing: -0.88px;
   }
 
-  #favorites-notfound {
+  #my-favorites-notfound {
     font-size: 18px;
     line-height: 24px;
     width: 554px;
     margin-top: 132px;
   }
 
-  .exercise-card {
+  .my-exercise-card {
     margin-top: 0;
   }
 
-  #favorites-list li:first-child {
+  #my-favorites-list li:first-child {
     margin-top: 0;
   }
 
-  #favorites-list {
+  #my-favorites-list {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
     margin-top: 64px;
   }
 
-  .exercise-card {
+  .my-exercise-card {
     margin-top: 0;
+    min-width: 415px;
     width: calc((100% - 16px) / 2);
   }
 
-  .favorites-block-flex {
+  .my-favorites-block-flex {
     margin-top: 32px;
   }
 
-  .exercise-card-title h3 {
+  .my-exercise-card-title h3 {
     font-size: 24px;
     line-height: 32px;
     max-width: 270px;
   }
 
-  .exercise-card-info {
+  .my-exercise-card-info {
     margin-top: 8px;
   }
 
-  .pagination {
+  .my-pagination {
     margin-top: 32px;
   }
 
-  .exercise-card-info-p1 {
+  .my-exercise-card-info-p1 {
     width: 135px;
   }
 
-  .exercise-card-info-p2 {
+  .my-exercise-card-info-p2 {
     width: 91px;
   }
 
-  .exercise-card-info-p3 {
+  .my-exercise-card-info-p3 {
     width: 63px;
   }
 }
 @media screen and (min-width: 1440px) {
-  .favorites-section {
+  .my-favorites-section {
     margin-top: 90px;
   }
 
@@ -425,41 +427,41 @@ body {
     max-width: 1376px;
   }
 
-  #favorites-notfound {
+  #my-favorites-notfound {
     margin-top: 114px;
     margin-left: 148px;
   }
 
-  .favorites-block-flex {
+  .my-favorites-block-flex {
     display: flex;
     gap: 32px;
   }
 
-  #favorites-list {
+  #my-favorites-list {
     margin-top: 0;
   }
 
-  #pagination {
+  #my-pagination {
     display: none;
   }
 
-  .exercise-card-info {
+  .my-exercise-card-info {
     gap: 16px;
   }
 
-  .exercise-card-title h3 {
+  .my-exercise-card-title h3 {
     max-width: 330px;
   }
 
-  .exercise-card-info-p1 {
+  .my-exercise-card-info-p1 {
     width: 160px;
   }
 
-  .exercise-card-info-p2 {
+  .my-exercise-card-info-p2 {
     width: 116px;
   }
 
-  .exercise-card-info-p3 {
+  .my-exercise-card-info-p3 {
     width: 73px;
   }
 }

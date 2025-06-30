@@ -9,6 +9,7 @@ const refs = {
 
 const submitRegistrationForm = event => {
   event.preventDefault();
+  
   const formValue = refs.footerInputEl.value;
   YourEnergyAPI.subscribe(formValue)
     .then(() => {
@@ -36,6 +37,9 @@ const submitRegistrationForm = event => {
         });
       }
     });
+
+    refs.footerFormBtn.reset();
+    document.activeElement.blur();
 };
 
 refs.footerFormBtn.addEventListener('submit', submitRegistrationForm);

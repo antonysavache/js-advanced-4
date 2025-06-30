@@ -1,6 +1,8 @@
 import './Quote.scss';
 import { YourEnergyAPI } from '../../api';
 import { type Quote as QuoteModel } from '../../api/api.interface';
+import { loadQuote, saveQuote } from '../../shared/utils/quote-storage';
+import { getTodayDate } from '../../shared/utils/date';
 
 interface QuoteData {
   quote: string;
@@ -10,7 +12,6 @@ interface QuoteData {
 
 export class Quote {
   private readonly container: HTMLElement | null;
-  private storageKey: string = 'daily-quote';
 
   constructor(containerSelector: string) {
     this.container = document.querySelector<HTMLElement>(containerSelector);
@@ -26,7 +27,7 @@ export class Quote {
 
   private init(): void {
     const cached = this.getCachedQuote();
-    const today = this.getTodayDate();
+    const today = getTodayDate();
 
     if (cached && cached.date === today) {
       this.render(cached.quote, cached.author);
@@ -36,26 +37,13 @@ export class Quote {
   }
 
   private getCachedQuote(): QuoteData | null {
-    const raw = localStorage.getItem(this.storageKey);
-    if (!raw) {
-      return null;
-    }
-
-    try {
-      return JSON.parse(raw) as QuoteData;
-    } catch {
-      return null;
-    }
-  }
-
-  private getTodayDate(): string {
-    return new Date().toISOString().split('T')[0];
+    return loadQuote();
   }
 
   private getQuote(): void {
     YourEnergyAPI.getQuote()
       .then((quote: QuoteModel) => {
-        const today = this.getTodayDate();
+        const today = getTodayDate();
         const quoteData: QuoteData = {
           quote: quote.quote,
           author: quote.author,
@@ -63,7 +51,7 @@ export class Quote {
         };
 
         this.render(quote.quote, quote.author);
-        localStorage.setItem(this.storageKey, JSON.stringify(quoteData));
+        saveQuote(quoteData);
       })
       .catch(err => {
         console.warn('Ошибка загрузки цитаты, используется дефолт', err);
@@ -78,24 +66,26 @@ export class Quote {
 
     this.container.innerHTML = `
       <div class="quote-block">
-        <div class="quote-header">
-          <div class="quote-icon">
-            <img src="images/running-man/run-man.png" 
-                srcset="images/running-man/run-man.png 1x, 
-                        images/running-man/run-man@2x.png 2x, 
-                        images/running-man/run-man@3x.png 3x" 
-                alt="icon" 
-            />
+<!--        <div class="quote-content">-->
+          <div class="quote-header">
+            <div class="quote-icon">
+              <img src="images/running-man/run-man.png" 
+                  srcset="images/running-man/run-man.png 1x, 
+                          images/running-man/run-man@2x.png 2x, 
+                          images/running-man/run-man@3x.png 3x" 
+                  alt="icon" 
+              />
+            </div>
+            <h2 class="quote-title">Quote of the day</h2>
+            <div class="quote-decor">
+              <svg class="icon">
+                <use xlink:href="sprite.svg#inverted-commas"></use>
+              </svg>
+            </div>
           </div>
-          <h2 class="quote-title">Quote of the day</h2>
-          <div class="quote-decor">
-            <svg class="icon">
-              <use xlink:href="sprite.svg#inverted-commas"></use>
-            </svg>
-          </div>
-        </div>
-        <p class="quote-text">${quote}</p>
-        <p class="quote-author">${author}</p>
+          <div class="quote-textual">${quote}</div>
+          <div class="quote-author">${author}</div>
+<!--        </div>-->
       </div>
     `;
   }

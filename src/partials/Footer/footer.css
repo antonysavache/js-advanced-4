@@ -6,22 +6,33 @@
   flex-direction: column;
 }
 
+.info-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 @media screen and (min-width: 768px) {
   .footer-info {
     flex-direction: row;
     justify-content: space-between;
   }
-}
-
-@media screen and (min-width: 1158px) {
-  .footer-info {
-    flex-direction: row;
-    margin-bottom: 70px;
-    align-items: flex-start;
-  }
 
   .info-content {
     display: flex;
+    flex-wrap: wrap;
+    margin-left: 100px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer-info {
+    flex-direction: row;
+    margin-bottom: 70px;
+  }
+
+    .info-content {
+    margin-right: 90px;
   }
 }
 
@@ -37,8 +48,6 @@
   margin-bottom: 20px;
 }
 
-.footer-logo-link {
-}
 
 .logo-icon {
   fill: var(--page-bg);
@@ -69,20 +78,19 @@
 .social-links-icon {
   width: 24px;
   height: 24px;
-  fill: #f4f4f4;
+  fill: var(--page-bg);
   transition: fill 0.3s;
 }
 
-.social-links-link:hover,
-.social-links-link:focus {
-  background-color: #f4f4f4;
-  color: #242424;
+.social-links-link:hover {
+  background-color: var(--page-bg);
+  color: var(--gray14);
 }
 
-.social-links-link:hover .social-links-icon,
-.social-links-link:focus .social-links-icon {
+.social-links-link:hover .social-links-icon {
   fill: var(--gray14);
 }
+
 
 @media screen and (min-width: 768px) {
   .social {
@@ -91,7 +99,7 @@
   }
 }
 
-@media screen and (min-width: 1158px) {
+@media screen and (min-width: 1440px) {
 }
 
 /* #endregion */
@@ -129,7 +137,7 @@
   }
 }
 
-@media screen and (min-width: 1158px) {
+@media screen and (min-width: 1440px) {
   .slogan {
     min-width: 595px;
   }
@@ -167,14 +175,14 @@
   border: 1px solid var(--page-bg);
   border-radius: 30px;
   background-color: transparent;
-  color: #ffffff;
+  color: var(--white);
   font-family: var(--dm-sans-family);
   font-size: 14px;
   line-height: 1.5;
   outline: none;
 }
 
-.registration-input:hover{
+.registration-input:hover {
   border: 2px solid var(--hover-grey);
 }
 
@@ -221,7 +229,7 @@
   }
 }
 
-@media screen and (min-width: 1158px) {
+@media screen and (min-width: 1440px) {
   .registration {
     margin-top: 64px;
   }
@@ -231,8 +239,15 @@
 
 /* #region end */
 .footer-end {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
+
+.small-footer-text.year {
+  margin-top: 20px;
+}
+
 .small-footer-text {
   font-family: var(--dm-sans-family);
   font-style: normal;
@@ -245,12 +260,6 @@
   transition: color 0.3s;
 }
 
-.small-footer-text.year {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
 .small-footer-text.policy::after {
   content: "/";
   padding-left: 8px;
@@ -261,7 +270,9 @@
   opacity: 1;
 }
 
-.footer-rules {
+.text {
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 768px) {
@@ -269,15 +280,26 @@
     display: flex;
   }
 
-  .small-footer-text.policy {
-    margin-left: 70px;
+
+  .small-footer-text.year {
+    margin-top: 0;
+  }
+
+  .text {
+    flex-direction: row;
+    gap: 70px;
   }
 }
 
-@media screen and (min-width: 1158px) {
-  .small-footer-text.year {
-    right: 300px;
-    bottom: 16px;
+@media screen and (min-width: 1440px) {
+  .text {
+    gap: 122px;
+  }
+
+  .footer-end {
+    display: flex;
+    justify-content: flex-start;
+    gap: 430px;
   }
 }
 

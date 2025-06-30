@@ -1,6 +1,9 @@
 import { ExerciseFilter } from '../../api/api.interface';
 
 class HomePageController {
+  categoryPaginator = null;
+  exercisePaginator = null;
+
   constructor() {
     this.activeFilter = 'Muscles';
     this.loading = false;
@@ -24,7 +27,7 @@ class HomePageController {
     this.setDefaultFilter();
     this.initQuote();
     this.initEmptyState();
-    this.loadCategories(this.activeFilter);
+    this.loadCategories();
     this.updateExercisesTitle('Exercises', false);
     this.hideSearchInput();
   }
@@ -41,7 +44,7 @@ class HomePageController {
     });
 
     if (this.backToCategoriesLink) {
-      this.backToCategoriesLink.addEventListener('click', (e) => {
+      this.backToCategoriesLink.addEventListener('click', e => {
         e.preventDefault();
         this.showCategoryGrid();
         this.updateExercisesTitle('Exercises', false);
@@ -86,19 +89,19 @@ class HomePageController {
     this.setActiveFilter('Muscles');
   }
 
-  async loadCategories(filter) {
+  async loadCategories(page = 1, perPage = 12) {
     try {
       this.loading = true;
 
-      const apiFilter = ExerciseFilter[filter];
-      const response = await window.YourEnergyAPI.getFilters(apiFilter, 1, 12);
+      const apiFilter = ExerciseFilter[this.activeFilter];
+      const response = await window.YourEnergyAPI.getFilters(apiFilter, page, perPage);
 
       if (response && response.results && response.results.length) {
         this.renderCategories(response.results);
       } else {
         this.showEmptyState();
       }
-      this.renderPaginator();
+      this.renderCategoryPaginator(page, perPage, response.totalPages);
     } catch (error) {
       console.log(error);
       this.showErrorState();
@@ -122,6 +125,7 @@ class HomePageController {
       this.categoryCards.push(categoryCard);
     });
   }
+
 
   displayExercises(exercises) {
     if (this.exerciseContainer && window.exerciseGrid) {
@@ -242,11 +246,7 @@ class HomePageController {
   }
 
   initQuote() {
-    const selectors = [
-      '#quote-container',
-      '.tablet-only .quote-section',
-      '.desktop-only .quote-section',
-    ];
+    const selectors = ['#quote-container', '.tablet-only .quote-section', '.desktop-only .quote-section'];
 
     selectors.forEach(selector => {
       const container = document.querySelector(selector);
@@ -339,3 +339,4 @@ window.addEventListener('load', () => {
   window.homePageController = homePageController;
   window.exerciseGrid = new window.ExerciseGrid('#exercise-container');
 });
+

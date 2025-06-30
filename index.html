@@ -11,13 +11,20 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="src/css/index.css" />
+    <link rel="stylesheet" href="src/css/favorites.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body>
   <app-header></app-header>
     <main>
-      <load src="src/partials/hero-page/hero-page.html" />
-      <load src="src/partials/home-page/home-page.html" />
+      <section id="home-section" >
+        <load src="src/partials/hero-page/hero-page.html" />
+        <load src="src/partials/home-page/home-page.html" />
+      </section>
+      
+      <section id="favorites-section" style="display: none;">
+        <load src="src/partials/favorites-page/favorites-page.html" />
+      </section>
     </main>
 
   <aside class="mobile-menu">
@@ -33,17 +40,17 @@
     <ul class="mobile-menu__social social-links">
       <li class="social-links__item">
         <a href="https://www.facebook.com/goITclub/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-facebook"></use></svg>
+          <svg class="social-links__icon"><use href="/sprite.svg#icon-facebook"></use></svg>
         </a>
       </li>
       <li class="social-links__item">
         <a href="https://www.instagram.com/goitclub/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-instagram"></use></svg>
+          <svg class="social-links__icon"><use href="/sprite.svg#icon-instagram"></use></svg>
         </a>
       </li>
       <li class="social-links__item">
         <a href="https://www.youtube.com/c/GoIT" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-          <svg class="social-links__icon"><use href="/src/images/sprite.svg#icon-youtube"></use></svg>
+          <svg class="social-links__icon"><use href="/sprite.svg#icon-youtube"></use></svg>
         </a>
       </li>
     </ul>
@@ -54,5 +61,6 @@
     <load src="src/partials/Footer/footer.html" />
     <script type="module" src="src/main.ts"></script>
     <script type="module" src="src/js/main.js"></script>
+    <script type="module" src="src/js/favorites.js"></script>
   </body>
 </html>

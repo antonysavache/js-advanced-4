@@ -417,7 +417,7 @@
 .categories-grid {
   min-height: 400px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 
   @include mobile {
     max-width: 335px;
@@ -431,6 +431,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    margin-bottom: 32px;
 
     .category-card {
       width: calc((100% - 30px) / 3); // (705px - 2*15px) / 3 = 225px
@@ -440,7 +441,7 @@
 
   @include desktop {
     max-width: 900px;
-    margin: 0;
+    margin: 0 0 32px 0;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
