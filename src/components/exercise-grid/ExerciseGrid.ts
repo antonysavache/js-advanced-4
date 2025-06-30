@@ -42,9 +42,9 @@ export class ExerciseGrid {
                   </svg>
                 </span>
               </div>
-              <button class="exercise-grid-start-btn">Start
-                <img src="/src/images/arrow.png" alt="start" width="16" height="16">
-              </button>
+<!--              <button class="exercise-grid-start-btn">Start-->
+<!--                <img src="/src/images/arrow.png" alt="start" width="16" height="16">-->
+<!--              </button>-->
             </div>
             <div class="exercise-grid-body">
               <div class="run-icon">
@@ -71,8 +71,7 @@ export class ExerciseGrid {
         this.container.appendChild(card);
       });
     } else {
-      this.container.innerHTML =
-        '<p class="empty-state-message-custom">Nothing found</p>';
+      this.container.innerHTML = '<p class="empty-state-message-custom">Nothing found</p>';
     }
   }
 
