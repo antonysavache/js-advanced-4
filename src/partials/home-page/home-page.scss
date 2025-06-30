@@ -418,6 +418,7 @@
   min-height: 400px;
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 20px;
 
   @include mobile {
     max-width: 335px;
@@ -444,6 +445,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    margin-bottom: 32px;
 
     .category-card {
       width: calc((100% - 30px) / 3); // (900px - 2*15px) / 3 = 290px

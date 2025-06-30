@@ -1,35 +1,65 @@
 import './Paginator.scss';
 
-export interface IPaginationData {
+type LoadManagedComponentDataFunc = (
+  currentPage: number,
+  perPage: number,
+  totalPages: number,
+) => Promise<unknown>;
+
+interface IPaginationData {
   totalPages: number;
   perPage: number;
   currentPage: number;
 }
 
 export class Paginator {
-  private static newPaginatorId: number = 1;
-  private paginatorId: number = Paginator.newPaginatorId++;
+  private readonly loadManagedComponentData: LoadManagedComponentDataFunc;
   private totalPages: number;
   private currentPage: number;
-  // private perPage: number;
+  private perPage: number;
+  private _isVisible: boolean = true;
 
   private _mainContainer: HTMLElement;
+  private _paginatorElement: HTMLDivElement | null = null;
   private pageButtons: HTMLButtonElement[] = [];
   private firstPageButton: HTMLButtonElement | null = null;
   private lastPageButton: HTMLButtonElement | null = null;
   private prevButton: HTMLButtonElement | null = null;
   private nextButton: HTMLButtonElement | null = null;
 
-  constructor(mainContainer: HTMLElement, paginationData: IPaginationData) {
+  constructor(
+    mainContainer: HTMLElement,
+    loadManagedComponentData: LoadManagedComponentDataFunc,
+    paginationData: IPaginationData,
+  ) {
     this.totalPages = paginationData.totalPages;
-    // this.perPage = paginationData.perPage;
+    this.perPage = paginationData.perPage;
     this.currentPage = paginationData.currentPage;
     this._mainContainer = mainContainer;
+    this.loadManagedComponentData = loadManagedComponentData;
   }
 
-  render() {
-    this.cleanupPaginator();
+  render(
+    page: number = this.currentPage,
+    perPage: number = this.perPage,
+    totalPages: number = this.totalPages,
+  ) {
+    this.destroy();
+    this.currentPage = page;
+    this.perPage = perPage;
+    if (totalPages || totalPages === 0) {
+      this.totalPages = totalPages;
+    }
+
+    if (this.totalPages === 0) {
+      this.hide();
+      return;
+    } else {
+      this.show();
+    }
+
     const paginator = this.createPaginatorElement();
+    this._paginatorElement = paginator;
     this.mainContainer.appendChild(paginator);
     this.addEventListeners();
   }
@@ -38,9 +68,44 @@ export class Paginator {
     return this._mainContainer;
   }
 
-  public setNewContainer(newContainer: HTMLElement) {
-    this.cleanupPaginator();
+  get isVisible(): boolean {
+    return this._isVisible;
+  }
+
+  get paginatorElement(): HTMLDivElement | null {
+    return this._paginatorElement;
+  }
+
+  setNewContainer(newContainer: HTMLElement) {
+    this.destroy();
     this._mainContainer = newContainer;
+  }
+
+  destroy() {
+    this.cleanupEventListeners();
+    if (this._paginatorElement) {
+      this._mainContainer.removeChild(this._paginatorElement);
+    }
+    this.pageButtons = [];
+    this.firstPageButton = null;
+    this.lastPageButton = null;
+    this.prevButton = null;
+    this.nextButton = null;
+    this._paginatorElement = null;
+  }
+
+  hide() {
+    if (this._paginatorElement) {
+      this._paginatorElement.style.display = 'none';
+      this._isVisible = false;
+    }
+  }
+
+  show() {
+    if (this._paginatorElement) {
+      this._paginatorElement.style.display = '';
+      this._isVisible = true;
+    }
   }
 
   private createPaginatorElement(): HTMLDivElement {
@@ -68,7 +133,7 @@ export class Paginator {
       doubleArrowButton.classList.add('paginator__arrow-button--disabled');
     }
     doubleArrowButton.innerHTML =
-      '<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-double-left"></use></svg>';
+      `<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-double-${type === 'previous' ? 'left' : 'right'}"></use></svg>`;
 
     const singleArrowButton = document.createElement('button');
     singleArrowButton.classList.add('paginator__arrow-button');
@@ -78,7 +143,7 @@ export class Paginator {
       singleArrowButton.classList.add('paginator__arrow-button--disabled');
     }
     singleArrowButton.innerHTML =
-      '<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-left"></use></svg>';
+      `<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-${type === 'previous' ? 'left' : 'right'}"></use></svg>`;
 
     if (type === 'previous') {
       container.appendChild(doubleArrowButton);
@@ -109,27 +174,71 @@ export class Paginator {
 
   private createPageButtons(): HTMLElement[] {
     const buttons: HTMLElement[] = [];
-    for (let i = 1; i <= this.totalPages; i++) {
-      if (i > 3) {
-        const ellipsis = document.createElement('span');
-        ellipsis.classList.add('paginator__ellipsis');
-        ellipsis.innerText = '...';
-        buttons.push(ellipsis);
-        break;
-      }
-      const pageElement = document.createElement('button');
-      pageElement.classList.add('paginator__page-button');
-      pageElement.id = `paginator__page-button_${this.paginatorId}`;
-      if (i === this.currentPage) {
-        pageElement.classList.add('paginator__page-button--active');
-      }
-      pageElement.textContent = i.toString();
-      pageElement.disabled = i === this.currentPage;
-      buttons.push(pageElement);
-    }
-    this.pageButtons = buttons as HTMLButtonElement[];
+    const visibleRange = 3;
 
+    let start = 1;
+    let end = this.totalPages;
+    let showEllipsisLeft = false;
+    let showEllipsisRight = false;
+
+    if (this.totalPages > visibleRange + 2) {
+        if (this.currentPage <= Math.ceil(visibleRange / 2) + 1) {
+            end = visibleRange;
+            showEllipsisRight = true;
+        } else if (this.currentPage >= this.totalPages - Math.floor(visibleRange / 2)) {
+            start = this.totalPages - visibleRange + 1;
+            end = this.totalPages;
+            showEllipsisLeft = true;
+        } else {
+            start = this.currentPage - Math.floor(visibleRange / 2);
+            end = this.currentPage + Math.floor(visibleRange / 2);
+            showEllipsisLeft = true;
+            showEllipsisRight = true;
+        }
+    }
+
+    if (showEllipsisLeft) {
+        buttons.push(this.createPageButton(1));
+        if (start > 2) {
+            buttons.push(this.createEllipsis());
+        }
+    }
+
+    for (let i = start; i <= end; i++) {
+        buttons.push(this.createPageButton(i));
+    }
+
+    if (showEllipsisRight) {
+        if (end < this.totalPages - 1) {
+            buttons.push(this.createEllipsis());
+        }
+        buttons.push(this.createPageButton(this.totalPages));
+    }
+
+    this.pageButtons = buttons as HTMLButtonElement[];
     return buttons;
+  }
+
+  private createPageButton(pageNumber: number): HTMLButtonElement {
+    const pageButton = document.createElement('button');
+    pageButton.classList.add('paginator__page-button');
+    pageButton.textContent = pageNumber.toString();
+    pageButton.disabled = (pageNumber === this.currentPage);
+
+    // Використовуємо порівняння як рядки для додавання класу, щоб уникнути потенційних проблем з типами
+    if (String(pageNumber) === String(this.currentPage)) {
+      pageButton.classList.add('paginator__page-button--active');
+    }
+
+    return pageButton;
+  }
+
+  private createEllipsis(): HTMLSpanElement {
+    const ellipsis = document.createElement('span');
+    ellipsis.classList.add('paginator__ellipsis');
+    ellipsis.textContent = '...';
+
+    return ellipsis;
   }
 
   private isFirstPage(): boolean {
@@ -160,50 +269,45 @@ export class Paginator {
     });
   }
 
-  private handleFirstPageClick = () => {
+  private handleFirstPageClick = async () => {
     this.currentPage = 1;
-    this.render();
+    await this.reloadData();
   };
 
-  private handlePrevClick = () => {
+  private handlePrevClick = async () => {
     if (this.isFirstPage()) {
       return;
     }
     this.currentPage--;
-    this.render();
+    await this.reloadData();
   };
 
-  private handleLastPageClick = () => {
+  private handleLastPageClick = async () => {
     this.currentPage = this.totalPages;
-    this.render();
+    await this.reloadData();
   };
 
-  private handleNextClick = () => {
+  private handleNextClick = async () => {
     if (this.isLastPage()) {
       return;
     }
     this.currentPage++;
-    this.render();
+    await this.reloadData();
   };
 
-  private handlePageClick = (event: MouseEvent) => {
+  private handlePageClick = async (event: MouseEvent) => {
     const target = event.target as HTMLButtonElement;
     if (target.classList.contains('paginator__page-button')) {
       const pageNumber = +target.textContent;
       if (pageNumber !== this.currentPage) {
         this.currentPage = pageNumber;
-        this.render();
+        await this.reloadData();
       }
     }
   };
 
-  private cleanupPaginator() {
-    this.cleanupEventListeners();
-    this.pageButtons = [];
-    this.firstPageButton = null;
-    this.lastPageButton = null;
-    this.prevButton = null;
-    this.nextButton = null;
-    this._mainContainer.innerHTML = '';
+  private async reloadData() {
+    await this.loadManagedComponentData(this.currentPage, this.perPage, this.totalPages);
+    this.render(this.currentPage, this.perPage, this.totalPages);
   }
 }

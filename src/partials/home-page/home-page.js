@@ -1,4 +1,5 @@
 import { ExerciseFilter } from '../../api/api.interface';
+import { Paginator } from '../../components/paginator/Paginator';
 
 class HomePageController {
   constructor() {
@@ -16,6 +17,11 @@ class HomePageController {
     this.isDisplayingExercises = false;
     this.searchWrapper = document.querySelector('.search-exercises-wrapper');
 
+    this.paginatorInstance = null;
+    this.currentPage = 1;
+    this.perPage = 12;
+    this.totalPages = 1;
+
     this.init();
   }
 
@@ -24,7 +30,7 @@ class HomePageController {
     this.setDefaultFilter();
     this.initQuote();
     this.initEmptyState();
-    this.loadCategories(this.activeFilter);
+    this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
     this.updateExercisesTitle('Exercises', false);
     this.hideSearchInput();
   }
@@ -47,6 +53,8 @@ class HomePageController {
         this.updateExercisesTitle('Exercises', false);
         this.clearSearch();
         this.hideSearchInput();
+        this.currentPage = 1;
+        this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
       });
     }
 
@@ -65,7 +73,8 @@ class HomePageController {
     this.clearSearch();
     this.hideSearchInput();
 
-    await this.loadCategories(filter);
+    this.currentPage = 1;
+    await this.loadCategories(filter, this.currentPage, this.perPage);
   }
 
   setActiveFilter(filter) {
@@ -86,22 +95,30 @@ class HomePageController {
     this.setActiveFilter('Muscles');
   }
 
-  async loadCategories(filter) {
+  async loadCategories(filter, page, perPage) {
     try {
       this.loading = true;
 
       const apiFilter = ExerciseFilter[filter];
-      const response = await window.YourEnergyAPI.getFilters(apiFilter, 1, 12);
+      const response = await window.YourEnergyAPI.getFilters(apiFilter, page, perPage);
 
       if (response && response.results && response.results.length) {
         this.renderCategories(response.results);
+        this.totalPages = response.totalPages || 1;
+        this.currentPage = response.page || 1;
+        this.perPage = response.perPage || perPage;
+
+        this.renderPaginator(this.currentPage, this.perPage, this.totalPages);
       } else {
         this.showEmptyState();
+        this.totalPages = 0;
+        this.renderPaginator(this.currentPage, this.perPage, this.totalPages);
       }
-      this.renderPaginator();
     } catch (error) {
       console.log(error);
       this.showErrorState();
+      this.totalPages = 0;
+      this.renderPaginator(this.currentPage, this.perPage, this.totalPages);
     } finally {
       this.loading = false;
     }
@@ -131,6 +148,9 @@ class HomePageController {
       document.getElementById('category-grid').style.display = 'none';
       this.isDisplayingExercises = true;
       this.showSearchInput();
+      if (this.paginatorInstance) {
+          this.paginatorInstance.hide();
+      }
     }
   }
 
@@ -196,16 +216,32 @@ class HomePageController {
     }
   }
 
-  renderPaginator() {
+  renderPaginator(currentPage, perPage, totalPages) {
     const paginatorContainer = document.getElementById('paginator-container');
-    if (!paginatorContainer) return;
+    if (!paginatorContainer) {
+      console.warn("Елемент #paginator-container не знайдено. Переконайтеся, що він існує у вашому HTML.");
+      return;
+    }
 
-    const paginator = new window.Paginator(paginatorContainer, {
-      totalPages: 5,
-      perPage: 12,
-      currentPage: 1,
-    });
-    paginator.render();
+    const paginationData = {
+      totalPages: totalPages,
+      perPage: perPage,
+      currentPage: currentPage,
+    };
+
+    const loadManagedDataFunction = async (newPage, currentPerPage, currentTotalPages) => {
+      this.currentPage = newPage;
+      this.perPage = currentPerPage;
+      this.totalPages = currentTotalPages;
+      await this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
+    };
+
+    if (this.paginatorInstance) {
+      this.paginatorInstance.render(paginationData.currentPage, paginationData.perPage, paginationData.totalPages);
+    } else {
+      this.paginatorInstance = new window.Paginator(paginatorContainer, loadManagedDataFunction, paginationData);
+      this.paginatorInstance.render();
+    }
   }
 
   showEmptyState() {
@@ -213,6 +249,9 @@ class HomePageController {
       return;
     }
     this.emptyState.show('Категорії не знайдено');
+    if (this.paginatorInstance) {
+        this.paginatorInstance.hide();
+    }
   }
 
   showErrorState() {
@@ -220,6 +259,9 @@ class HomePageController {
       return;
     }
     this.emptyState.show('Помилка завантаження даних.');
+    if (this.paginatorInstance) {
+        this.paginatorInstance.hide();
+    }
   }
 
   clearCategoryCards() {
@@ -262,6 +304,8 @@ class HomePageController {
             this.updateExercisesTitle('Exercises', false);
             this.clearSearch();
             this.hideSearchInput();
+            this.currentPage = 1;
+            this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
           });
         }
       } else {
@@ -274,6 +318,8 @@ class HomePageController {
             this.updateExercisesTitle('Exercises', false);
             this.clearSearch();
             this.hideSearchInput();
+            this.currentPage = 1;
+            this.loadCategories(this.activeFilter, this.currentPage, this.perPage);
           });
         }
       }
@@ -295,6 +341,9 @@ class HomePageController {
     }
     this.isDisplayingExercises = false;
     this.hideSearchInput();
+    if (this.paginatorInstance) {
+        this.paginatorInstance.show();
+    }
   }
 
   showSearchInput() {
