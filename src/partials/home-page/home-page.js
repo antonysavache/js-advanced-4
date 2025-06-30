@@ -10,7 +10,7 @@ class HomePageController {
     this.backToCategoriesLink = document.getElementById('back-to-categories');
     this.exerciseSearchInput = document.getElementById('exercise-search-input');
     this.clearSearchBtn = document.getElementById('clear-search-btn');
-    this.searchIconPlaceholder = document.getElementById('search-icon-placeholder'); 
+    this.searchIconPlaceholder = document.getElementById('search-icon-placeholder');
     this.exerciseContainer = document.getElementById('exercise-container');
     this.currentExercises = [];
     this.isDisplayingExercises = false;
@@ -41,7 +41,7 @@ class HomePageController {
     });
 
     if (this.backToCategoriesLink) {
-      this.backToCategoriesLink.addEventListener('click', (e) => {
+      this.backToCategoriesLink.addEventListener('click', e => {
         e.preventDefault();
         this.showCategoryGrid();
         this.updateExercisesTitle('Exercises', false);
@@ -77,7 +77,7 @@ class HomePageController {
       if (buttonFilter === filter) {
         button.classList.add('filter-btn--active');
       } else {
-        button.classList.remove('filter-btn.filter-btn--active');
+        button.classList.remove('filter-btn--active');
       }
     });
   }
@@ -139,19 +139,17 @@ class HomePageController {
     if (query) {
       this.clearSearchBtn.style.display = 'block';
       if (this.searchIconPlaceholder) {
-          this.searchIconPlaceholder.style.display = 'none';
+        this.searchIconPlaceholder.style.display = 'none';
       }
     } else {
       this.clearSearchBtn.style.display = 'none';
       if (this.searchIconPlaceholder) {
-          this.searchIconPlaceholder.style.display = 'block';
+        this.searchIconPlaceholder.style.display = 'block';
       }
     }
 
     if (this.currentExercises.length > 0) {
-      const filteredExercises = this.currentExercises.filter(exercise =>
-        exercise.name.toLowerCase().includes(query)
-      );
+      const filteredExercises = this.currentExercises.filter(exercise => exercise.name.toLowerCase().includes(query));
 
       if (window.exerciseGrid) {
         window.exerciseGrid.render(filteredExercises);
@@ -160,13 +158,13 @@ class HomePageController {
           document.getElementById('category-grid').style.display = 'none';
           this.isDisplayingExercises = true;
         } else {
-            if (this.isDisplayingExercises) {
-                window.exerciseGrid.render(this.currentExercises);
-                window.exerciseGrid.show();
-                document.getElementById('category-grid').style.display = 'none';
-            } else {
-                this.showCategoryGrid();
-            }
+          if (this.isDisplayingExercises) {
+            window.exerciseGrid.render(this.currentExercises);
+            window.exerciseGrid.show();
+            document.getElementById('category-grid').style.display = 'none';
+          } else {
+            this.showCategoryGrid();
+          }
         }
       }
     } else if (query) {
@@ -177,7 +175,7 @@ class HomePageController {
         this.isDisplayingExercises = true;
       }
     } else {
-        this.showCategoryGrid();
+      this.showCategoryGrid();
     }
   }
 
@@ -186,7 +184,7 @@ class HomePageController {
       this.exerciseSearchInput.value = '';
       this.clearSearchBtn.style.display = 'none';
       if (this.searchIconPlaceholder) {
-          this.searchIconPlaceholder.style.display = 'block';
+        this.searchIconPlaceholder.style.display = 'block';
       }
     }
     if (this.isDisplayingExercises) {
@@ -194,7 +192,7 @@ class HomePageController {
         window.exerciseGrid.render(this.currentExercises);
       }
     } else {
-        this.showCategoryGrid();
+      this.showCategoryGrid();
     }
   }
 
@@ -242,11 +240,7 @@ class HomePageController {
   }
 
   initQuote() {
-    const selectors = [
-      '#quote-container',
-      '.tablet-only .quote-section',
-      '.desktop-only .quote-section',
-    ];
+    const selectors = ['#quote-container', '.tablet-only .quote-section', '.desktop-only .quote-section'];
 
     selectors.forEach(selector => {
       const container = document.querySelector(selector);
@@ -262,25 +256,25 @@ class HomePageController {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a> / <span class="exercise-category-title">${titleContent}</span>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-            this.backToCategoriesLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showCategoryGrid();
-                this.updateExercisesTitle('Exercises', false);
-                this.clearSearch();
-                this.hideSearchInput();
-            });
+          this.backToCategoriesLink.addEventListener('click', e => {
+            e.preventDefault();
+            this.showCategoryGrid();
+            this.updateExercisesTitle('Exercises', false);
+            this.clearSearch();
+            this.hideSearchInput();
+          });
         }
       } else {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-            this.backToCategoriesLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showCategoryGrid();
-                this.updateExercisesTitle('Exercises', false);
-                this.clearSearch();
-                this.hideSearchInput();
-            });
+          this.backToCategoriesLink.addEventListener('click', e => {
+            e.preventDefault();
+            this.showCategoryGrid();
+            this.updateExercisesTitle('Exercises', false);
+            this.clearSearch();
+            this.hideSearchInput();
+          });
         }
       }
     }
@@ -307,15 +301,15 @@ class HomePageController {
     if (this.searchWrapper) {
       this.searchWrapper.style.display = 'block';
       if (this.exerciseSearchInput.value.trim() === '') {
-          if (this.searchIconPlaceholder) {
-              this.searchIconPlaceholder.style.display = 'block';
-          }
-          this.clearSearchBtn.style.display = 'none';
+        if (this.searchIconPlaceholder) {
+          this.searchIconPlaceholder.style.display = 'block';
+        }
+        this.clearSearchBtn.style.display = 'none';
       } else {
-          this.clearSearchBtn.style.display = 'block';
-          if (this.searchIconPlaceholder) {
-              this.searchIconPlaceholder.style.display = 'none';
-          }
+        this.clearSearchBtn.style.display = 'block';
+        if (this.searchIconPlaceholder) {
+          this.searchIconPlaceholder.style.display = 'none';
+        }
       }
     }
   }
@@ -326,7 +320,7 @@ class HomePageController {
       this.exerciseSearchInput.value = '';
       this.clearSearchBtn.style.display = 'none';
       if (this.searchIconPlaceholder) {
-          this.searchIconPlaceholder.style.display = 'none';
+        this.searchIconPlaceholder.style.display = 'none';
       }
     }
   }
