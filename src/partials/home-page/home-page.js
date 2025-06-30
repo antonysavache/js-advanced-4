@@ -11,13 +11,6 @@ class HomePageController {
     this.emptyState = null;
     this.exercisesTitleElement = document.querySelector('.exercises-title');
     this.backToCategoriesLink = document.getElementById('back-to-categories');
-    this.exerciseSearchInput = document.getElementById('exercise-search-input');
-    this.clearSearchBtn = document.getElementById('clear-search-btn');
-    this.searchIconPlaceholder = document.getElementById('search-icon-placeholder'); 
-    this.exerciseContainer = document.getElementById('exercise-container');
-    this.currentExercises = [];
-    this.isDisplayingExercises = false;
-    this.searchWrapper = document.querySelector('.search-exercises-wrapper');
 
     this.init();
   }
@@ -29,7 +22,6 @@ class HomePageController {
     this.initEmptyState();
     this.loadCategories();
     this.updateExercisesTitle('Exercises', false);
-    this.hideSearchInput();
   }
 
   bindEvents() {
@@ -48,16 +40,7 @@ class HomePageController {
         e.preventDefault();
         this.showCategoryGrid();
         this.updateExercisesTitle('Exercises', false);
-        this.clearSearch();
-        this.hideSearchInput();
       });
-    }
-
-    if (this.exerciseSearchInput) {
-      this.exerciseSearchInput.addEventListener('keyup', this.handleSearch.bind(this));
-    }
-    if (this.clearSearchBtn) {
-      this.clearSearchBtn.addEventListener('click', this.clearSearch.bind(this));
     }
   }
 
@@ -65,8 +48,6 @@ class HomePageController {
     this.setActiveFilter(filter);
     this.showCategoryGrid();
     this.updateExercisesTitle('Exercises', false);
-    this.clearSearch();
-    this.hideSearchInput();
 
     await this.loadCategories(filter);
   }
@@ -80,7 +61,7 @@ class HomePageController {
       if (buttonFilter === filter) {
         button.classList.add('filter-btn--active');
       } else {
-        button.classList.remove('filter-btn.filter-btn--active');
+        button.classList.remove('filter-btn--active');
       }
     });
   }
@@ -125,7 +106,6 @@ class HomePageController {
       this.categoryCards.push(categoryCard);
     });
   }
-
 
   displayExercises(exercises) {
     if (this.exerciseContainer && window.exerciseGrid) {
@@ -207,9 +187,9 @@ class HomePageController {
     if (!paginatorContainer) return;
 
     const paginator = new window.Paginator(paginatorContainer, {
-      totalPages: 5,
-      perPage: 12,
-      currentPage: 1,
+      totalPages: 5, // Example total pages, replace with actual data
+      perPage: 12, // Example items per page, replace with actual data
+      currentPage: 1, // Example current page, replace with actual data
     });
     paginator.render();
   }
@@ -251,10 +231,12 @@ class HomePageController {
     selectors.forEach(selector => {
       const container = document.querySelector(selector);
       if (container && window.Quote) {
+        console.log(`Initializing Quote for: ${selector}`);
         new window.Quote(selector);
       }
     });
   }
+
 
   updateExercisesTitle(titleContent, isCategorySelected) {
     if (this.exercisesTitleElement && this.backToCategoriesLink) {
@@ -266,8 +248,6 @@ class HomePageController {
                 e.preventDefault();
                 this.showCategoryGrid();
                 this.updateExercisesTitle('Exercises', false);
-                this.clearSearch();
-                this.hideSearchInput();
             });
         }
       } else {
@@ -278,8 +258,6 @@ class HomePageController {
                 e.preventDefault();
                 this.showCategoryGrid();
                 this.updateExercisesTitle('Exercises', false);
-                this.clearSearch();
-                this.hideSearchInput();
             });
         }
       }
@@ -295,39 +273,6 @@ class HomePageController {
     }
     if (exerciseContainer) {
       exerciseContainer.style.display = 'none';
-      if (window.exerciseGrid) {
-        window.exerciseGrid.hide();
-      }
-    }
-    this.isDisplayingExercises = false;
-    this.hideSearchInput();
-  }
-
-  showSearchInput() {
-    if (this.searchWrapper) {
-      this.searchWrapper.style.display = 'block';
-      if (this.exerciseSearchInput.value.trim() === '') {
-          if (this.searchIconPlaceholder) {
-              this.searchIconPlaceholder.style.display = 'block';
-          }
-          this.clearSearchBtn.style.display = 'none';
-      } else {
-          this.clearSearchBtn.style.display = 'block';
-          if (this.searchIconPlaceholder) {
-              this.searchIconPlaceholder.style.display = 'none';
-          }
-      }
-    }
-  }
-
-  hideSearchInput() {
-    if (this.searchWrapper) {
-      this.searchWrapper.style.display = 'none';
-      this.exerciseSearchInput.value = '';
-      this.clearSearchBtn.style.display = 'none';
-      if (this.searchIconPlaceholder) {
-          this.searchIconPlaceholder.style.display = 'none';
-      }
     }
   }
 }
@@ -337,6 +282,5 @@ let homePageController;
 window.addEventListener('load', () => {
   homePageController = new HomePageController();
   window.homePageController = homePageController;
-  window.exerciseGrid = new window.ExerciseGrid('#exercise-container');
 });
 
