@@ -1,5 +1,5 @@
-@use '../../styles/mixins' as *;
-@use '../../styles/variables' as *;
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
 
 .exercises-section {
   padding: $spacing-xl 0;
@@ -34,11 +34,11 @@
 }
 
 .exercises-title {
-  font-family: 'DM Sans';
-font-weight: 400;
-font-size: 44px;
-line-height: 48px;
-letter-spacing: -2%;
+  font-family: "DM Sans";
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 48px;
+  letter-spacing: -2%;
   color: #242424;
   margin: 0;
 
@@ -59,16 +59,6 @@ letter-spacing: -2%;
 // FILTER PANEL
 // ========================================
 
-.filters-panel {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-
-  @include mobile {
-    gap: 16px;
-  }
-}
-
 .filter-btn {
   all: unset;
   padding: 0;
@@ -84,7 +74,7 @@ letter-spacing: -2%;
   height: 32px;
   display: flex;
   align-items: center;
-  line-height: 1.0;
+  line-height: 1;
 
   @include mobile {
     font-size: 13px;
@@ -98,7 +88,7 @@ letter-spacing: -2%;
     color: #000;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: 0;
@@ -196,7 +186,6 @@ letter-spacing: -2%;
 // ========================================
 
 .mobile-only {
-
   .mobile-image-section {
     border-radius: 20px;
     overflow: hidden;
@@ -428,7 +417,8 @@ letter-spacing: -2%;
 .categories-grid {
   min-height: 400px;
   width: 100%;
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
 
   @include mobile {
     max-width: 335px;
@@ -442,7 +432,6 @@ letter-spacing: -2%;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 32px;
 
     .category-card {
       width: calc((100% - 30px) / 3); // (705px - 2*15px) / 3 = 225px
@@ -452,10 +441,11 @@ letter-spacing: -2%;
 
   @include desktop {
     max-width: 900px;
-    margin: 0 0 32px 0;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    margin-bottom: 32px;
 
     .category-card {
       width: calc((100% - 30px) / 3); // (900px - 2*15px) / 3 = 290px
@@ -486,7 +476,7 @@ letter-spacing: -2%;
   margin: 0;
 }
 
-.exercise-container{
+.exercise-container {
   gap: 20px;
   margin-bottom: 20px;
 
