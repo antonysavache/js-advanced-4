@@ -1,6 +1,5 @@
 import './CategoryCard.scss';
-import { YourEnergyAPI } from '../../api';
-import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts'; 
+import { ExerciseGrid } from '../exercise-grid/ExerciseGrid.ts';
 
 declare global {
   interface Window {
@@ -67,9 +66,8 @@ export class CategoryCard {
       if (this.homePageController) {
         this.homePageController.updateExercisesTitle(this.data.name, true);
         // Тепер викликаємо loadExercises замість displayExercises
-        await this.homePageController.loadExercises(this.data.name, 1, 12, ''); 
+        await this.homePageController.loadExercises(this.data.name, 1, 12, '');
       }
-      
     } catch (error: unknown) {
       console.warn('Вправи не знайдено або сталася помилка:', error);
       this.exerciseGridInstance.showError('Помилка завантаження вправ. Спробуйте пізніше.');
