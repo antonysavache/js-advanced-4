@@ -53,6 +53,7 @@ export class Paginator {
 
     if (this.totalPages === 0) {
       this.hide();
+
       return;
     } else {
       this.show();
@@ -132,8 +133,7 @@ export class Paginator {
     } else if (type === 'next' && this.isLastPage()) {
       doubleArrowButton.classList.add('paginator__arrow-button--disabled');
     }
-    doubleArrowButton.innerHTML =
-      `<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-double-left"></use></svg>`;
+    doubleArrowButton.innerHTML = `<svg class="paginator__arrow-icon" width="20" height="20"><use href="/sprite.svg#icon-arrow-double-left"></use></svg>`;
 
     const singleArrowButton = document.createElement('button');
     singleArrowButton.classList.add('paginator__arrow-button');
@@ -142,8 +142,7 @@ export class Paginator {
     } else if (type === 'next' && this.isLastPage()) {
       singleArrowButton.classList.add('paginator__arrow-button--disabled');
     }
-    singleArrowButton.innerHTML =
-      `<svg class="paginator__arrow-icon" width="20" height="20"><use href="/public/sprite.svg#icon-arrow-${type === 'previous' ? 'left' : 'right'}"></use></svg>`;
+    singleArrowButton.innerHTML = `<svg class="paginator__arrow-icon" width="20" height="20"><use href="sprite.svg#icon-arrow-${type === 'previous' ? 'left' : 'right'}"></use></svg>`;
 
     if (type === 'previous') {
       container.appendChild(doubleArrowButton);
@@ -182,40 +181,41 @@ export class Paginator {
     let showEllipsisRight = false;
 
     if (this.totalPages > visibleRange + 2) {
-        if (this.currentPage <= Math.ceil(visibleRange / 2) + 1) {
-            end = visibleRange;
-            showEllipsisRight = true;
-        } else if (this.currentPage >= this.totalPages - Math.floor(visibleRange / 2)) {
-            start = this.totalPages - visibleRange + 1;
-            end = this.totalPages;
-            showEllipsisLeft = true;
-        } else {
-            start = this.currentPage - Math.floor(visibleRange / 2);
-            end = this.currentPage + Math.floor(visibleRange / 2);
-            showEllipsisLeft = true;
-            showEllipsisRight = true;
-        }
+      if (this.currentPage <= Math.ceil(visibleRange / 2) + 1) {
+        end = visibleRange;
+        showEllipsisRight = true;
+      } else if (this.currentPage >= this.totalPages - Math.floor(visibleRange / 2)) {
+        start = this.totalPages - visibleRange + 1;
+        end = this.totalPages;
+        showEllipsisLeft = true;
+      } else {
+        start = this.currentPage - Math.floor(visibleRange / 2);
+        end = this.currentPage + Math.floor(visibleRange / 2);
+        showEllipsisLeft = true;
+        showEllipsisRight = true;
+      }
     }
 
     if (showEllipsisLeft) {
-        buttons.push(this.createPageButton(1));
-        if (start > 2) {
-            buttons.push(this.createEllipsis());
-        }
+      buttons.push(this.createPageButton(1));
+      if (start > 2) {
+        buttons.push(this.createEllipsis());
+      }
     }
 
     for (let i = start; i <= end; i++) {
-        buttons.push(this.createPageButton(i));
+      buttons.push(this.createPageButton(i));
     }
 
     if (showEllipsisRight) {
-        if (end < this.totalPages - 1) {
-            buttons.push(this.createEllipsis());
-        }
-        buttons.push(this.createPageButton(this.totalPages));
+      if (end < this.totalPages - 1) {
+        buttons.push(this.createEllipsis());
+      }
+      buttons.push(this.createPageButton(this.totalPages));
     }
 
     this.pageButtons = buttons as HTMLButtonElement[];
+
     return buttons;
   }
 
@@ -223,7 +223,7 @@ export class Paginator {
     const pageButton = document.createElement('button');
     pageButton.classList.add('paginator__page-button');
     pageButton.textContent = pageNumber.toString();
-    pageButton.disabled = (pageNumber === this.currentPage);
+    pageButton.disabled = pageNumber === this.currentPage;
 
     // Використовуємо порівняння як рядки для додавання класу, щоб уникнути потенційних проблем з типами
     if (String(pageNumber) === String(this.currentPage)) {
