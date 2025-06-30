@@ -11,6 +11,13 @@ class HomePageController {
     this.emptyState = null;
     this.exercisesTitleElement = document.querySelector('.exercises-title');
     this.backToCategoriesLink = document.getElementById('back-to-categories');
+    this.exerciseSearchInput = document.getElementById('exercise-search-input');
+    this.clearSearchBtn = document.getElementById('clear-search-btn');
+    this.searchIconPlaceholder = document.getElementById('search-icon-placeholder'); 
+    this.exerciseContainer = document.getElementById('exercise-container');
+    this.currentExercises = [];
+    this.isDisplayingExercises = false;
+    this.searchWrapper = document.querySelector('.search-exercises-wrapper');
 
     this.init();
   }
@@ -22,6 +29,7 @@ class HomePageController {
     this.initEmptyState();
     this.loadCategories();
     this.updateExercisesTitle('Exercises', false);
+    this.hideSearchInput();
   }
 
   bindEvents() {
@@ -40,7 +48,16 @@ class HomePageController {
         e.preventDefault();
         this.showCategoryGrid();
         this.updateExercisesTitle('Exercises', false);
+        this.clearSearch();
+        this.hideSearchInput();
       });
+    }
+
+    if (this.exerciseSearchInput) {
+      this.exerciseSearchInput.addEventListener('keyup', this.handleSearch.bind(this));
+    }
+    if (this.clearSearchBtn) {
+      this.clearSearchBtn.addEventListener('click', this.clearSearch.bind(this));
     }
   }
 
@@ -48,14 +65,10 @@ class HomePageController {
     this.setActiveFilter(filter);
     this.showCategoryGrid();
     this.updateExercisesTitle('Exercises', false);
-    if (!this.categoryPaginator.isVisible) {
-      this.categoryPaginator.show();
-    }
-    if (this.exercisePaginator) {
-      this.exercisePaginator.destroy();
-      this.exercisePaginator = null;
-    }
-    await this.loadCategories();
+    this.clearSearch();
+    this.hideSearchInput();
+
+    await this.loadCategories(filter);
   }
 
   setActiveFilter(filter) {
@@ -67,7 +80,7 @@ class HomePageController {
       if (buttonFilter === filter) {
         button.classList.add('filter-btn--active');
       } else {
-        button.classList.remove('filter-btn--active');
+        button.classList.remove('filter-btn.filter-btn--active');
       }
     });
   }
@@ -113,18 +126,92 @@ class HomePageController {
     });
   }
 
-  renderCategoryPaginator(currentPage, perPage, totalPages) {
+
+  displayExercises(exercises) {
+    if (this.exerciseContainer && window.exerciseGrid) {
+      this.currentExercises = exercises;
+      window.exerciseGrid.render(exercises);
+      window.exerciseGrid.show();
+      document.getElementById('category-grid').style.display = 'none';
+      this.isDisplayingExercises = true;
+      this.showSearchInput();
+    }
+  }
+
+  handleSearch() {
+    const query = this.exerciseSearchInput.value.toLowerCase().trim();
+    if (query) {
+      this.clearSearchBtn.style.display = 'block';
+      if (this.searchIconPlaceholder) {
+          this.searchIconPlaceholder.style.display = 'none';
+      }
+    } else {
+      this.clearSearchBtn.style.display = 'none';
+      if (this.searchIconPlaceholder) {
+          this.searchIconPlaceholder.style.display = 'block';
+      }
+    }
+
+    if (this.currentExercises.length > 0) {
+      const filteredExercises = this.currentExercises.filter(exercise =>
+        exercise.name.toLowerCase().includes(query)
+      );
+
+      if (window.exerciseGrid) {
+        window.exerciseGrid.render(filteredExercises);
+        if (query) {
+          window.exerciseGrid.show();
+          document.getElementById('category-grid').style.display = 'none';
+          this.isDisplayingExercises = true;
+        } else {
+            if (this.isDisplayingExercises) {
+                window.exerciseGrid.render(this.currentExercises);
+                window.exerciseGrid.show();
+                document.getElementById('category-grid').style.display = 'none';
+            } else {
+                this.showCategoryGrid();
+            }
+        }
+      }
+    } else if (query) {
+      if (window.exerciseGrid) {
+        window.exerciseGrid.render([]);
+        window.exerciseGrid.show();
+        document.getElementById('category-grid').style.display = 'none';
+        this.isDisplayingExercises = true;
+      }
+    } else {
+        this.showCategoryGrid();
+    }
+  }
+
+  clearSearch() {
+    if (this.exerciseSearchInput) {
+      this.exerciseSearchInput.value = '';
+      this.clearSearchBtn.style.display = 'none';
+      if (this.searchIconPlaceholder) {
+          this.searchIconPlaceholder.style.display = 'block';
+      }
+    }
+    if (this.isDisplayingExercises) {
+      if (window.exerciseGrid) {
+        window.exerciseGrid.render(this.currentExercises);
+      }
+    } else {
+        this.showCategoryGrid();
+    }
+  }
+
+  renderPaginator() {
     const paginatorContainer = document.getElementById('paginator-container');
     if (!paginatorContainer) return;
-    if (!this.categoryPaginator) {
-      const paginator = new window.Paginator(paginatorContainer, this.loadCategories.bind(this), {
-        totalPages,
-        perPage,
-        currentPage,
-      });
-      this.categoryPaginator = paginator;
-    }
-    this.categoryPaginator.render(currentPage, perPage, totalPages);
+
+    const paginator = new window.Paginator(paginatorContainer, {
+      totalPages: 5,
+      perPage: 12,
+      currentPage: 1,
+    });
+    paginator.render();
   }
 
   showEmptyState() {
@@ -175,27 +262,25 @@ class HomePageController {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a> / <span class="exercise-category-title">${titleContent}</span>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-          this.backToCategoriesLink.addEventListener('click', e => {
-            e.preventDefault();
-            this.showCategoryGrid();
-            this.updateExercisesTitle('Exercises', false);
-            this.exercisePaginator.destroy();
-            this.exercisePaginator = null;
-            this.categoryPaginator.show();
-          });
+            this.backToCategoriesLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showCategoryGrid();
+                this.updateExercisesTitle('Exercises', false);
+                this.clearSearch();
+                this.hideSearchInput();
+            });
         }
       } else {
         this.exercisesTitleElement.innerHTML = `<a href="#" id="back-to-categories" class="exercises-back-link">Exercises</a>`;
         this.backToCategoriesLink = document.getElementById('back-to-categories');
         if (this.backToCategoriesLink) {
-          this.backToCategoriesLink.addEventListener('click', e => {
-            e.preventDefault();
-            this.showCategoryGrid();
-            this.updateExercisesTitle('Exercises', false);
-            this.exercisePaginator?.destroy();
-            this.exercisePaginator = null;
-            this.categoryPaginator.show();
-          });
+            this.backToCategoriesLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showCategoryGrid();
+                this.updateExercisesTitle('Exercises', false);
+                this.clearSearch();
+                this.hideSearchInput();
+            });
         }
       }
     }
@@ -210,6 +295,39 @@ class HomePageController {
     }
     if (exerciseContainer) {
       exerciseContainer.style.display = 'none';
+      if (window.exerciseGrid) {
+        window.exerciseGrid.hide();
+      }
+    }
+    this.isDisplayingExercises = false;
+    this.hideSearchInput();
+  }
+
+  showSearchInput() {
+    if (this.searchWrapper) {
+      this.searchWrapper.style.display = 'block';
+      if (this.exerciseSearchInput.value.trim() === '') {
+          if (this.searchIconPlaceholder) {
+              this.searchIconPlaceholder.style.display = 'block';
+          }
+          this.clearSearchBtn.style.display = 'none';
+      } else {
+          this.clearSearchBtn.style.display = 'block';
+          if (this.searchIconPlaceholder) {
+              this.searchIconPlaceholder.style.display = 'none';
+          }
+      }
+    }
+  }
+
+  hideSearchInput() {
+    if (this.searchWrapper) {
+      this.searchWrapper.style.display = 'none';
+      this.exerciseSearchInput.value = '';
+      this.clearSearchBtn.style.display = 'none';
+      if (this.searchIconPlaceholder) {
+          this.searchIconPlaceholder.style.display = 'none';
+      }
     }
   }
 }
@@ -219,4 +337,6 @@ let homePageController;
 window.addEventListener('load', () => {
   homePageController = new HomePageController();
   window.homePageController = homePageController;
+  window.exerciseGrid = new window.ExerciseGrid('#exercise-container');
 });
+

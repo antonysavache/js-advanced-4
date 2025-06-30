@@ -68,21 +68,25 @@ export class ExerciseGrid {
         `;
 
         const startButton = card.querySelector('.exercise-grid-start-btn');
-        startButton.addEventListener('click', () => {
-          fetchAndShowDetails(exercise._id);
-        });
+        if (startButton) {
+          startButton.addEventListener('click', () => {
+            fetchAndShowDetails(exercise._id);
+          });
+        }
 
         this._container.appendChild(card);
       });
     } else {
-      this._container.innerHTML =
-        '<p class="empty-state-message-custom">Вправи за цією категорією не знайдено.</p>';
+      this.container.innerHTML =
+        '<p class="empty-state-message-custom">Nothing found</p>';
+
     }
   }
 
   public setLoading(): void {
-    if (this._container) {
-      this._container.innerHTML = '<p class="loading-message-custom">Завантаження вправ...</p>';
+    if (this.container) {
+      this.container.innerHTML = '<p class="loading-message-custom">Loading exercises...</p>';
+
     }
   }
 
@@ -104,3 +108,5 @@ export class ExerciseGrid {
     }
   }
 }
+
+(window as any).ExerciseGrid = ExerciseGrid;
