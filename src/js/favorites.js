@@ -1,13 +1,14 @@
 import 'modern-normalize/modern-normalize.css';
 
 import { fetchAndShowDetails } from '../partials/modal/modal';
-import { Quote } from '../components/quote/Quote'
+import { renderQuote } from '../partials/quote/quote';
+
 const FAVORITES_KEY = 'yourEnergyFavorites';
 
 const PER_PAGE = window.screen.width < 768 ? 8 : window.screen.width < 1440 ? 10 : 9999999;
 
 document.addEventListener('DOMContentLoaded', () => {
-  new Quote('#quote');
+  renderQuote();
   renderFavorites();
 });
 

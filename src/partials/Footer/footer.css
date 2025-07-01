@@ -31,7 +31,7 @@
     margin-bottom: 70px;
   }
 
-    .info-content {
+  .info-content {
     margin-right: 90px;
   }
 }
@@ -47,7 +47,6 @@
 .footer-logo {
   margin-bottom: 20px;
 }
-
 
 .logo-icon {
   fill: var(--page-bg);
@@ -90,7 +89,6 @@
 .social-links-link:hover .social-links-icon {
   fill: var(--gray14);
 }
-
 
 @media screen and (min-width: 768px) {
   .social {
@@ -202,12 +200,14 @@
   height: 42px;
   background: var(--page-bg);
   border-radius: 30px;
+  color: #242424;
 }
 
 .submit-btn:hover,
 .submit-btn:focus {
-  background-color: var(--hover-grey);
-  transition: background-color 0.3s;
+  border: 1px solid #f4f4f4;
+  color: #f4f4f4;
+  background-color: #242424;
 }
 
 @media screen and (min-width: 768px) {
@@ -279,7 +279,6 @@
   .footer-end {
     display: flex;
   }
-
 
   .small-footer-text.year {
     margin-top: 0;
