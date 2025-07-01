@@ -165,7 +165,7 @@
     flex-direction: column;
     gap: $spacing-lg;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
 
   @include desktop {
@@ -214,11 +214,6 @@
     }
 
     .sport-info-icon {
-      background: var(--black);
-
-      svg {
-        color: var(--white);
-      }
     }
 
     .sport-info-time {
@@ -298,11 +293,6 @@
     }
 
     .sport-info-icon {
-      background: var(--black);
-
-      svg {
-        color: var(--white);
-      }
     }
 
     .sport-info-time {
@@ -376,11 +366,6 @@
     }
 
     .sport-info-icon {
-      background: var(--black);
-
-      svg {
-        color: var(--white);
-      }
     }
 
     .sport-info-time {
@@ -571,7 +556,7 @@
   width: 18px;
 }
 
-.search-icon{
+.search-icon {
   width: 18px;
   height: 18px;
 }

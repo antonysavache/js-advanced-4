@@ -384,7 +384,7 @@ container {
 
   .my-exercise-card {
     margin-top: 0;
-    min-width: 415px;
+
     width: calc((100% - 16px) / 2);
   }
 
@@ -443,6 +443,10 @@ container {
 
   #my-pagination {
     display: none;
+  }
+
+  .my-exercise-card {
+    min-width: 415px;
   }
 
   .my-exercise-card-info {
